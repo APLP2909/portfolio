@@ -1,0 +1,33 @@
+# Temporary workflow: publishes the placeholder page to GitHub Pages.
+# Stage 3 MUST replace this file with the Astro build workflow.
+name: Deploy placeholder to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Adds a manual "Run workflow" button in the Actions tab.
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Run one deployment at a time.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: placeholder
+      - id: deployment
+        uses: actions/deploy-pages@v5
