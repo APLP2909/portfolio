@@ -1,0 +1,43 @@
+# Build output and caches
+dist/
+.astro/
+node_modules/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Environment files (secrets, tokens)
+.env
+.env.*
+!.env.example
+
+# Operating system and editor files
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Private working material. It MUST stay out of this public repo.
+# The materials folder lives outside the repo, but these patterns catch
+# accidental copies.
+content-source.md
+positioning.md
+copy-home.md
+copy-about.md
+portfolio-log.md
+handover.md
+portfolio-site-prompt.pdf
+Library export/
+*_all.csv
+*CV*.pdf
+*Resume (Public)*.pdf
+scratch/
+*.scratch.*
+
+# Throwaway sample case studies used for testing. Never commit them.
+src/content/work/_sample*
+src/content/work/**/_sample*
+
+# Local Claude Code settings
+.claude/
