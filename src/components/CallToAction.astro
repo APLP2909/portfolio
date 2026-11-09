@@ -27,7 +27,7 @@ const { href, variant = 'primary', icon, download = false, rel } = Astro.props;
     gap: var(--space-2);
     min-height: 2.75rem;
     padding: var(--space-2) var(--space-4);
-    border: 2px solid var(--color-accent);
+    border: 1px solid var(--color-rule-strong);
     border-radius: var(--radius);
     font-weight: 600;
     text-decoration: none;
@@ -35,15 +35,18 @@ const { href, variant = 'primary', icon, download = false, rel } = Astro.props;
 
   .primary {
     background: var(--color-accent);
-    color: var(--color-accent-contrast);
+    border-color: var(--color-accent-edge);
+    color: var(--color-on-accent);
   }
 
   .secondary {
     background: transparent;
-    color: var(--color-accent);
+    color: var(--color-text);
   }
 
   .cta:hover {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
   }
 </style>

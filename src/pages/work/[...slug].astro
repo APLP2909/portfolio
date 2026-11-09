@@ -113,12 +113,23 @@ const context: [string, string | undefined][] = [
     border-radius: var(--radius);
   }
 
+  .context {
+    border-top: 4px solid var(--color-accent);
+  }
+
   dt {
-    font-size: 0.8125rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     color: var(--color-text-muted);
+  }
+
+  .body :global(h2) {
+    margin-top: var(--space-5);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
   }
 
   dd {

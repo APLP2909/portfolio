@@ -1,6 +1,8 @@
 ---
 /** About page. Copy from copy-about.md (approved 9 November 2026). */
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import headshot from '../assets/headshot.jpg';
 import ContactCTA from '../components/ContactCTA.astro';
 ---
 
@@ -9,13 +11,27 @@ import ContactCTA from '../components/ContactCTA.astro';
   description="Aadeel Peerally is a product leader based in Berlin, working on payments platforms, marketplaces, medical learning tools and solar software."
   ogImage="/og/about.png"
 >
-  <article class="prose">
-    <h1>About</h1>
-    <p>
-      I am a product leader based in Berlin. My work has centred on products where software meets money, operations
-      and data: payments platforms, marketplaces, learning tools for medical students and doctors, and software for
-      solar developers.
-    </p>
+  <header class="intro">
+    <div class="prose">
+      <h1>About</h1>
+      <p class="lead">
+        I am a product leader based in Berlin. My work has centred on products where software meets money, operations
+        and data: payments platforms, marketplaces, learning tools for medical students and doctors, and software for
+        solar developers.
+      </p>
+    </div>
+    <Image
+      src={headshot}
+      alt="Portrait of Aadeel Peerally"
+      width={720}
+      widths={[240, 480, 720]}
+      sizes="(min-width: 48rem) 240px, 60vw"
+      class="portrait"
+      loading="eager"
+    />
+  </header>
+
+  <article class="prose ruled">
 
     <h2>Where I started</h2>
     <p>
@@ -100,7 +116,45 @@ import ContactCTA from '../components/ContactCTA.astro';
 </BaseLayout>
 
 <style>
+  .intro {
+    display: grid;
+    gap: var(--space-4);
+    margin-block: var(--space-5);
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .portrait {
+    width: min(15rem, 60%);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 25%;
+    border: 1px solid var(--color-rule-strong);
+    border-bottom: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+  }
+
+  @media (min-width: 48rem) {
+    .intro {
+      grid-template-columns: 1fr 15rem;
+      align-items: end;
+      gap: var(--space-5);
+    }
+
+    .portrait {
+      width: 100%;
+    }
+  }
+
   article {
     margin-bottom: var(--space-5);
+  }
+
+  article :global(h2) {
+    margin-top: var(--space-5);
+    font-size: 1.5rem;
   }
 </style>

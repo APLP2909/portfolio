@@ -1,6 +1,8 @@
 ---
 /** Home page. Copy from copy-home.md (approved 9 November 2026). */
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import headshot from '../assets/headshot.jpg';
 import CallToAction from '../components/CallToAction.astro';
 import Skills from '../components/Skills.astro';
 import WorkList from '../components/WorkList.astro';
@@ -39,13 +41,25 @@ const differentiators = [
 
 <BaseLayout>
   <section class="hero" aria-labelledby="hero-heading">
-    <p class="name">{site.name}</p>
-    <h1 id="hero-heading">Product leader for platforms and AI</h1>
-    <p class="level">Product Director · 15 years · built and led product teams across four sectors</p>
-    <div class="actions">
-      {showWorkButton && <CallToAction href="/work/">See my work</CallToAction>}
-      <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
+    <div class="hero-text">
+      <p class="name label">{site.name}</p>
+      <h1 id="hero-heading">Product leader for platforms and AI</h1>
+      <p class="level">Product Director · 15 years · built and led product teams across four sectors</p>
+      <div class="actions">
+        {showWorkButton && <CallToAction href="/work/">See my work</CallToAction>}
+        <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
+      </div>
     </div>
+    <Image
+      src={headshot}
+      alt="Portrait of Aadeel Peerally"
+      width={640}
+      widths={[160, 320, 480, 640]}
+      sizes="(min-width: 48rem) 320px, 160px"
+      class="portrait"
+      loading="eager"
+      fetchpriority="high"
+    />
   </section>
 
   <section aria-label="Highlights">
@@ -61,7 +75,7 @@ const differentiators = [
     </ul>
   </section>
 
-  <section class="prose narrative" aria-label="Summary">
+  <section class="prose narrative ruled" aria-label="Summary">
     <p>
       Fast-growing companies often end up with fragmented systems: separate tools, separate data and separate ways
       of handling payments. Much of my career has been spent helping to bring these together into platforms that can
@@ -74,7 +88,7 @@ const differentiators = [
     </p>
   </section>
 
-  <section aria-labelledby="bring-heading">
+  <section class="ruled" aria-labelledby="bring-heading">
     <h2 id="bring-heading">What I bring</h2>
     <div class="bring">
       {
@@ -88,12 +102,12 @@ const differentiators = [
     </div>
   </section>
 
-  <section aria-labelledby="skills-heading">
+  <section class="ruled" aria-labelledby="skills-heading">
     <h2 id="skills-heading">Skills</h2>
     <Skills />
   </section>
 
-  <section id="work" aria-labelledby="work-heading">
+  <section id="work" class="ruled" aria-labelledby="work-heading">
     <h2 id="work-heading">My work</h2>
     <WorkList />
   </section>
@@ -107,22 +121,48 @@ const differentiators = [
   }
 
   .hero {
+    display: grid;
+    gap: var(--space-4);
     margin-top: var(--space-5);
+  }
+
+  .portrait {
+    order: -1;
+    width: 8rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: 50% 25%;
+    border: 1px solid var(--color-rule-strong);
+    border-radius: var(--radius);
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      grid-template-columns: 1fr 17.5rem;
+      align-items: end;
+      gap: var(--space-5);
+    }
+
+    .portrait {
+      order: 0;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-bottom: 4px solid var(--color-accent);
+    }
   }
 
   .name {
     margin: 0;
-    font-weight: 600;
-    color: var(--color-text-muted);
   }
 
   h1 {
-    font-size: clamp(2rem, 6vw, 3.25rem);
-    margin-block: var(--space-2);
+    font-size: clamp(2.25rem, 6.5vw, 4rem);
+    margin-block: var(--space-3);
   }
 
   .level {
-    font-size: 1.125rem;
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
     color: var(--color-text-muted);
     margin-top: 0;
   }
@@ -145,18 +185,24 @@ const differentiators = [
 
   .proof li {
     display: grid;
-    gap: var(--space-1);
-    padding-top: var(--space-3);
-    border-top: 2px solid var(--color-accent);
+    align-content: start;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border-top: 4px solid var(--color-accent);
   }
 
   .proof strong {
-    font-size: 2rem;
-    line-height: 1.1;
+    font-family: var(--font-mono);
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 
   .proof span {
     color: var(--color-text-muted);
+    font-size: 0.9375rem;
   }
 
   .bring {
@@ -165,8 +211,14 @@ const differentiators = [
     gap: var(--space-2) var(--space-5);
   }
 
+  h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+  }
+
   .bring h3 {
     margin-bottom: var(--space-2);
+    font-size: 1.125rem;
   }
 
   .bring p {

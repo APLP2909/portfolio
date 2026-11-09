@@ -35,7 +35,7 @@ import { achievements, education, experience, languages, projects, skills } from
           {role.positions.map((pos) => (
             <div class="position">
               <p class="title-line">
-                <strong>{pos.title}</strong> · <span>{pos.dates}</span>
+                <strong>{pos.title}</strong> <span class="label dates">{pos.dates}</span>
               </p>
               {pos.bullets.length > 0 && (
                 <ul>
@@ -139,8 +139,29 @@ import { achievements, education, experience, languages, projects, skills } from
   }
 
   h2 {
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: var(--space-2);
+    border-top: 1px solid var(--color-rule-strong);
+    padding-top: var(--space-3);
+    font-size: 1.5rem;
+  }
+
+  .title-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .dates {
+    white-space: nowrap;
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
   }
 
   .role {
@@ -173,10 +194,6 @@ import { achievements, education, experience, languages, projects, skills } from
   .skills {
     display: grid;
     gap: var(--space-3);
-  }
-
-  dt {
-    font-weight: 700;
   }
 
   dd {
