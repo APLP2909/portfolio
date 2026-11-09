@@ -1,0 +1,66 @@
+---
+/**
+ * WorkCard (design-system.md): a case-study teaser generated from the case
+ * study's frontmatter. Media on one side (the demo video if the case study has
+ * one, otherwise its cover image), summary on the other. The only element
+ * that uses the `glow` shadow.
+ */
+import { Image } from 'astro:assets';
+import LoopVideo from './LoopVideo.astro';
+import { workSlug, type WorkEntry } from '../lib/work';
+
+interface Props {
+  entry: WorkEntry;
+  /** Heading level for the card title, so the page outline stays correct. */
+  headingLevel?: 2 | 3;
+}
+
+const { entry, headingLevel = 3 } = Astro.props;
+const { title, description, outcome, tags, cover, coverAlt, video } = entry.data;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const href = `/work/${workSlug(entry)}/`;
+const hasMedia = Boolean(video || cover);
+---
+
+<article class="ps-work">
+  {
+    hasMedia && (
+      <div class="ps-work__media">
+        {video ? (
+          <LoopVideo {...video} caption={undefined} />
+        ) : (
+          cover && (
+            <Image
+              src={cover}
+              alt={coverAlt ?? ''}
+              widths={[420, 840]}
+              sizes="(min-width: 60rem) 560px, 100vw"
+            />
+          )
+        )}
+      </div>
+    )
+  }
+  <div class="ps-work__body">
+    <div class="ps-tags">{tags.slice(0, 3).map((tag) => <span class="ps-tag">{tag}</span>)}</div>
+    <Heading class="ps-h2 ps-work__title">{title}</Heading>
+    <p>{description}</p>
+    <div class="ps-work__meta">{outcome}</div>
+    <a class="ps-work__link" href={href}>Read the case study →<span class="visually-hidden">: {title}</span></a>
+  </div>
+</article>
+
+<style>
+  /* The media fills its half; the video's own frame is not needed inside it. */
+  .ps-work__media {
+    padding: 0;
+  }
+
+  .ps-work__media :global(.loop-video),
+  .ps-work__media :global(.ps-media) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+</style>

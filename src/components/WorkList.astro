@@ -1,10 +1,10 @@
 ---
 /**
- * All case studies as cards, newest first. Shows an empty state when
- * there are none, so the live site never shows a blank block.
+ * Every case study as a WorkCard, newest first, stacked with a 24px gap.
+ * Shows an empty state when there are none, so the live site never shows a
+ * blank block.
  */
-import Grid from './Grid.astro';
-import PortfolioPreview from './PortfolioPreview.astro';
+import WorkCard from './WorkCard.astro';
 import { getWork } from '../lib/work';
 
 interface Props {
@@ -17,28 +17,29 @@ const entries = await getWork();
 
 {
   entries.length > 0 ? (
-    <Grid as="ul">
+    <div class="stack">
       {entries.map((entry) => (
-        <li>
-          <PortfolioPreview entry={entry} headingLevel={headingLevel} />
-        </li>
+        <WorkCard entry={entry} headingLevel={headingLevel} />
       ))}
-    </Grid>
+    </div>
   ) : (
-    <p class="empty">
+    <div class="ps-card">
       {/* DRAFT COPY: awaiting Aadeel's approval. */}
-      Case studies are being written and will appear here soon. In the meantime, my <a href="/resume/">resume</a>{' '}
-      covers my experience in full.
-    </p>
+      <p class="ps-card__text">
+        Case studies are being written and will appear here soon. In the meantime, my <a href="/resume/">resume</a>{' '}
+        covers my experience in full.
+      </p>
+    </div>
   )
 }
 
 <style>
-  .empty {
-    padding: var(--space-4);
-    border: 1px dashed var(--color-border);
-    border-radius: var(--radius);
-    color: var(--color-text-muted);
-    max-width: var(--measure);
+  .stack {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .ps-card__text {
+    margin-top: 0;
   }
 </style>

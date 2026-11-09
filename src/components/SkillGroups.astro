@@ -1,0 +1,23 @@
+---
+/** SkillGroups (design-system.md): skills grouped under short titles, each skill a chip. */
+interface Props {
+  groups: { group: string; items: string[] }[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div class="ps-skills">
+  {
+    groups.map((g) => (
+      <div class="ps-skills__group">
+        <h3 class="ps-skills__title">{g.group}</h3>
+        <ul class="ps-chips" aria-label={g.group}>
+          {g.items.map((item) => (
+            <li class="ps-chip">{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
