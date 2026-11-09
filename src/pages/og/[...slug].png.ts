@@ -12,7 +12,7 @@ import { renderOgImage, type OgContent } from '../../lib/og';
 export const getStaticPaths = (async () => {
   const pages: { slug: string; content: OgContent }[] = [
     // Home: text only (title, name and a short line). No headshot.
-    { slug: 'home', content: { name: site.name, title: site.ogLine, line: 'Product Director · 15 years' } },
+    { slug: 'home', content: { name: site.name, title: site.ogLine, line: site.ogSupportingLine } },
     { slug: 'about', content: { name: site.name, title: 'About', line: site.ogLine } },
     { slug: 'resume', content: { name: site.name, title: 'Resume', line: site.ogLine } },
     { slug: 'work', content: { name: site.name, title: 'My work', line: site.ogLine } },

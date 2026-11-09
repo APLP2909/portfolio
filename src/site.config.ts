@@ -11,9 +11,11 @@ export const site = {
   defaultTitle: 'Aadeel Peerally, Product Director: platforms and AI',
   /** Default meta description. */
   defaultDescription:
-    'Product leader for platforms and AI. Product Director · 15 years · built and led product teams across four sectors.',
-  /** Short line used on the home page social preview image. */
-  ogLine: 'Product leader for platforms and AI',
+    'Product Director. I lead platforms and AI products. 15 years building and leading product teams across four sectors. Based in Berlin.',
+  /** Tagline, used as the title of the home page social preview image. */
+  ogLine: 'Product Director. I lead platforms and AI products.',
+  /** Supporting line under the tagline, used on the home page social preview image. */
+  ogSupportingLine: '15 years building and leading product teams across four sectors.',
   location: 'Berlin',
   /**
    * Public email address, stored backwards so bots that scan this public
