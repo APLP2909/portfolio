@@ -147,7 +147,7 @@ const differentiators = [
       order: 0;
       width: 100%;
       aspect-ratio: 4 / 5;
-      border-bottom: 4px solid var(--color-accent);
+      border-bottom: 4px solid var(--color-charge-dim);
     }
   }
 
@@ -183,21 +183,59 @@ const differentiators = [
     padding: 0;
   }
 
+  /*
+   * The proof numbers are the strongest evidence on the page, so they are the
+   * only things that glow (Charge State: "brightness equals rank").
+   */
   .proof li {
+    position: relative;
     display: grid;
     align-content: start;
     gap: var(--space-2);
     padding: var(--space-4);
+    padding-top: calc(var(--space-4) + 4px);
     background: var(--color-surface);
-    border-top: 4px solid var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glow-charge);
+  }
+
+  /* The charge bar: fills once on load, the site's one "energy" moment. */
+  .proof li::before {
+    content: '';
+    position: absolute;
+    inset: -1px -1px auto;
+    height: 4px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: var(--color-charge);
+    box-shadow: var(--glow-text);
+    transform-origin: left;
+    animation: charge var(--t-charge) both;
+  }
+
+  .proof li:nth-child(2)::before {
+    animation-delay: 60ms;
+  }
+
+  .proof li:nth-child(3)::before {
+    animation-delay: 120ms;
+  }
+
+  @keyframes charge {
+    from {
+      transform: scaleX(0);
+    }
   }
 
   .proof strong {
     font-family: var(--font-mono);
     font-size: clamp(2.25rem, 5vw, 3rem);
     font-weight: 500;
+    font-variant-numeric: tabular-nums;
     line-height: 1;
     letter-spacing: -0.02em;
+    color: var(--color-charge);
+    text-shadow: var(--glow-text);
   }
 
   .proof span {

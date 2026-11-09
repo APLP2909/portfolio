@@ -15,7 +15,7 @@ interface Props {
 const { href, variant = 'primary', icon, download = false, rel } = Astro.props;
 ---
 
-<a class:list={['cta', variant]} href={href} download={download || undefined} rel={rel}>
+<a class:list={['cta', 'state-layer', variant]} href={href} download={download || undefined} rel={rel}>
   {icon && <Icon name={icon} size={18} />}
   <span><slot /></span>
 </a>
@@ -27,16 +27,17 @@ const { href, variant = 'primary', icon, download = false, rel } = Astro.props;
     gap: var(--space-2);
     min-height: 2.75rem;
     padding: var(--space-2) var(--space-4);
-    border: 1px solid var(--color-rule-strong);
+    /* --color-text-muted keeps the outline above 3:1 against the page in both themes. */
+    border: 1px solid var(--color-text-muted);
     border-radius: var(--radius);
     font-weight: 600;
     text-decoration: none;
   }
 
   .primary {
-    background: var(--color-accent);
-    border-color: var(--color-accent-edge);
-    color: var(--color-on-accent);
+    background: var(--color-charge);
+    border-color: var(--color-charge);
+    color: var(--color-on-charge);
   }
 
   .secondary {

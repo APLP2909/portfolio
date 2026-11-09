@@ -14,7 +14,7 @@ const spokenEmail = `${reverse(user)} at ${reverse(domain).replace(/\./g, ' dot 
   <h2 id="contact-heading">Get in touch</h2>
   <p>For product leadership conversations, email me or connect on LinkedIn.</p>
   <div class="actions">
-    <EmailLink class="cta-email"><Icon name="mail" size={18} /><span>Email me</span></EmailLink>
+    <EmailLink class="cta-email state-layer"><Icon name="mail" size={18} /><span>Email me</span></EmailLink>
     <CallToAction href={site.linkedin} variant="secondary" icon="linkedin" rel="me">LinkedIn</CallToAction>
     <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
   </div>
@@ -28,7 +28,7 @@ const spokenEmail = `${reverse(user)} at ${reverse(domain).replace(/\./g, ' dot 
     margin-top: var(--space-6);
     padding: var(--space-5) var(--space-4);
     background: var(--color-surface);
-    border-top: 4px solid var(--color-accent);
+    border-top: 4px solid var(--color-charge-dim);
   }
 
   h2 {
@@ -49,10 +49,10 @@ const spokenEmail = `${reverse(user)} at ${reverse(domain).replace(/\./g, ' dot 
     gap: var(--space-2);
     min-height: 2.75rem;
     padding: var(--space-2) var(--space-4);
-    border: 1px solid var(--color-accent-edge);
+    border: 1px solid var(--color-charge);
     border-radius: var(--radius);
-    background: var(--color-accent);
-    color: var(--color-on-accent);
+    background: var(--color-charge);
+    color: var(--color-on-charge);
     font-weight: 600;
     text-decoration: none;
   }

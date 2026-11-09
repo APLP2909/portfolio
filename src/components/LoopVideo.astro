@@ -39,7 +39,7 @@ const { src, poster, width, height, label, caption } = Astro.props;
       preload="none"
       controls
       aria-label={label}></video>
-    <button type="button" class="toggle" hidden aria-label="Play video">
+    <button type="button" class="toggle state-layer" hidden aria-label="Play video">
       <span class="when-paused"><Icon name="play" size={18} /></span>
       <span class="when-playing"><Icon name="pause" size={18} /></span>
     </button>
