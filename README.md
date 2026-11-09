@@ -132,7 +132,7 @@ If you change analytics, update the privacy page (`src/pages/privacy.astro`) in 
 ### Replace the headshot
 
 Overwrite `src/assets/headshot.jpg` with the new photo, keeping the name. Astro creates the resized versions at build time.
-Home and About crop it from the top quarter of the frame; adjust `object-position` in those pages if the face sits elsewhere.
+The portrait frame crops it with `object-position: 50% 22%` (in `bundle.css`, `.ps-portrait img`).
 
 ### Publish a change
 
@@ -161,7 +161,9 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `src/components/` | Reusable pieces: navigation, cards, buttons, video, contact block. |
 | `src/layouts/BaseLayout.astro` | The shell every page shares. |
 | `src/lib/` | Helpers: case-study sorting and section checks, social preview images. |
-| `src/styles/global.css` | Colours, type and spacing as CSS custom properties. Contrast is checked against WCAG AA; re-check if you change a colour. |
+| `src/styles/tokens.css` | Design tokens from the design system: colours, spacing, radii, fonts. Contrast is checked against WCAG AA; re-check if you change a colour. |
+| `src/styles/bundle.css` | The design system's component styles. Do not edit; change tokens instead. |
+| `src/styles/global.css` | Loads the two files above and adds a few site-level helpers. |
 | `src/assets/` | Images that Astro resizes and compresses, such as the headshot. |
 | `scripts/` | One-off helper scripts, such as the favicon generator. |
 | `src/site.config.ts` | Site-wide settings. |
@@ -189,10 +191,19 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 
 ## Explanation: design
 
-The visual direction is "Engineered": IBM Plex Sans for text and IBM Plex Mono for numbers, dates and labels;
-cool white and graphite, with one solar-amber signal colour; a visible grid with thin rules.
-Fonts are bundled from the `@fontsource` packages at build time and served from aadeelp.com,
-so no visitor request goes to a third-party font service.
+The site uses Aadeel's portfolio design system (`design-system.md`, kept outside this repo).
+It is dark-first: dark is the default theme and visitors can switch to light (the choice is remembered).
+There is one accent per theme (teal in dark, violet in light), and the only gradient is the soft
+background halo behind the hero and the contact panel. Type is Archivo (semi-expanded) for display,
+IBM Plex Sans for body and IBM Plex Mono for numbers, labels and dates.
+
+- `src/styles/tokens.css` and `src/styles/bundle.css` are copied from the design system. Change a
+  value in `tokens.css`, never in `bundle.css` or page code. The one local change: fonts are
+  self-hosted from the `@fontsource` packages, so no visitor request goes to Google Fonts.
+- Pages use the system's component classes (`ps-…`). Use them; do not invent new classes for
+  patterns the system already has.
+- Before you merge a layout change, run the system's layout tests: a 100-character title, one item
+  and eight items in each list, widths from 1440 px to 360 px, both themes, and printing the Resume page.
 
 ## Explanation: how the site fits together
 
