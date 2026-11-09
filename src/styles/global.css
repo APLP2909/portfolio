@@ -1,35 +1,47 @@
 /*
- * Global styles and design tokens. Direction B, "Engineered" (chosen 9 November 2026):
- * IBM Plex Sans for text, IBM Plex Mono for numbers, dates and labels;
- * cool white and graphite with one solar-amber signal colour; a visible grid
- * with thin rules.
+ * Global styles and design tokens, from Aadeel's "Charge State" design system
+ * (adopted 9 November 2026), on the "Engineered" layout.
+ *
+ * Rules carried over from Charge State:
+ * - One colour, one job. --charge marks strength (the proof numbers, which glow)
+ *   and, flat, primary actions and links. --attn is the focus ring only.
+ * - The glow is reserved for the proof numbers. Buttons use the same hue, flat.
+ * - Never colour alone: colour never carries meaning without a word.
+ * - Interactions settle in 90–140 ms. The one longer motion is the "charge"
+ *   bar on the proof numbers (280 ms). Reduced motion turns all motion off.
  *
  * Every colour in the site MUST reference a token from this file.
- * Contrast (WCAG AA) was checked for every text/background pair in both themes;
- * re-check if you change a value.
+ * Contrast (WCAG AA) was checked for every text pair on --bg, --surface and
+ * --raised in both themes; re-check if you change a value.
  */
 
 :root {
   color-scheme: light;
 
-  --color-bg: #f7f8fa;
-  --color-surface: #eceef2;
-  --color-text: #16181d;
-  --color-text-muted: #4a515c;
-  --color-border: #c9ced6;
-  --color-rule-strong: #16181d;
-  /* Link text. Darker than the accent so it passes AA on light backgrounds. */
-  --color-link: #8a4b00;
-  /* Solar amber. Used for fills and rules, never for text on light backgrounds. */
-  --color-accent: #f2a900;
-  --color-on-accent: #16181d;
-  /* Outline on accent fills, so buttons stay visible against the background (3:1). */
-  --color-accent-edge: #8a4b00;
-  --color-focus: #b35f00;
+  /* Light theme. Text ratios on --bg in brackets. */
+  --color-bg: #f3f6f7;
+  --color-surface: #ffffff;
+  --color-raised: #f8fafb;
+  --color-text: #0d1a21; /* 16.3:1 */
+  --color-text-muted: #52626d; /* 5.8:1 */
+  --color-border: #d3dde1;
+  --color-rule-strong: #0d1a21;
+  --color-charge: #0a7c72; /* 4.7:1 */
+  --color-charge-dim: #8fb8b3;
+  --color-on-charge: #ffffff; /* 5.1:1 on --color-charge */
+  --color-attn: #2f62c4; /* 5.3:1 */
+  /* The light theme cannot glow: a solid edge plus a soft tinted shadow instead. */
+  --glow-charge: 0 6px 18px -8px rgb(10 124 114 / 0.45);
+  --glow-text: none;
 
+  --font-display: var(--font-archivo), var(--font-plex-sans), system-ui, sans-serif;
   --font-body: var(--font-plex-sans), system-ui, sans-serif;
-  --font-heading: var(--font-body);
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --display-width: 'wdth' 112;
+
+  --t-fast: 90ms linear;
+  --t-base: 140ms cubic-bezier(0.2, 0, 0, 1);
+  --t-charge: 280ms cubic-bezier(0.05, 0.7, 0.1, 1);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -38,7 +50,7 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
-  --radius: 2px;
+  --radius: 4px;
   --measure: 68ch;
   --page-max: 72rem;
   --gutter: 1rem;
@@ -47,17 +59,20 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --color-bg: #121418;
-  --color-surface: #1c1f25;
-  --color-text: #e9ebee;
-  --color-text-muted: #a8afba;
-  --color-border: #3a4049;
-  --color-rule-strong: #e9ebee;
-  --color-link: #ffc14d;
-  --color-accent: #f5b330;
-  --color-on-accent: #121418;
-  --color-accent-edge: #f5b330;
-  --color-focus: #ffc14d;
+  /* Dark theme (Charge State leads with dark). Text ratios on --bg in brackets. */
+  --color-bg: #0b1117;
+  --color-surface: #121a22;
+  --color-raised: #18222c;
+  --color-text: #e6edf2; /* 16:1 */
+  --color-text-muted: #8c9aa6; /* 6.6:1 */
+  --color-border: #26323d;
+  --color-rule-strong: #3a4a57;
+  --color-charge: #38e1d0; /* 11.6:1 */
+  --color-charge-dim: #1b8f86;
+  --color-on-charge: #0b1117; /* 11.6:1 on --color-charge */
+  --color-attn: #7fb2ff; /* 8.8:1 */
+  --glow-charge: 0 0 24px -4px rgb(56 225 208 / 0.45);
+  --glow-text: 0 0 18px rgb(56 225 208 / 0.45);
 }
 
 @media (min-width: 48rem) {
@@ -88,16 +103,16 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-width);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.12;
   text-wrap: balance;
 }
 
 h1 {
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 p,
@@ -106,9 +121,10 @@ li {
 }
 
 a {
-  color: var(--color-link);
+  color: var(--color-charge);
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
+  transition: text-decoration-thickness var(--t-fast);
 }
 
 a:hover {
@@ -123,13 +139,13 @@ video {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus);
+  outline: 3px solid var(--color-attn);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-charge);
+  color: var(--color-on-charge);
 }
 
 .container {
@@ -143,20 +159,49 @@ video {
   max-width: var(--measure);
 }
 
-/* Small monospace label: dates, metadata, field names. */
+/* Eyebrow label (Charge State): Plex Mono, 11.5px, uppercase, 0.08em tracking. */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.71875rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   color: var(--color-text-muted);
 }
 
 /* Section with a thin rule above it, the grid's main divider. */
 .ruled {
-  border-top: 1px solid var(--color-rule-strong);
+  border-top: 1px solid var(--color-border);
   padding-top: var(--space-4);
+}
+
+/*
+ * Material 3 state layer: an overlay in the content colour, 8% on hover and
+ * 10% when pressed. Add to any button-like element with `position: relative`.
+ */
+.state-layer {
+  position: relative;
+  isolation: isolate;
+}
+
+.state-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+  pointer-events: none;
+}
+
+.state-layer:hover::after {
+  opacity: 0.08;
+}
+
+.state-layer:active::after {
+  opacity: 0.1;
 }
 
 .visually-hidden {
@@ -175,8 +220,8 @@ video {
   position: absolute;
   left: var(--space-3);
   top: -3rem;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-charge);
+  color: var(--color-on-charge);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius);
   z-index: 10;
@@ -190,8 +235,8 @@ video {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }

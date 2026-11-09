@@ -31,6 +31,24 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   fonts: [
     {
+      // Display face (Charge State): Archivo, set semi-expanded in CSS with
+      // `font-variation-settings: 'wdth' 112`. This variable file carries the
+      // width and weight axes.
+      provider: fontProviders.local(),
+      name: 'Archivo',
+      cssVariable: '--font-archivo',
+      fallbacks: ['sans-serif'],
+      options: {
+        variants: [
+          {
+            src: ['./node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2'],
+            weight: '100 900',
+            style: 'normal',
+          },
+        ],
+      },
+    },
+    {
       provider: fontProviders.local(),
       name: 'IBM Plex Sans',
       cssVariable: '--font-plex-sans',
