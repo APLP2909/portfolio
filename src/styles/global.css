@@ -1,25 +1,35 @@
 /*
- * Global styles and design tokens.
+ * Global styles and design tokens. Direction B, "Engineered" (chosen 9 November 2026):
+ * IBM Plex Sans for text, IBM Plex Mono for numbers, dates and labels;
+ * cool white and graphite with one solar-amber signal colour; a visible grid
+ * with thin rules.
  *
- * PRE-DESIGN PLACEHOLDER (Phase 2). The palette and type below are neutral
- * stand-ins. Phase 3 replaces the token values after Aadeel picks a visual
- * direction. Every colour in the site MUST reference a token from this file.
+ * Every colour in the site MUST reference a token from this file.
+ * Contrast (WCAG AA) was checked for every text/background pair in both themes;
+ * re-check if you change a value.
  */
 
 :root {
   color-scheme: light;
 
-  --color-bg: #ffffff;
-  --color-surface: #f4f4f2;
-  --color-text: #1a1a1a;
-  --color-text-muted: #4d4d4d;
-  --color-border: #d6d6d2;
-  --color-accent: #1f4fbf;
-  --color-accent-contrast: #ffffff;
-  --color-focus: #1f4fbf;
+  --color-bg: #f7f8fa;
+  --color-surface: #eceef2;
+  --color-text: #16181d;
+  --color-text-muted: #4a515c;
+  --color-border: #c9ced6;
+  --color-rule-strong: #16181d;
+  /* Link text. Darker than the accent so it passes AA on light backgrounds. */
+  --color-link: #8a4b00;
+  /* Solar amber. Used for fills and rules, never for text on light backgrounds. */
+  --color-accent: #f2a900;
+  --color-on-accent: #16181d;
+  /* Outline on accent fills, so buttons stay visible against the background (3:1). */
+  --color-accent-edge: #8a4b00;
+  --color-focus: #b35f00;
 
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: var(--font-plex-sans), system-ui, sans-serif;
   --font-heading: var(--font-body);
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -28,7 +38,7 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
-  --radius: 6px;
+  --radius: 2px;
   --measure: 68ch;
   --page-max: 72rem;
   --gutter: 1rem;
@@ -37,14 +47,17 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --color-bg: #121212;
-  --color-surface: #1e1e1e;
-  --color-text: #ececec;
-  --color-text-muted: #b5b5b5;
-  --color-border: #3a3a3a;
-  --color-accent: #8fb0ff;
-  --color-accent-contrast: #121212;
-  --color-focus: #8fb0ff;
+  --color-bg: #121418;
+  --color-surface: #1c1f25;
+  --color-text: #e9ebee;
+  --color-text-muted: #a8afba;
+  --color-border: #3a4049;
+  --color-rule-strong: #e9ebee;
+  --color-link: #ffc14d;
+  --color-accent: #f5b330;
+  --color-on-accent: #121418;
+  --color-accent-edge: #f5b330;
+  --color-focus: #ffc14d;
 }
 
 @media (min-width: 48rem) {
@@ -76,8 +89,15 @@ h1,
 h2,
 h3 {
   font-family: var(--font-heading);
-  line-height: 1.2;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   text-wrap: balance;
+}
+
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 p,
@@ -86,7 +106,13 @@ li {
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-link);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 img,
@@ -101,6 +127,11 @@ video {
   outline-offset: 2px;
 }
 
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
 .container {
   width: 100%;
   max-width: var(--page-max);
@@ -110,6 +141,22 @@ video {
 
 .prose {
   max-width: var(--measure);
+}
+
+/* Small monospace label: dates, metadata, field names. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Section with a thin rule above it, the grid's main divider. */
+.ruled {
+  border-top: 1px solid var(--color-rule-strong);
+  padding-top: var(--space-4);
 }
 
 .visually-hidden {
@@ -129,7 +176,7 @@ video {
   left: var(--space-3);
   top: -3rem;
   background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  color: var(--color-on-accent);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius);
   z-index: 10;

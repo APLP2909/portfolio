@@ -4,6 +4,7 @@
  * preview tags, favicons and the theme script that runs before first paint.
  */
 import { site } from '../site.config';
+import { Font } from 'astro:assets';
 import Analytics from './Analytics.astro';
 
 interface Props {
@@ -52,7 +53,13 @@ const ogImageUrl = new URL(ogImage, Astro.site);
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
 
+<Font cssVariable="--font-plex-sans" preload={[{ weight: 400, style: 'normal' }, { weight: 700 }]} />
+<Font cssVariable="--font-plex-mono" />
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/favicon-180.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <script is:inline>
