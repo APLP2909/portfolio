@@ -129,6 +129,11 @@ Edit `src/site.config.ts`. It holds the name, default title and description, Lin
 resume path, Cloudflare Web Analytics token and the `hideWorkWhenEmpty` switch.
 If you change analytics, update the privacy page (`src/pages/privacy.astro`) in the same commit.
 
+### Replace the headshot
+
+Overwrite `src/assets/headshot.jpg` with the new photo, keeping the name. Astro creates the resized versions at build time.
+Home and About crop it from the top quarter of the frame; adjust `object-position` in those pages if the face sits elsewhere.
+
 ### Publish a change
 
 Every push to the `main` branch rebuilds and publishes the site through GitHub Actions.
@@ -156,7 +161,9 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `src/components/` | Reusable pieces: navigation, cards, buttons, video, contact block. |
 | `src/layouts/BaseLayout.astro` | The shell every page shares. |
 | `src/lib/` | Helpers: case-study sorting and section checks, social preview images. |
-| `src/styles/global.css` | Colours, type and spacing as CSS custom properties. |
+| `src/styles/global.css` | Colours, type and spacing as CSS custom properties. Contrast is checked against WCAG AA; re-check if you change a colour. |
+| `src/assets/` | Images that Astro resizes and compresses, such as the headshot. |
+| `scripts/` | One-off helper scripts, such as the favicon generator. |
 | `src/site.config.ts` | Site-wide settings. |
 | `public/` | Files served as-is: resume PDF, videos, favicon, `robots.txt`. |
 
@@ -168,6 +175,7 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `npm run dev` | Starts the local preview at <http://localhost:4321>. |
 | `npm run build` | Checks types and content, then builds the site into `dist/`. |
 | `npm run preview` | Serves the built `dist/` folder locally. |
+| `npm run favicons` | Rebuilds `public/favicon.svg` and the PNG favicons from `scripts/make-favicons.mjs`. |
 
 ### Generated files
 
@@ -178,6 +186,13 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `/sitemap-index.xml` | Sitemap, from `@astrojs/sitemap`. |
 
 ---
+
+## Explanation: design
+
+The visual direction is "Engineered": IBM Plex Sans for text and IBM Plex Mono for numbers, dates and labels;
+cool white and graphite, with one solar-amber signal colour; a visible grid with thin rules.
+Fonts are bundled from the `@fontsource` packages at build time and served from aadeelp.com,
+so no visitor request goes to a third-party font service.
 
 ## Explanation: how the site fits together
 
