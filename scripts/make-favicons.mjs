@@ -1,7 +1,8 @@
 /**
  * Builds the favicon set: public/favicon.svg plus PNGs at 32, 180 and 192 px.
  *
- * The mark is "AP" in IBM Plex Mono on night (#0b1117) with a charge-teal bar (Charge State).
+ * The mark matches the design system's header mark (.ps-mark): "AP" in Archivo
+ * bold, in the dark-theme accent (teal), on the surface colour with a 1px line border.
  * Letters are converted to shapes, so the icon never depends on installed fonts.
  * Edit the colours or letters below, then run `npm run favicons`.
  */
@@ -11,7 +12,7 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
 const require = createRequire(import.meta.url);
-const mono = readFileSync(require.resolve('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff'));
+const archivo = readFileSync(require.resolve('@fontsource/archivo/files/archivo-latin-700-normal.woff'));
 
 const h = (style, children) => ({ type: 'div', props: { style, children } });
 
@@ -20,23 +21,19 @@ const tree = h(
     width: 64,
     height: 64,
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 5,
-    background: '#0b1117',
-    borderRadius: 4,
+    background: '#121a22',
+    border: '2px solid rgba(230, 237, 242, 0.22)',
+    borderRadius: 14,
   },
-  [
-    h({ display: 'flex', fontFamily: 'IBM Plex Mono', fontWeight: 500, fontSize: 27, letterSpacing: 0, color: '#e6edf2', lineHeight: 1 }, 'AP'),
-    h({ display: 'flex', width: 36, height: 5, background: '#38e1d0' }),
-  ],
+  [h({ display: 'flex', fontFamily: 'Archivo', fontWeight: 700, fontSize: 28, color: '#38e1d0', lineHeight: 1 }, 'AP')],
 );
 
 const svg = await satori(tree, {
   width: 64,
   height: 64,
-  fonts: [{ name: 'IBM Plex Mono', data: mono, weight: 500, style: 'normal' }],
+  fonts: [{ name: 'Archivo', data: archivo, weight: 700, style: 'normal' }],
 });
 
 writeFileSync('public/favicon.svg', svg);

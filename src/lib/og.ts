@@ -1,6 +1,7 @@
 /**
  * Builds 1200 × 630 social preview images at build time, in the site's
- * "Engineered" style: night background (Charge State), Archivo titles, IBM Plex, one charge-teal bar.
+ * portfolio design system (dark theme): bg, the violet/teal background halo, the
+ * name in accent, Archivo titles and IBM Plex.
  *
  * Fonts MUST be .woff, .ttf or .otf files (the image renderer cannot read .woff2).
  *
@@ -44,12 +45,16 @@ function loadFonts(): Promise<Fonts> {
   return fonts;
 }
 
+/** Dark-theme tokens from src/styles/tokens.css (the image renderer cannot read CSS variables). */
 const colours = {
   background: '#0b1117',
   text: '#e6edf2',
-  muted: '#8c9aa6',
+  muted: '#9aa7b2',
   accent: '#38e1d0',
-  rule: '#26323d',
+  line: 'rgba(230, 237, 242, 0.13)',
+  // The halo: the system's only gradient, same stops as .ps-halo in bundle.css.
+  halo:
+    'radial-gradient(45% 70% at 85% 0%, rgba(168, 98, 224, 0.18), transparent 70%), radial-gradient(45% 70% at 10% 0%, rgba(56, 225, 208, 0.14), transparent 70%)',
 };
 
 /** Minimal element helper, so this file needs no JSX or React. */
@@ -76,16 +81,16 @@ export async function renderOgImage({ title, line, name }: OgContent): Promise<U
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: '64px 80px',
-      background: colours.background,
+      backgroundColor: colours.background,
+      backgroundImage: colours.halo,
       fontFamily: 'IBM Plex Sans',
     },
     [
-      h('div', { display: 'flex', width: 1040, justifyContent: 'space-between', fontSize: 26, color: colours.muted, ...mono }, [
-        h('div', { display: 'flex' }, name),
-        h('div', { display: 'flex' }, 'aadeelp.com'),
+      h('div', { display: 'flex', width: 1040, justifyContent: 'space-between', fontSize: 24, ...mono }, [
+        h('div', { display: 'flex', color: colours.accent }, name),
+        h('div', { display: 'flex', color: colours.muted }, 'aadeelp.com'),
       ]),
       h('div', { display: 'flex', flexDirection: 'column', width: 1040 }, [
-        h('div', { display: 'flex', width: 96, height: 8, background: colours.accent, marginBottom: 36 }),
         h(
           'div',
           {
@@ -104,7 +109,7 @@ export async function renderOgImage({ title, line, name }: OgContent): Promise<U
           ? [h('div', { display: 'flex', width: 1040, marginTop: 28, fontSize: 34, color: colours.muted, lineHeight: 1.3 }, line)]
           : []),
       ]),
-      h('div', { display: 'flex', width: 1040, height: 2, background: colours.rule }),
+      h('div', { display: 'flex', width: 1040, height: 1, background: colours.line }),
     ],
   );
 
