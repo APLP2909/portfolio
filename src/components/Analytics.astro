@@ -3,6 +3,8 @@
  * Cloudflare Web Analytics. Sets no cookies. Loads only in production builds,
  * and only when a token is set in `src/site.config.ts`.
  * The privacy page names this tool; keep the two in step.
+ * Markup matches the snippet from the Cloudflare dashboard (type="module").
+ * The token is public by design: Cloudflare's snippet puts it in every page.
  */
 import { site } from '../site.config';
 
@@ -14,7 +16,7 @@ const enabled = import.meta.env.PROD && token.length > 0;
   enabled && (
     <script
       is:inline
-      defer
+      type="module"
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon={JSON.stringify({ token })}
     />

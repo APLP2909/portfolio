@@ -37,7 +37,7 @@ export const site = {
    * Cloudflare Web Analytics site token. Leave empty to turn analytics off.
    * The script loads only in production builds.
    */
-  cloudflareAnalyticsToken: '',
+  cloudflareAnalyticsToken: '0881b74bf6184a739c4d38f755fb0ff6',
   /**
    * When `true`, the "Work" nav item and the "See my work" button are hidden
    * while no case study exists. Pending decision (Aadeel, Phase 3).
