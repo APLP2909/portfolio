@@ -1,19 +1,20 @@
 ---
 /**
- * About page. Copy from copy-about.md (approved 9 November 2026; section order
- * updated after the design rounds). The ribbon under the intro links to the
- * first six sections.
+ * About page. Copy from copy-about.md (approved 9 November 2026).
+ * Template from design-system.md, "About": Hero, SectionRibbon, SectionRows
+ * (AI first), Languages row, then the ContactPanel and Footer from the layout.
+ * Every row looks the same. The ribbon order MUST match the row order.
  */
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import headshot from '../assets/headshot.jpg';
-import ContactCTA from '../components/ContactCTA.astro';
 
+/** Short ribbon names (one to three words), in row order. */
 const ribbon = [
-  { id: 'ai', label: 'Working with AI' },
+  { id: 'ai', label: 'AI' },
   { id: 'payments', label: 'Payments and platforms' },
-  { id: 'founder', label: 'Building something of my own' },
-  { id: 'internal-teams', label: 'Internal teams are customers too' },
+  { id: 'founder', label: 'Founder' },
+  { id: 'internal-teams', label: 'Internal teams' },
   { id: 'how-i-work', label: 'How I work' },
   { id: 'where-i-started', label: 'Where I started' },
 ];
@@ -24,186 +25,147 @@ const ribbon = [
   description="Aadeel Peerally is a product leader based in Berlin, working on payments platforms, marketplaces, medical learning tools and solar software."
   ogImage="/og/about.png"
 >
-  <header class="intro">
-    <div class="prose">
-      <h1>A product leader based in Berlin.</h1>
-      <p class="lead">
-        My work has centred on products where software meets money, operations and data: payments platforms,
-        marketplaces, learning tools for medical students and doctors, and software for solar developers.
-      </p>
+  <section class="ps-halo" aria-labelledby="about-heading">
+    <div class="ps-container ps-hero__inner">
+      <div class="ps-hero__text">
+        <div class="ps-eyebrow ps-eyebrow--accent">About</div>
+        <h1 class="ps-display-lg" id="about-heading">A product leader based in Berlin.</h1>
+        <p class="ps-lead">
+          My work has centred on products where software meets money, operations and data: payments platforms,
+          marketplaces, learning tools for medical students and doctors, and software for solar developers.
+        </p>
+      </div>
+      <div class="ps-hero__media portrait-sm">
+        <div class="ps-portrait">
+          <Image
+            src={headshot}
+            alt="Portrait of Aadeel Peerally"
+            width={420}
+            widths={[210, 420]}
+            sizes="210px"
+            loading="eager"
+          />
+        </div>
+      </div>
     </div>
-    <Image
-      src={headshot}
-      alt="Portrait of Aadeel Peerally"
-      width={720}
-      widths={[240, 480, 720]}
-      sizes="(min-width: 48rem) 240px, 60vw"
-      class="portrait"
-      loading="eager"
-    />
-  </header>
+  </section>
 
-  <nav class="ribbon" aria-label="On this page">
-    <ul>
-      {
-        ribbon.map((r) => (
-          <li>
-            <a href={`#${r.id}`}>{r.label}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+  <div class="ps-container">
+    <nav class="ps-ribbon" aria-label="On this page">
+      {ribbon.map((r) => <a href={`#${r.id}`}>{r.label}</a>)}
+    </nav>
 
-  <article class="prose">
-    <h2 id="ai">Working with AI</h2>
-    <p>
-      At PVcase, I lead product for a new platform that brings solar engineering and commercial workflows together.
-      Part of that work is an LLM-powered review workflow that turns expert review into structured compliance checks.
-      It is released and gaining traction with customers.
-    </p>
-    <p>
-      I owned the decision to keep a human in the loop. User interviews made it clear that our customers did not yet
-      trust the output of AI workflows on their own. Human validation lets them use the automation while staying in
-      control of the result.
-    </p>
-    <p>
-      I built Arnie OS, a system of 10+ AI agents for research, PRDs and reporting. Nothing is filed until I approve
-      it. Senior PMs on my team use it for their own work. I built it to cut the repetitive research and reporting
-      work my team and I were doing.
-    </p>
+    <section class="ps-row" id="ai">
+      <h2 class="ps-h2 ps-row__title">Working with AI</h2>
+      <div class="ps-row__body">
+        <p>
+          At PVcase, I lead product for a new platform that brings solar engineering and commercial workflows
+          together. Part of that work is an LLM-powered review workflow that turns expert review into structured
+          compliance checks. It is released and gaining traction with customers.
+        </p>
+        <p>
+          I owned the decision to keep a human in the loop. User interviews made it clear that our customers did not
+          yet trust the output of AI workflows on their own. Human validation lets them use the automation while
+          staying in control of the result.
+        </p>
+        <p>
+          I built Arnie OS, a system of 10+ AI agents for research, PRDs and reporting. Nothing is filed until I
+          approve it. Senior PMs on my team use it for their own work. I built it to cut the repetitive research and
+          reporting work my team and I were doing.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="payments">Payments and platforms</h2>
-    <p>
-      From WeSwap, I moved to Equals, then to Delivery Hero and AMBOSS. Each company handled payments in its own way,
-      shaped by how quickly it had grown.
-    </p>
-    <p>
-      At Delivery Hero, I led the migration of 20+ countries onto one financial platform, working across regulatory,
-      engineering and regional teams. At AMBOSS, we brought a fragmented payment set-up together into one system,
-      which cut time-to-market for campaigns and new products from weeks to hours. In each case, the right answer
-      depended on the business around it.
-    </p>
+    <section class="ps-row" id="payments">
+      <h2 class="ps-h2 ps-row__title">Payments and platforms</h2>
+      <div class="ps-row__body">
+        <p>
+          From WeSwap, I moved to Equals, then to Delivery Hero and AMBOSS. Each company handled payments in its own
+          way, shaped by how quickly it had grown.
+        </p>
+        <p>
+          At Delivery Hero, I led the migration of 20+ countries onto one financial platform, working across
+          regulatory, engineering and regional teams. At AMBOSS, we brought a fragmented payment set-up together into
+          one system, which cut time-to-market for campaigns and new products from weeks to hours. In each case, the
+          right answer depended on the business around it.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="founder">Building something of my own</h2>
-    <p>Alongside WeSwap and Equals, I co-founded TryMyKitchen, a self-serve marketplace for cooking classes.</p>
-    <p>
-      Before TryMyKitchen, cooking class hosts listed their classes on general experience and deal sites, where they
-      were easily lost among other offers. To stand out, hosts had to pay higher commissions or sell at steep
-      discounts. We built a dedicated self-service portal for hosts, combined with paid and organic marketing designed
-      to put their classes near the top of search results.
-    </p>
-    <p>
-      The marketplace grew to 8,000+ classes across Europe and North America, with partners including Jamie Oliver
-      cooking schools and Heineken. The lesson: a product succeeds only when it understands its customers' pain and
-      expectations clearly.
-    </p>
+    <section class="ps-row" id="founder">
+      <h2 class="ps-h2 ps-row__title">Building something of my own</h2>
+      <div class="ps-row__body">
+        <p>Alongside WeSwap and Equals, I co-founded TryMyKitchen, a self-serve marketplace for cooking classes.</p>
+        <p>
+          Before TryMyKitchen, cooking class hosts listed their classes on general experience and deal sites, where
+          they were easily lost among other offers. To stand out, hosts had to pay higher commissions or sell at steep
+          discounts. We built a dedicated self-service portal for hosts, combined with paid and organic marketing
+          designed to put their classes near the top of search results.
+        </p>
+        <p>
+          The marketplace grew to 8,000+ classes across Europe and North America, with partners including Jamie Oliver
+          cooking schools and Heineken. The lesson: a product succeeds only when it understands its customers' pain
+          and expectations clearly.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="internal-teams">Internal teams are customers too</h2>
-    <p>
-      Before I worked in product, I worked alongside the people who keep a product running. At WeSwap, I was Head of
-      Operations. I led the customer support team, up to 11 agents, and the compliance and fraud teams.
-    </p>
-    <p>
-      At WeSwap, I saw that internal teams are customers too. A product has to serve the people who use it and the
-      people who support it. Support agents need tools that triage incoming queries, answer simple requests
-      automatically and give customers self-service options. Without them, agents move from one call or email to the
-      next, with no time to listen.
-    </p>
-    <p>
-      The compliance and fraud teams faced a different version of the same problem. They handled a high volume of
-      paperwork and failed applications caused by incorrect customer information. Some customers waited more than a
-      week for their accounts to open. When I became Chief Product Officer, simplifying identity checks and making
-      them as self-service as possible was an obvious priority. Accounts were approved much faster, and the team had
-      more time for complex cases.
-    </p>
+    <section class="ps-row" id="internal-teams">
+      <h2 class="ps-h2 ps-row__title">Internal teams are customers too</h2>
+      <div class="ps-row__body">
+        <p>
+          Before I worked in product, I worked alongside the people who keep a product running. At WeSwap, I was Head
+          of Operations. I led the customer support team, up to 11 agents, and the compliance and fraud teams.
+        </p>
+        <p>
+          At WeSwap, I saw that internal teams are customers too. A product has to serve the people who use it and the
+          people who support it. Support agents need tools that triage incoming queries, answer simple requests
+          automatically and give customers self-service options. Without them, agents move from one call or email to
+          the next, with no time to listen.
+        </p>
+        <p>
+          The compliance and fraud teams faced a different version of the same problem. They handled a high volume of
+          paperwork and failed applications caused by incorrect customer information. Some customers waited more than
+          a week for their accounts to open. When I became Chief Product Officer, simplifying identity checks and
+          making them as self-service as possible was an obvious priority. Accounts were approved much faster, and the
+          team had more time for complex cases.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="how-i-work">How I work</h2>
-    <p>
-      I value a steady operating rhythm: structured discovery, written PRDs that are reviewed before work starts, and
-      weekly reporting on delivery and adoption. I hire and coach product and engineering people, and I try to keep
-      everyone, from engineers to leadership, aligned on why we are building something.
-    </p>
+    <section class="ps-row" id="how-i-work">
+      <h2 class="ps-h2 ps-row__title">How I work</h2>
+      <div class="ps-row__body">
+        <p>
+          I value a steady operating rhythm: structured discovery, written PRDs that are reviewed before work starts,
+          and weekly reporting on delivery and adoption. I hire and coach product and engineering people, and I try to
+          keep everyone, from engineers to leadership, aligned on why we are building something.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="where-i-started">Where I started</h2>
-    <p>
-      I studied Telecommunications Engineering at King's College London, graduating with an MEng in 2005. My early
-      roles were in sales and customer support, before I moved into product at the Guardian.
-    </p>
+    <section class="ps-row" id="where-i-started">
+      <h2 class="ps-h2 ps-row__title">Where I started</h2>
+      <div class="ps-row__body">
+        <p>
+          I studied Telecommunications Engineering at King's College London, graduating with an MEng in 2005. My early
+          roles were in sales and customer support, before I moved into product at the Guardian.
+        </p>
+      </div>
+    </section>
 
-    <h2 id="languages">Languages</h2>
-    <p>English (native), French (fluent), Spanish (intermediate) and German (basic).</p>
-  </article>
-
-  <ContactCTA />
+    <section class="ps-row" id="languages">
+      <h2 class="ps-h2 ps-row__title">Languages</h2>
+      <div class="ps-row__body">
+        <p>English (native), French (fluent), Spanish (intermediate) and German (basic).</p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .intro {
-    display: grid;
-    gap: var(--space-4);
-    margin-block: var(--space-5);
-  }
-
-  .lead {
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
-
-  .portrait {
-    width: min(15rem, 60%);
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: 50% 25%;
-    border: 1px solid var(--color-rule-strong);
-    border-radius: var(--radius);
-  }
-
-  @media (min-width: 48rem) {
-    .intro {
-      grid-template-columns: 1fr 15rem;
-      align-items: end;
-      gap: var(--space-5);
-    }
-
-    .portrait {
-      width: 100%;
-    }
-  }
-
-  /* Section links under the intro. Wraps on narrow screens. */
-  .ribbon {
-    border-block: 1px solid var(--color-border);
-    padding-block: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .ribbon ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .ribbon a {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-
-  article {
-    margin-bottom: var(--space-5);
-  }
-
-  article :global(h2) {
-    scroll-margin-top: var(--space-4);
-  }
-
-  article :global(h2) {
-    margin-top: var(--space-5);
-    font-size: 1.5rem;
+  /* Shorter portrait for the About headline (design-system.md, Hero rules). */
+  .portrait-sm {
+    width: clamp(160px, 17vw, 210px);
   }
 </style>

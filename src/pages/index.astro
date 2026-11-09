@@ -1,12 +1,14 @@
 ---
-/** Home page. Copy from copy-home.md (approved 9 November 2026, updated after the design rounds). */
+/**
+ * Home page. Copy from copy-home.md (approved 9 November 2026).
+ * Template from design-system.md, "Home": Hero, StatStrip, CardGrid,
+ * WorkCard, SkillGroups, then the ContactPanel and Footer from the layout.
+ */
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import headshot from '../assets/headshot.jpg';
-import CallToAction from '../components/CallToAction.astro';
-import Skills from '../components/Skills.astro';
+import SkillGroups from '../components/SkillGroups.astro';
 import WorkList from '../components/WorkList.astro';
-import ContactCTA from '../components/ContactCTA.astro';
 import { site } from '../site.config';
 import { getWork } from '../lib/work';
 
@@ -14,268 +16,127 @@ const hasWork = (await getWork()).length > 0;
 const showWorkButton = hasWork || !site.hideWorkWhenEmpty;
 
 const proof = [
-  { number: '500+', label: 'monthly active users on PVcase Platform, beyond pilot goals' },
-  { number: '20+', label: 'countries migrated onto one financial platform at Delivery Hero' },
-  { number: '€5M+', label: 'saved each year in payment processing costs at Delivery Hero' },
+  { value: '500+', label: 'monthly active users on PVcase Platform, beyond pilot goals' },
+  { value: '20+', label: 'countries migrated onto one financial platform at Delivery Hero' },
+  { value: '€5M+', label: 'saved each year in payment processing costs at Delivery Hero' },
 ];
 
-const differentiators = [
+const cards = [
   {
-    heading: 'The same problem, in different sectors',
+    title: 'The same problem, in different sectors',
     text: 'Fragmented systems brought onto one platform at Delivery Hero, AMBOSS and PVcase.',
   },
   {
-    heading: 'Payments with commercial results',
+    title: 'Payments with commercial results',
     text: 'Lower processing costs, better success rates and recovered orders at four companies.',
   },
   {
-    heading: 'Hands-on AI',
+    title: 'Hands-on AI',
     text: 'Shipped an LLM-powered review workflow at PVcase. Built Arnie OS, a system of 10+ AI agents.',
   },
   {
-    heading: 'Founder experience',
+    title: 'Founder experience',
     text: 'Co-founded TryMyKitchen, which grew to 8,000+ classes across Europe and North America.',
+  },
+];
+
+// copy-home.md, "Skills": each comma-separated item becomes a chip.
+const split = (s: string) => s.split(', ');
+const skills = [
+  {
+    group: 'Product leadership',
+    items: split(
+      'product strategy, platform strategy, product vision, product organisation design, team building and coaching, discovery, roadmapping, operating cadence',
+    ),
+  },
+  {
+    group: 'Technology',
+    items: split(
+      'AI and LLM products, agentic workflows, workflow automation, platform architecture, APIs, data products, integrations, analytics',
+    ),
+  },
+  {
+    group: 'Commercial',
+    items: split('B2B SaaS, marketplace economics, payments, cost optimisation, growth'),
   },
 ];
 ---
 
 <BaseLayout>
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-text">
-      <p class="eyebrow label">Hello, I am</p>
-      <h1 id="hero-heading">{site.name}</h1>
-      <p class="tagline">Product Director. I lead platforms and AI products.</p>
-      <p class="supporting">15 years building and leading product teams across four sectors. Based in Berlin.</p>
-      <div class="actions">
-        {showWorkButton && <CallToAction href="/work/">See my work</CallToAction>}
-        <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
+  <section class="ps-halo" aria-labelledby="hero-heading">
+    <div class="ps-container ps-hero__inner">
+      <div class="ps-hero__text">
+        <div class="ps-eyebrow ps-eyebrow--accent">Hello, I am</div>
+        <h1 class="ps-display-xl ps-name" id="hero-heading">{site.name}</h1>
+        <p class="ps-tagline">Product Director. I lead platforms and AI products.</p>
+        <p class="ps-lead">15 years building and leading product teams across four sectors. Based in Berlin.</p>
+        <div class="ps-actions">
+          {showWorkButton && <a class="ps-btn ps-btn--primary" href="/work/">See my work</a>}
+          <a class="ps-btn ps-btn--secondary" href={site.resumePdf} download>Download resume</a>
+        </div>
+      </div>
+      <div class="ps-hero__media">
+        <div class="ps-portrait">
+          <Image
+            src={headshot}
+            alt="Portrait of Aadeel Peerally"
+            width={520}
+            widths={[260, 520]}
+            sizes="(min-width: 60rem) 260px, 190px"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
       </div>
     </div>
-    <Image
-      src={headshot}
-      alt="Portrait of Aadeel Peerally"
-      width={640}
-      widths={[160, 320, 480, 640]}
-      sizes="(min-width: 48rem) 320px, 160px"
-      class="portrait"
-      loading="eager"
-      fetchpriority="high"
-    />
   </section>
 
-  <section aria-label="Highlights">
-    <ul class="proof">
+  <section class="ps-container" aria-label="Highlights">
+    <div class="ps-stats">
       {
         proof.map((p) => (
-          <li>
-            <strong>{p.number}</strong>
-            <span>{p.label}</span>
-          </li>
+          <div class="ps-stat">
+            <div class="ps-stat__value">{p.value}</div>
+            <p class="ps-stat__label">{p.label}</p>
+          </div>
         ))
       }
-    </ul>
+    </div>
   </section>
 
-  <section class="ruled" aria-labelledby="bring-heading">
-    <h2 id="bring-heading">What I bring</h2>
-    <ol class="bring">
+  <section class="ps-section ps-container" aria-labelledby="bring-heading">
+    <h2 class="ps-h2" id="bring-heading">What I bring</h2>
+    <div class="ps-grid spaced">
       {
-        differentiators.map((d, i) => (
-          <li>
-            <h3>
-              <span class="num label" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')} ·
-              </span>{' '}
-              {d.heading}
-            </h3>
-            <p>{d.text}</p>
-          </li>
+        cards.map((c, i) => (
+          <article class="ps-card">
+            <div class="ps-card__index">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="ps-h3 ps-card__title">{c.title}</h3>
+            <p class="ps-card__text">{c.text}</p>
+          </article>
         ))
       }
-    </ol>
+    </div>
   </section>
 
-  <section id="work" class="ruled" aria-labelledby="work-heading">
-    <h2 id="work-heading">My work</h2>
-    <WorkList />
+  <section class="ps-section ps-container" id="work" aria-labelledby="work-heading">
+    <h2 class="ps-h2" id="work-heading">My work</h2>
+    <div class="spaced">
+      <WorkList />
+    </div>
   </section>
 
-  <section class="ruled" aria-labelledby="skills-heading">
-    <h2 id="skills-heading">Skills</h2>
-    <Skills />
+  <section class="ps-section ps-container" aria-labelledby="skills-heading">
+    <h2 class="ps-h2" id="skills-heading">Skills</h2>
+    <div class="spaced">
+      <SkillGroups groups={skills} />
+    </div>
   </section>
-
-  <ContactCTA />
 </BaseLayout>
 
 <style>
-  section {
-    margin-block: var(--space-5);
-  }
-
-  .hero {
-    display: grid;
-    gap: var(--space-4);
+  /* Space between a section title and its content (space-5). */
+  .spaced {
     margin-top: var(--space-5);
-  }
-
-  .portrait {
-    order: -1;
-    width: 8rem;
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: 50% 25%;
-    border: 1px solid var(--color-rule-strong);
-    border-radius: var(--radius);
-  }
-
-  @media (min-width: 48rem) {
-    .hero {
-      grid-template-columns: 1fr 17.5rem;
-      align-items: end;
-      gap: var(--space-5);
-    }
-
-    .portrait {
-      order: 0;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-    }
-  }
-
-  .eyebrow {
-    margin: 0;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    margin-block: var(--space-2) var(--space-3);
-  }
-
-  .tagline {
-    margin: 0;
-    font-family: var(--font-display);
-    font-variation-settings: var(--display-width);
-    font-size: clamp(1.25rem, 2.6vw, 1.625rem);
-    font-weight: 600;
-    line-height: 1.25;
-  }
-
-  .supporting {
-    margin-block: var(--space-2) 0;
-    color: var(--color-text-muted);
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-4);
-  }
-
-  .proof {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
-    gap: var(--space-4);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  /*
-   * The proof numbers are the strongest evidence on the page, so they are the
-   * only things that glow (Charge State: "brightness equals rank").
-   */
-  .proof li {
-    position: relative;
-    display: grid;
-    align-content: start;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    padding-top: calc(var(--space-4) + 4px);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    box-shadow: var(--glow-charge);
-  }
-
-  /* The charge bar: fills once on load, the site's one "energy" moment. */
-  .proof li::before {
-    content: '';
-    position: absolute;
-    inset: -1px -1px auto;
-    height: 4px;
-    border-radius: var(--radius) var(--radius) 0 0;
-    background: var(--color-charge);
-    box-shadow: var(--glow-text);
-    transform-origin: left;
-    animation: charge var(--t-charge) both;
-  }
-
-  .proof li:nth-child(2)::before {
-    animation-delay: 60ms;
-  }
-
-  .proof li:nth-child(3)::before {
-    animation-delay: 120ms;
-  }
-
-  @keyframes charge {
-    from {
-      transform: scaleX(0);
-    }
-  }
-
-  .proof strong {
-    font-family: var(--font-mono);
-    font-size: clamp(2.25rem, 5vw, 3rem);
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--color-charge);
-    text-shadow: var(--glow-text);
-  }
-
-  .proof span {
-    color: var(--color-text-muted);
-    font-size: 0.9375rem;
-  }
-
-  /* Four short cards; they wrap to fewer columns as space shrinks. */
-  .bring {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
-    gap: var(--space-3);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .bring li {
-    padding: var(--space-4);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-  }
-
-  .num {
-    font-size: 0.8125rem;
-    vertical-align: 0.1em;
-  }
-
-  h2 {
-    margin-top: 0;
-    font-size: 1.75rem;
-  }
-
-  .bring h3 {
-    margin: 0 0 var(--space-2);
-    font-size: 1.125rem;
-  }
-
-  .bring p {
-    margin: 0;
-    color: var(--color-text-muted);
   }
 </style>

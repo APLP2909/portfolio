@@ -1,5 +1,9 @@
 ---
-/** /work/: every case study, newest first, or an empty state. */
+/**
+ * /work/: every case study, newest first, or an empty state.
+ * Template from design-system.md, "How to add a new area": an index page with
+ * a hero without a portrait and a stack of WorkCards.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import WorkList from '../../components/WorkList.astro';
 ---
@@ -9,12 +13,15 @@ import WorkList from '../../components/WorkList.astro';
   description="Case studies by Aadeel Peerally on platforms, payments and AI."
   ogImage="/og/work.png"
 >
-  <h1>My work</h1>
-  <WorkList headingLevel={2} />
+  <section class="ps-halo" aria-labelledby="work-heading">
+    <div class="ps-container ps-hero__inner">
+      <div class="ps-hero__text">
+        <div class="ps-eyebrow ps-eyebrow--accent">Work</div>
+        <h1 class="ps-display-lg" id="work-heading">My work</h1>
+      </div>
+    </div>
+  </section>
+  <div class="ps-container">
+    <WorkList headingLevel={2} />
+  </div>
 </BaseLayout>
-
-<style>
-  h1 {
-    margin-block: var(--space-5) var(--space-4);
-  }
-</style>
