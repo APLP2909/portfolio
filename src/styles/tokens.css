@@ -1,0 +1,66 @@
+/*
+ * Portfolio design system tokens (design-system.md, "Tokens (tokens.css)").
+ * Copied as published. One deliberate change: the three font tokens point to
+ * the self-hosted fonts that Astro registers (--font-archivo, --font-plex-sans,
+ * --font-plex-mono) instead of the family names, because the site does not
+ * load Google Fonts.
+ *
+ * Change a value here, never in bundle.css or page code.
+ * Contrast checked 9 Nov 2026: every text pair passes WCAG AA on bg, surface
+ * and raised in both themes (lowest 5.58:1).
+ */
+:root,[data-theme="dark"]{
+  --bg:#0b1117;
+  --surface:#121a22;
+  --raised:#18222c;
+  --text:#e6edf2;
+  --muted:#9aa7b2;
+  --line:#e6edf221;
+  --teal:#38e1d0;
+  --blue:#6fb6ff;
+  --violet:#a862e0;
+  --accent:var(--teal);
+  --action:var(--teal);
+  --on-action:#0b1117;
+  --attn:#7fb2ff;
+  --glow:0 0 60px rgba(168,98,224,0.16);
+}
+[data-theme="light"]{
+  --bg:#f9f9fb;
+  --surface:#ffffff;
+  --raised:#f2f2f6;
+  --text:#1d1d1f;
+  --muted:#5c5c66;
+  --line:#0000001f;
+  --teal:#097a8c;
+  --blue:#2f6fd0;
+  --violet:#7a3fc8;
+  --accent:var(--violet);
+  --action:#1d1d1f;
+  --on-action:#ffffff;
+  --attn:#2f62c4;
+  --glow:0 10px 30px rgba(0,0,0,0.06);
+}
+:root{
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:48px;
+  --space-8:64px;
+  --space-9:96px;
+  --radius-sm:12px;
+  --radius-md:16px;
+  --radius-lg:20px;
+  --radius-xl:24px;
+  --radius-pill:999px;
+  --container:1200px;
+  --measure:720px;
+  --tap-min:44px;
+  --control:48px;
+  --font-display:var(--font-archivo), system-ui, sans-serif;
+  --font-body:var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono:var(--font-plex-mono), ui-monospace, monospace;
+}

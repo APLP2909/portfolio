@@ -1,0 +1,160 @@
+/*
+ * Portfolio design system component styles (design-system.md, "bundle.css").
+ * Copied as published, with one change: the Google Fonts @import is removed.
+ * The fonts are self-hosted through Astro's fonts API (astro.config.mjs), so
+ * no visitor request goes to Google.
+ */
+/* Portfolio design system: component styles. Every value comes from tokens.css. */
+
+/* ---- Page shell ---- */
+.ps-page{position:relative;background:var(--bg);color:var(--text);font:400 17px/1.55 var(--font-body);min-height:100%;-webkit-font-smoothing:antialiased}
+.ps-page *,.ps-page *::before,.ps-page *::after{box-sizing:border-box}
+.ps-page :where(h1,h2,h3,p,dl,dd,ul,ol,figure,blockquote){margin:0}
+.ps-page :where(ul,ol){padding:0;list-style:none}
+.ps-page :where(a){color:inherit;text-decoration:none}
+.ps-page :where(a,button):focus-visible{outline:2px solid var(--attn);outline-offset:3px}
+.ps-page :where(img,video,svg){max-width:100%}
+.ps-container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:clamp(20px,5vw,64px)}
+.ps-section{padding-top:clamp(40px,6vw,var(--space-8))}
+.ps-stack>*+*{margin-top:var(--space-5)}
+.ps-muted{color:var(--muted)}
+
+/* Background halo: the only gradient in the system. */
+.ps-halo{position:relative;overflow:hidden}
+.ps-halo::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:
+  radial-gradient(45% 70% at 85% 0%,color-mix(in srgb,var(--violet) 18%,transparent),transparent 70%),
+  radial-gradient(45% 70% at 10% 0%,color-mix(in srgb,var(--teal) 14%,transparent),transparent 70%)}
+[data-theme="light"] .ps-halo::before{
+ background:
+  radial-gradient(45% 70% at 85% 0%,color-mix(in srgb,var(--violet) 8%,transparent),transparent 70%),
+  radial-gradient(45% 70% at 10% 0%,color-mix(in srgb,var(--blue) 8%,transparent),transparent 70%)}
+.ps-halo>*{position:relative}
+
+/* ---- Type ---- */
+.ps-eyebrow{font:500 11.5px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ps-eyebrow--accent{color:var(--accent)}
+.ps-display-xl,.ps-display-lg,.ps-display-md,.ps-h2,.ps-h3{font-family:var(--font-display);font-stretch:112%;letter-spacing:-.03em;overflow-wrap:break-word}
+.ps-display-xl{font-size:clamp(40px,5.6vw,76px);line-height:1.02;font-weight:700}
+.ps-display-lg{font-size:clamp(34px,4.6vw,58px);line-height:1.05;font-weight:500}
+.ps-display-md{font-size:clamp(32px,4vw,44px);line-height:1;font-weight:700}
+.ps-h2{font-size:30px;line-height:1.05;font-weight:700}
+.ps-h3{font-size:21px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.ps-name{color:var(--accent)}
+.ps-tagline{font:500 clamp(20px,2.2vw,28px)/1.25 var(--font-display);font-stretch:112%;letter-spacing:-.01em}
+.ps-lead{font-size:19px;line-height:1.55;color:var(--muted);max-width:56ch}
+
+/* ---- Header ---- */
+.ps-header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-block:20px}
+.ps-mark{display:inline-flex;align-items:center;justify-content:center;width:var(--tap-min);height:var(--tap-min);border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--accent);font:700 16px/1 var(--font-display);font-stretch:112%}
+.ps-nav{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:15px}
+.ps-nav a:not(.ps-btn){color:var(--muted);transition:color .12s}
+.ps-nav a:not(.ps-btn):hover{color:var(--accent)}
+.ps-nav a[aria-current="page"]{color:var(--text);border-bottom:1px solid var(--accent);padding-bottom:2px}
+
+/* ---- Buttons and tags ---- */
+.ps-btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--control);padding:0 26px;border-radius:var(--radius-pill);font:600 16px/1.2 var(--font-body);text-align:center;transition:filter .12s,background .12s}
+.ps-btn--primary{background:var(--action);color:var(--on-action)}
+.ps-btn--primary:hover{filter:brightness(1.08)}
+.ps-btn--secondary{border:1px solid var(--line);font-weight:500}
+.ps-btn--secondary:hover{background:var(--raised)}
+.ps-btn--sm{min-height:var(--tap-min);padding:0 20px;font-size:15px}
+.ps-actions{display:flex;flex-wrap:wrap;gap:12px}
+.ps-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ps-tag{font:500 11.5px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:var(--radius-pill);padding:5px 12px;color:var(--accent)}
+
+/* ---- Hero ---- */
+.ps-hero__inner{display:flex;flex-wrap:wrap;gap:32px 56px;align-items:center;padding-block:16px 40px}
+.ps-hero__text{flex:1 1 440px;min-width:0}
+.ps-hero__text>*+*{margin-top:18px}
+.ps-hero__media{flex:0 0 auto;width:clamp(190px,22vw,260px)}
+.ps-portrait{aspect-ratio:4/5;border:1px solid var(--line);border-radius:var(--radius-xl);overflow:hidden;background:var(--raised)}
+.ps-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.ps-portrait--empty{display:flex;align-items:center;justify-content:center}
+
+/* ---- Stat strip ---- */
+.ps-stats{display:flex;flex-wrap:wrap;gap:0 40px;border-block:1px solid var(--line)}
+.ps-stat{flex:1 1 260px;min-width:0;padding-block:20px;display:flex;align-items:center;gap:16px}
+.ps-stat__value{flex:none;font:500 clamp(34px,3.6vw,46px)/1 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--accent);white-space:nowrap}
+.ps-stat__label{font-size:14.5px;line-height:1.4;color:var(--muted);max-width:28ch;overflow-wrap:break-word}
+
+/* ---- Card grid ---- */
+.ps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:var(--space-4)}
+.ps-grid--wide{grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
+.ps-card{min-width:0;padding:var(--space-5);border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);overflow-wrap:break-word}
+.ps-card--span{grid-column:1/-1}
+.ps-card__index{font:500 11.5px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ps-card__title{margin-top:10px}
+.ps-card__text{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted)}
+
+/* ---- Media slot ---- */
+.ps-media{aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden}
+.ps-media--4x3{aspect-ratio:4/3}
+.ps-media :where(img,video){display:block;width:100%;height:100%;object-fit:cover}
+.ps-media--placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;border:1px dashed var(--accent);color:var(--muted)}
+.ps-media--placeholder svg{flex:none}
+
+/* ---- Work card ---- */
+.ps-work{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden;box-shadow:var(--glow)}
+.ps-work__media{flex:1 1 420px;min-width:0;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;background:var(--raised);border-right:1px solid var(--line)}
+.ps-work__media :where(img,video){display:block;width:100%;height:100%;object-fit:cover}
+.ps-work__body{flex:1 1 400px;min-width:0;padding:clamp(24px,3.5vw,40px);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.ps-work__title{font-size:clamp(28px,3.4vw,40px)}
+.ps-work__meta{font:400 13px/1.4 var(--font-mono);color:var(--muted)}
+.ps-work__link{align-self:flex-start;font-weight:600;color:var(--accent)}
+
+/* ---- Section row and ribbon ---- */
+.ps-ribbon{display:flex;flex-wrap:wrap;gap:10px 28px;padding-block:20px;border-top:1px solid var(--line);font:400 12px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ps-ribbon a:hover{color:var(--accent)}
+.ps-row{display:flex;flex-wrap:wrap;gap:20px 64px;padding-block:var(--space-8);border-top:1px solid var(--line)}
+.ps-row__title{flex:1 1 240px;min-width:0}
+.ps-row__body{flex:3 1 520px;min-width:0;max-width:var(--measure)}
+.ps-row__body>*+*{margin-top:20px}
+.ps-row__body p{font-size:18px;line-height:1.65}
+
+/* ---- Case study ---- */
+.ps-case{display:flex;flex-wrap:wrap;gap:var(--space-7) 72px;align-items:flex-start}
+.ps-case__article{flex:3 1 520px;min-width:0;max-width:var(--measure)}
+.ps-panel{flex:1 1 280px;max-width:340px;min-width:0;padding:28px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+.ps-panel dl{display:grid;gap:20px}
+.ps-panel dt{font:500 11.5px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ps-panel dd{margin-top:6px;font-size:16px;overflow-wrap:break-word}
+.ps-panel__outcome{padding-top:20px;border-top:1px solid var(--line)}
+.ps-panel__outcome dd{font:500 20px/1.35 var(--font-mono);color:var(--accent)}
+.ps-back{font:400 12px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ps-back:hover{color:var(--accent)}
+
+/* ---- Skills ---- */
+.ps-skills{display:flex;flex-wrap:wrap;gap:28px 40px}
+.ps-skills__group{flex:1 1 320px;min-width:0}
+.ps-skills__title{margin-bottom:12px;font-size:15px;font-weight:600}
+.ps-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ps-chip{font-size:13.5px;line-height:1.4;border:1px solid var(--line);border-radius:var(--radius-pill);padding:5px 13px;background:var(--surface)}
+
+/* ---- Contact and footer ---- */
+.ps-contact{padding:clamp(28px,4vw,48px);border:1px solid var(--line);border-radius:var(--radius-xl);background:var(--surface)}
+.ps-contact__inner{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;justify-content:space-between}
+.ps-contact__text{min-width:0}
+.ps-contact__text p{margin-top:12px;max-width:46ch;font-size:16px;color:var(--muted)}
+.ps-footer{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;padding-block:32px 40px;font:400 12px/1.4 var(--font-mono);letter-spacing:.04em;color:var(--muted)}
+
+/* ---- Resume ---- */
+.ps-resume__head{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between;padding-block:16px 32px}
+.ps-resume__head>div{min-width:0}
+.ps-entry{display:flex;flex-wrap:wrap;gap:8px 48px;padding-block:28px;border-top:1px solid var(--line)}
+.ps-entry__when{flex:1 1 180px;max-width:220px;min-width:0;font:400 13px/1.5 var(--font-mono);color:var(--muted)}
+.ps-entry__what{flex:3 1 480px;min-width:0}
+.ps-entry__org{margin-top:4px;color:var(--muted)}
+.ps-entry__list{margin-top:14px;display:grid;gap:8px}
+.ps-entry__list li{position:relative;padding-left:1.1em;font-size:16px;line-height:1.55}
+.ps-entry__list li::before{content:"";position:absolute;left:0;top:.7em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.ps-entry__list li>*{overflow-wrap:break-word}
+
+@media (prefers-reduced-motion:reduce){.ps-page *{transition:none!important}}
+
+/* Print: the resume page prints on white, with no controls. */
+@media print{
+ .ps-page{--bg:#fff;--surface:#fff;--raised:#fff;--text:#000;--muted:#333;--line:#bbb;--accent:#4b2a86;background:#fff;color:#000}
+ .ps-halo::before,.ps-nav,.ps-btn,.ps-ribbon,.ps-contact{display:none!important}
+ .ps-entry{break-inside:avoid}
+}

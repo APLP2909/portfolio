@@ -31,9 +31,9 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   fonts: [
     {
-      // Display face (Charge State): Archivo, set semi-expanded in CSS with
-      // `font-variation-settings: 'wdth' 112`. This variable file carries the
-      // width and weight axes.
+      // Display face: Archivo. This variable file carries the width and weight
+      // axes; declaring the stretch range lets the design system's
+      // `font-stretch: 112%` select the semi-expanded width.
       provider: fontProviders.local(),
       name: 'Archivo',
       cssVariable: '--font-archivo',
@@ -43,6 +43,7 @@ export default defineConfig({
           {
             src: ['./node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2'],
             weight: '100 900',
+            stretch: '62% 125%',
             style: 'normal',
           },
         ],
@@ -57,6 +58,7 @@ export default defineConfig({
         variants: [
           plex('ibm-plex-sans', 400),
           plex('ibm-plex-sans', 400, 'italic'),
+          plex('ibm-plex-sans', 500),
           plex('ibm-plex-sans', 600),
           plex('ibm-plex-sans', 700),
         ],

@@ -65,15 +65,13 @@ const ogImageUrl = new URL(ogImage, Astro.site);
 
 <script is:inline>
   // Runs before first paint, so the page never flashes the wrong theme.
+  // Dark is the default (design-system.md); a stored choice wins.
   (() => {
     let theme = null;
     try {
       theme = localStorage.getItem('theme');
     } catch {}
-    if (theme !== 'light' && theme !== 'dark') {
-      theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    document.documentElement.dataset.theme = theme;
+    document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
   })();
 </script>
 
