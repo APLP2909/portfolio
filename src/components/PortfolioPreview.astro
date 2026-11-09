@@ -1,7 +1,11 @@
 ---
-/** Card for one case study. Used on the home page and /work/. */
+/**
+ * Card for one case study. Used on the home page and /work/.
+ * Media slot: the case study's demo video if it has one, otherwise its cover image.
+ */
 import { Image } from 'astro:assets';
 import Pill from './Pill.astro';
+import LoopVideo from './LoopVideo.astro';
 import { workSlug, type WorkEntry } from '../lib/work';
 
 interface Props {
@@ -11,26 +15,33 @@ interface Props {
 }
 
 const { entry, headingLevel = 3 } = Astro.props;
-const { title, description, company, timeframe, tags, cover, coverAlt } = entry.data;
+const { title, description, company, timeframe, outcome, tags, cover, coverAlt, video } = entry.data;
 const Heading = `h${headingLevel}` as 'h2' | 'h3';
 ---
 
 <article class="card">
   {
-    cover && (
-      <Image
-        src={cover}
-        alt={coverAlt ?? ''}
-        widths={[400, 800]}
-        sizes="(min-width: 48rem) 400px, 100vw"
-        class="cover"
-      />
+    video ? (
+      <div class="media">
+        <LoopVideo {...video} caption={undefined} />
+      </div>
+    ) : (
+      cover && (
+        <Image
+          src={cover}
+          alt={coverAlt ?? ''}
+          widths={[400, 800]}
+          sizes="(min-width: 48rem) 400px, 100vw"
+          class="cover"
+        />
+      )
     )
   }
   <div class="body">
     <p class="meta label">{company} · {timeframe}</p>
     <Heading class="title"><a href={`/work/${workSlug(entry)}/`}>{title}</a></Heading>
     <p>{description}</p>
+    <p class="outcome"><span class="label">Outcome</span> {outcome}</p>
     <ul class="tags" aria-label="Tags">
       {
         tags.map((tag) => (
@@ -63,6 +74,28 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
     width: 100%;
     aspect-ratio: 1200 / 630;
     object-fit: cover;
+  }
+
+  .media :global(.loop-video) {
+    margin: 0;
+  }
+
+  .media :global(video) {
+    border: 0;
+    border-radius: 0;
+  }
+
+  /* Keep the video's pause button above the card-wide link. */
+  .media :global(.toggle) {
+    z-index: 1;
+  }
+
+  .outcome {
+    margin-block: 0 var(--space-3);
+  }
+
+  .outcome .label {
+    margin-right: var(--space-2);
   }
 
   .body {
