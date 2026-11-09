@@ -1,0 +1,28 @@
+---
+/**
+ * ContactPanel (design-system.md): the closing panel on every page, over the
+ * background halo. Copy from copy-home.md and copy-about.md (approved).
+ * Keeps id="contact" so the header's "Email me" button links here.
+ */
+import { site } from '../site.config';
+import EmailLink from './EmailLink.astro';
+
+const reverse = (s: string) => [...s].reverse().join('');
+const { user, domain } = site.emailReversed;
+const spokenEmail = `${reverse(user)} at ${reverse(domain).replace(/\./g, ' dot ')}`;
+---
+
+<section class="ps-contact ps-halo" id="contact" aria-labelledby="contact-heading">
+  <div class="ps-contact__inner">
+    <div class="ps-contact__text">
+      <h2 class="ps-display-md ps-name" id="contact-heading">Get in touch</h2>
+      <p>For product leadership conversations, email me or connect on LinkedIn.</p>
+      <noscript><p>Email: {spokenEmail}</p></noscript>
+    </div>
+    <div class="ps-actions">
+      <EmailLink class="ps-btn ps-btn--primary">Email me</EmailLink>
+      <a class="ps-btn ps-btn--secondary" href={site.linkedin} rel="me">LinkedIn</a>
+      <a class="ps-btn ps-btn--secondary" href={site.resumePdf} download>Download resume</a>
+    </div>
+  </div>
+</section>

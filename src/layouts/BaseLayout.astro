@@ -1,11 +1,14 @@
 ---
-/** Shared page shell: <head>, skip link, header, main content and footer. */
+/**
+ * Shared page shell (design-system.md, "Page templates"): every page starts
+ * with the Header and ends with the ContactPanel and the Footer.
+ */
 import '../styles/global.css';
-import MainHead from '../components/MainHead.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-
 import type { ComponentProps } from 'astro/types';
+import MainHead from '../components/MainHead.astro';
+import Header from '../components/Header.astro';
+import ContactPanel from '../components/ContactPanel.astro';
+import Footer from '../components/Footer.astro';
 
 type Props = ComponentProps<typeof MainHead>;
 
@@ -13,16 +16,21 @@ const props = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="dark">
   <head>
     <MainHead {...props} />
   </head>
-  <body>
+  <body class="ps-page">
     <a class="skip-link" href="#main">Skip to content</a>
-    <Nav />
-    <main id="main" class="container">
+    <div class="ps-container">
+      <Header />
+    </div>
+    <main id="main">
       <slot />
     </main>
-    <Footer />
+    <div class="ps-container ps-band">
+      <ContactPanel />
+      <Footer />
+    </div>
   </body>
 </html>

@@ -1,61 +1,63 @@
 ---
 /**
- * Light/dark switch. Saves the choice in localStorage and sets
- * `data-theme` on <html>. The first-paint logic lives in MainHead.astro.
+ * Theme switch. The design system has no icon set, so the control is a text
+ * button naming the theme it switches to ("Light" or "Dark"), styled like a
+ * nav link. It stores the choice in localStorage. Dark is the default; the
+ * first-paint logic lives in MainHead.astro.
  */
-import Icon from './Icon.astro';
 ---
 
-<button type="button" class="theme-toggle state-layer" aria-label="Switch to dark theme" data-theme-toggle>
-  <span class="icon-light"><Icon name="sun" /></span>
-  <span class="icon-dark"><Icon name="moon" /></span>
+<button type="button" class="theme-toggle" data-theme-toggle>
+  <span data-theme-label>Light</span><span class="visually-hidden"> theme</span>
 </button>
 
 <script>
   const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const label = button?.querySelector<HTMLElement>('[data-theme-label]');
   const root = document.documentElement;
 
-  const label = () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    button?.setAttribute('aria-label', `Switch to ${next} theme`);
+  const sync = () => {
+    if (label) label.textContent = root.dataset.theme === 'light' ? 'Dark' : 'Light';
   };
 
-  label();
+  sync();
   button?.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
     root.dataset.theme = next;
     try {
       localStorage.setItem('theme', next);
     } catch {
-      // Storage can be blocked; the toggle still works for this page view.
+      // Storage can be blocked; the switch still works for this page view.
     }
-    label();
+    sync();
   });
 </script>
 
 <style>
+  /* Matches .ps-nav links: muted text, accent on hover. Tokens only. */
   .theme-toggle {
-    display: inline-grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    min-height: var(--tap-min);
     padding: 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: transparent;
-    color: var(--color-text);
+    border: 0;
+    background: none;
+    font: inherit;
+    color: var(--muted);
     cursor: pointer;
+    transition: color 0.12s;
   }
 
-  .icon-dark {
-    display: none;
+  .theme-toggle:hover {
+    color: var(--accent);
   }
 
-  :global([data-theme='dark']) .icon-light {
-    display: none;
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--attn);
+    outline-offset: 3px;
   }
 
-  :global([data-theme='dark']) .icon-dark {
-    display: inline;
+  @media print {
+    .theme-toggle {
+      display: none;
+    }
   }
 </style>

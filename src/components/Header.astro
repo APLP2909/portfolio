@@ -1,0 +1,30 @@
+---
+/**
+ * Header (design-system.md): the AP monogram on the left, the main navigation
+ * on the right, ending with a small primary "Email me" button that jumps to
+ * the contact panel. The header never repeats the full name.
+ */
+import { navItems, site } from '../site.config';
+import { getWork } from '../lib/work';
+import ThemeToggle from './ThemeToggle.astro';
+
+const hasWork = (await getWork()).length > 0;
+const items = navItems.filter((item) => !(item.requiresWork && site.hideWorkWhenEmpty && !hasWork));
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="ps-header">
+  <a class="ps-mark" href="/" aria-label="Home">AP</a>
+  <nav class="ps-nav" aria-label="Main">
+    {
+      items.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <ThemeToggle />
+    <a class="ps-btn ps-btn--primary ps-btn--sm" href="#contact">Email me</a>
+  </nav>
+</header>
