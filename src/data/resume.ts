@@ -1,6 +1,7 @@
 /**
  * Resume content. Wording is copied from the approved content pack
- * (content-source.md, sections 2–8, approved 9 November 2026).
+ * (content-source.md, sections 2–8, approved 9 November 2026; achievements and
+ * Arnie OS label updated the same day).
  *
  * The site is the master copy for wording. When you change this file,
  * re-export the PDF in `public/` so the two stay in step.
@@ -147,15 +148,19 @@ export const experience: Role[] = [
   },
 ];
 
-/** Achievements block (content-source.md, section 3). */
+/** Achievements block (content-source.md, section 3, rewritten 9 November 2026). Site wording only. */
 export const achievements: { label: string; text: string }[] = [
   {
     label: 'Platform',
-    text: 'took PVcase Platform from a single foundational epic to a product with shared document review, a components database, fine-grained authorisation and design-level financial modelling.',
+    text: 'defined the shared project data model behind PVcase Platform (500+ monthly active users), opening new OEM and partner opportunities.',
   },
   {
     label: 'AI',
-    text: 'scoped an LLM-powered, human-in-the-loop review workflow that is now released and gaining traction with customers.',
+    text: "led the release of AI-Assisted Design Review, an LLM workflow with a human deciding every finding. It shortens customers' design review cycles and is released and gaining traction with customers.",
+  },
+  {
+    label: 'Arnie OS',
+    text: "architected Arnie OS, a multi-agent system that automates my team's admin and reporting, and used it to deliver AI-Assisted Design Review from idea to shipped in under a month.",
   },
   {
     label: 'Commercial',
@@ -211,7 +216,7 @@ export const languages = [
 export const projects = [
   {
     name: 'Arnie OS',
-    label: 'Personal AI project',
+    label: 'AI project',
     bullets: [
       "Architected a custom multi-agent AI operating system using Anthropic's framework and MCP integrations across Jira, Slack, Tableau and Google Workspace to automate product management workflows.",
       'Engineered 10+ specialised agents with defined tool permissions, skills and escalation logic to execute data synthesis, PRD scoping and automated reporting.',
