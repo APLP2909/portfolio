@@ -1,0 +1,175 @@
+---
+/** Home page. Copy from copy-home.md (approved 9 November 2026). */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Skills from '../components/Skills.astro';
+import WorkList from '../components/WorkList.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { site } from '../site.config';
+import { getWork } from '../lib/work';
+
+const hasWork = (await getWork()).length > 0;
+const showWorkButton = hasWork || !site.hideWorkWhenEmpty;
+
+const proof = [
+  { number: '€5M+', label: 'saved each year in payment processing costs at Delivery Hero' },
+  { number: '20+', label: 'countries migrated onto one financial platform at Delivery Hero' },
+  { number: '500+', label: 'monthly active users on PVcase Platform, beyond its pilot goals' },
+];
+
+const differentiators = [
+  {
+    heading: 'The same problem, in different sectors',
+    text: 'At Delivery Hero, AMBOSS and PVcase, I led work to bring fragmented systems onto a single platform. Food delivery, health education and solar energy each came with their own constraints. Working across them has shown me how much the right answer depends on context.',
+  },
+  {
+    heading: 'Payments with commercial results',
+    text: 'I have led payments products at WeSwap, Equals, Delivery Hero and AMBOSS. The work reduced processing costs, improved payment success rates and recovered orders that previously failed.',
+  },
+  {
+    heading: 'Hands-on AI',
+    text: 'At PVcase, we shipped an LLM-powered review workflow that turns expert review into structured compliance checks, with a human in the loop. As a personal project, I built Arnie OS: a system of 10+ AI agents that automates product management workflows.',
+  },
+  {
+    heading: 'Founder experience',
+    text: 'I co-founded TryMyKitchen, a self-serve marketplace for cooking classes. It grew to 8,000+ classes across Europe and North America.',
+  },
+];
+---
+
+<BaseLayout>
+  <section class="hero" aria-labelledby="hero-heading">
+    <p class="name">{site.name}</p>
+    <h1 id="hero-heading">Product leader for platforms and AI</h1>
+    <p class="level">Product Director · 15 years · built and led product teams across four sectors</p>
+    <div class="actions">
+      {showWorkButton && <CallToAction href="/work/">See my work</CallToAction>}
+      <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
+    </div>
+  </section>
+
+  <section aria-label="Highlights">
+    <ul class="proof">
+      {
+        proof.map((p) => (
+          <li>
+            <strong>{p.number}</strong>
+            <span>{p.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="prose narrative" aria-label="Summary">
+    <p>
+      Fast-growing companies often end up with fragmented systems: separate tools, separate data and separate ways
+      of handling payments. Much of my career has been spent helping to bring these together into platforms that can
+      grow with the business.
+    </p>
+    <p>
+      I have worked on this problem in fintech, marketplaces, health education and solar energy. Each company
+      approached it differently, and each one taught me something new about what works. Most recently, at PVcase, I
+      led the product strategy for a new platform that unites solar engineering and commercial workflows.
+    </p>
+  </section>
+
+  <section aria-labelledby="bring-heading">
+    <h2 id="bring-heading">What I bring</h2>
+    <div class="bring">
+      {
+        differentiators.map((d) => (
+          <div>
+            <h3>{d.heading}</h3>
+            <p>{d.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Skills</h2>
+    <Skills />
+  </section>
+
+  <section id="work" aria-labelledby="work-heading">
+    <h2 id="work-heading">My work</h2>
+    <WorkList />
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  section {
+    margin-block: var(--space-5);
+  }
+
+  .hero {
+    margin-top: var(--space-5);
+  }
+
+  .name {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    margin-block: var(--space-2);
+  }
+
+  .level {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-top: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .proof li {
+    display: grid;
+    gap: var(--space-1);
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--color-accent);
+  }
+
+  .proof strong {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .proof span {
+    color: var(--color-text-muted);
+  }
+
+  .bring {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .bring h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  .bring p {
+    margin-top: 0;
+  }
+</style>

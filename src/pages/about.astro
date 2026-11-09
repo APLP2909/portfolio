@@ -1,0 +1,106 @@
+---
+/** About page. Copy from copy-about.md (approved 9 November 2026). */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Aadeel Peerally is a product leader based in Berlin, working on payments platforms, marketplaces, medical learning tools and solar software."
+  ogImage="/og/about.png"
+>
+  <article class="prose">
+    <h1>About</h1>
+    <p>
+      I am a product leader based in Berlin. My work has centred on products where software meets money, operations
+      and data: payments platforms, marketplaces, learning tools for medical students and doctors, and software for
+      solar developers.
+    </p>
+
+    <h2>Where I started</h2>
+    <p>
+      I studied Telecommunications Engineering at King's College London, graduating with an MEng in 2005. My early
+      roles were in sales and customer support, before I moved into product at the Guardian.
+    </p>
+
+    <h2>Internal teams are customers too</h2>
+    <p>
+      Before I worked in product, I worked alongside the people who keep a product running. At WeSwap, I was Head of
+      Operations. I led the customer support team, up to 11 agents, and the compliance and fraud teams.
+    </p>
+    <p>
+      That work taught me that internal teams are customers too. A product has to serve the people who use it and the
+      people who support it. Support agents need tools that triage incoming queries, answer simple requests
+      automatically and give customers self-service options. Without them, agents move from one call or email to the
+      next, with no time to listen.
+    </p>
+    <p>
+      The compliance and fraud teams faced a different version of the same problem. They handled a high volume of
+      paperwork and failed applications caused by incorrect customer information. Some customers waited more than a
+      week for their accounts to open. When I became Chief Product Officer, simplifying identity checks and making
+      them as self-service as possible was an obvious priority. Accounts were approved much faster, and the team had
+      more time for complex cases.
+    </p>
+
+    <h2>Payments and platforms</h2>
+    <p>
+      From WeSwap, I moved to Equals, then to Delivery Hero and AMBOSS. Each company handled payments in its own way,
+      shaped by how quickly it had grown.
+    </p>
+    <p>
+      At Delivery Hero, I led the migration of 20+ countries onto one financial platform, working across regulatory,
+      engineering and regional teams. At AMBOSS, we brought a fragmented payment set-up together into one system,
+      which cut time-to-market for campaigns and new products from weeks to hours. Each move taught me something
+      different about how much the right answer depends on the business around it.
+    </p>
+
+    <h2>Building something of my own</h2>
+    <p>Alongside WeSwap and Equals, I co-founded TryMyKitchen, a self-serve marketplace for cooking classes.</p>
+    <p>
+      Before TryMyKitchen, cooking class hosts listed their classes on general experience and deal sites, where they
+      were easily lost among other offers. To stand out, hosts had to pay higher commissions or sell at steep
+      discounts. We built a dedicated self-service portal for hosts, combined with paid and organic marketing designed
+      to put their classes near the top of search results.
+    </p>
+    <p>
+      The marketplace grew to 8,000+ classes across Europe and North America, with partners including Jamie Oliver
+      cooking schools and Heineken. My biggest lesson: a product succeeds only when it understands its customers' pain
+      and expectations clearly.
+    </p>
+
+    <h2>Working with AI</h2>
+    <p>
+      At PVcase, I lead product for a new platform that brings solar engineering and commercial workflows together.
+      Part of that work is an LLM-powered review workflow that turns expert review into structured compliance checks.
+      It is released and gaining traction with customers.
+    </p>
+    <p>
+      I owned the decision to keep a human in the loop. User interviews made it clear that our customers did not yet
+      trust the output of AI workflows on their own. Human validation lets them use the automation while staying in
+      control of the result.
+    </p>
+    <p>
+      As a personal project, I built Arnie OS, a system of 10+ AI agents that automates product management tasks such
+      as data synthesis, PRD scoping and reporting. I wanted a practical AI project to learn from, and I continue to
+      learn through other private projects.
+    </p>
+
+    <h2>How I work</h2>
+    <p>
+      I value a steady operating rhythm: structured discovery, written PRDs that are reviewed before work starts, and
+      weekly reporting on delivery and adoption. I hire and coach product and engineering people, and I try to keep
+      everyone, from engineers to leadership, aligned on why we are building something.
+    </p>
+
+    <h2>Languages</h2>
+    <p>English (native), French (fluent), Spanish (intermediate) and German (basic).</p>
+  </article>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  article {
+    margin-bottom: var(--space-5);
+  }
+</style>

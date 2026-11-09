@@ -1,0 +1,57 @@
+---
+/**
+ * Privacy page. DRAFT COPY: awaiting Aadeel's approval.
+ * It MUST name the analytics tool and say what it collects. If the analytics
+ * set-up changes, update this page in the same commit.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailLink from '../components/EmailLink.astro';
+---
+
+<BaseLayout
+  title="Privacy"
+  description="How aadeelp.com handles visitor data: Cloudflare Web Analytics, no cookies."
+  ogImage="/og/privacy.png"
+>
+  <article class="prose">
+    <h1>Privacy</h1>
+    <p>This is a personal website. It has no accounts, forms or advertising, and it sets no cookies.</p>
+
+    <h2>Analytics</h2>
+    <p>
+      To understand how many people visit the site and which pages they read, I use
+      <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a>. It does not use cookies or
+      browser storage, and Cloudflare says it does not use your IP address or browser details to identify or
+      fingerprint you.
+    </p>
+    <p>For each page view, it records:</p>
+    <ul>
+      <li>the page you visited and the site that linked to it, if any</li>
+      <li>your country</li>
+      <li>your browser, operating system and device type (desktop, mobile or tablet)</li>
+      <li>how quickly the page loaded</li>
+    </ul>
+    <p>
+      I see this information only as totals, not per visitor. You can read more in
+      <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>.
+    </p>
+
+    <h2>Hosting</h2>
+    <p>
+      The site is hosted on GitHub Pages. Like any web server, GitHub may log technical data, such as IP addresses,
+      to keep the service running and secure. See
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        >GitHub's privacy statement</a
+      >.
+    </p>
+
+    <h2>Contact</h2>
+    <p>If you email me, I use your message only to reply. Questions about this page: <EmailLink>email me</EmailLink>.</p>
+  </article>
+</BaseLayout>
+
+<style>
+  article {
+    margin-block: var(--space-5);
+  }
+</style>

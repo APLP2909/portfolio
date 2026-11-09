@@ -1,0 +1,19 @@
+---
+/** Page not found. DRAFT COPY: awaiting Aadeel's approval. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+---
+
+<BaseLayout title="Page not found" description="This page does not exist." noindex>
+  <section class="prose">
+    <h1>Page not found</h1>
+    <p>The page you are looking for does not exist or has moved.</p>
+    <CallToAction href="/">Go to the home page</CallToAction>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    margin-block: var(--space-6);
+  }
+</style>

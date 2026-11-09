@@ -1,0 +1,20 @@
+---
+/** /work/: every case study, newest first, or an empty state. */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkList from '../../components/WorkList.astro';
+---
+
+<BaseLayout
+  title="My work"
+  description="Case studies by Aadeel Peerally on platforms, payments and AI."
+  ogImage="/og/work.png"
+>
+  <h1>My work</h1>
+  <WorkList headingLevel={2} />
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-block: var(--space-5) var(--space-4);
+  }
+</style>

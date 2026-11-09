@@ -1,0 +1,137 @@
+---
+/**
+ * Case-study page template. One page per file in src/content/work/.
+ * The build fails if a case study's sections do not follow the template.
+ */
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import LoopVideo from '../../components/LoopVideo.astro';
+import Pill from '../../components/Pill.astro';
+import { assertSections, getWork, workSlug, type WorkEntry } from '../../lib/work';
+
+export async function getStaticPaths() {
+  const entries = await getWork();
+  return entries.map((entry) => ({ params: { slug: workSlug(entry) }, props: { entry } }));
+}
+
+interface Props {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+assertSections(entry, headings);
+
+const d = entry.data;
+const slug = workSlug(entry);
+const context: [string, string | undefined][] = [
+  ['Role', d.role],
+  ['Company', d.company],
+  ['Sector', d.sector],
+  ['Timeframe', d.timeframe],
+  ['Team', d.team],
+  ['Outcome', d.outcome],
+];
+---
+
+<BaseLayout title={d.title} description={d.description} ogImage={`/og/work/${slug}.png`} ogType="article">
+  <article class="case-study">
+    <header>
+      <p class="back"><a href="/work/">← My work</a></p>
+      <h1>{d.title}</h1>
+      <ul class="tags" aria-label="Tags">
+        {
+          d.tags.map((tag) => (
+            <li>
+              <Pill>{tag}</Pill>
+            </li>
+          ))
+        }
+      </ul>
+    </header>
+
+    <dl class="context" aria-label="Context">
+      {
+        context
+          .filter(([, value]) => value)
+          .map(([label, value]) => (
+            <div>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))
+      }
+    </dl>
+
+    {d.video && <LoopVideo {...d.video} />}
+    {
+      !d.video && d.cover && (
+        <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[640, 1280]} sizes="(min-width: 72rem) 68ch, 100vw" class="cover" />
+      )
+    }
+
+    <div class="prose body">
+      <Content />
+    </div>
+  </article>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .case-study {
+    margin-block: var(--space-5);
+  }
+
+  .back {
+    margin: 0;
+  }
+
+  h1 {
+    margin-block: var(--space-3);
+    max-width: var(--measure);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .context {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+    gap: var(--space-3) var(--space-4);
+    margin-block: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border-radius: var(--radius);
+  }
+
+  dt {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .cover {
+    border-radius: var(--radius);
+    margin-block: var(--space-4);
+  }
+
+  .body :global(img) {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+</style>
