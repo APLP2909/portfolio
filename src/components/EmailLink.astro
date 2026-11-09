@@ -1,0 +1,29 @@
+---
+/**
+ * Scraper-protected email link.
+ *
+ * The address never appears in the HTML as text or as a `mailto:` link.
+ * It is stored reversed in data attributes and assembled by a small script
+ * in the browser. Without JavaScript, the link points to the contact block
+ * and a <noscript> line shows the address in "name at domain" form.
+ */
+import { site } from '../site.config';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const { user, domain } = site.emailReversed;
+---
+
+<a class:list={['email-link', className]} href="/#contact" data-u={user} data-d={domain}><slot /></a
+>
+
+<script>
+  const reverse = (s: string) => [...s].reverse().join('');
+  document.querySelectorAll<HTMLAnchorElement>('a.email-link[data-u][data-d]').forEach((link) => {
+    const address = `${reverse(link.dataset.u ?? '')}@${reverse(link.dataset.d ?? '')}`;
+    link.href = `mailto:${address}`;
+  });
+</script>

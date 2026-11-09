@@ -1,0 +1,57 @@
+---
+/** "Get in touch" block. Copy from copy-home.md (approved 9 November 2026). */
+import { site } from '../site.config';
+import EmailLink from './EmailLink.astro';
+import Icon from './Icon.astro';
+import CallToAction from './CallToAction.astro';
+
+const reverse = (s: string) => [...s].reverse().join('');
+const { user, domain } = site.emailReversed;
+const spokenEmail = `${reverse(user)} at ${reverse(domain).replace(/\./g, ' dot ')}`;
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Get in touch</h2>
+  <p>For product leadership conversations, email me or connect on LinkedIn.</p>
+  <div class="actions">
+    <EmailLink class="cta-email"><Icon name="mail" size={18} /><span>Email me</span></EmailLink>
+    <CallToAction href={site.linkedin} variant="secondary" icon="linkedin" rel="me">LinkedIn</CallToAction>
+    <CallToAction href={site.resumePdf} variant="secondary" icon="download" download>Download resume</CallToAction>
+  </div>
+  <noscript>
+    <p class="noscript">Email: {spokenEmail}</p>
+  </noscript>
+</section>
+
+<style>
+  .contact {
+    padding: var(--space-5) var(--space-4);
+    background: var(--color-surface);
+    border-radius: var(--radius);
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  /* The email link matches CallToAction's primary style. */
+  .actions :global(.cta-email) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-4);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>

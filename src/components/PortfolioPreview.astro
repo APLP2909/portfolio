@@ -1,0 +1,101 @@
+---
+/** Card for one case study. Used on the home page and /work/. */
+import { Image } from 'astro:assets';
+import Pill from './Pill.astro';
+import { workSlug, type WorkEntry } from '../lib/work';
+
+interface Props {
+  entry: WorkEntry;
+  /** Heading level for the card title, so the page outline stays correct. */
+  headingLevel?: 2 | 3;
+}
+
+const { entry, headingLevel = 3 } = Astro.props;
+const { title, description, company, timeframe, tags, cover, coverAlt } = entry.data;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+---
+
+<article class="card">
+  {
+    cover && (
+      <Image
+        src={cover}
+        alt={coverAlt ?? ''}
+        widths={[400, 800]}
+        sizes="(min-width: 48rem) 400px, 100vw"
+        class="cover"
+      />
+    )
+  }
+  <div class="body">
+    <p class="meta">{company} · {timeframe}</p>
+    <Heading class="title"><a href={`/work/${workSlug(entry)}/`}>{title}</a></Heading>
+    <p>{description}</p>
+    <ul class="tags" aria-label="Tags">
+      {
+        tags.map((tag) => (
+          <li>
+            <Pill>{tag}</Pill>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .cover {
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+
+  .body {
+    padding: var(--space-4);
+  }
+
+  .meta {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .title {
+    margin-block: var(--space-2);
+    font-size: 1.25rem;
+  }
+
+  /* The whole card is clickable; the link text stays the title. */
+  .title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card:focus-within {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .title a:focus-visible {
+    outline: none;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

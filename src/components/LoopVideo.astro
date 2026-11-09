@@ -1,0 +1,151 @@
+---
+/**
+ * Silent looping video with a poster frame and a pause control.
+ *
+ * - Never autoplays when the visitor has asked for reduced motion; they
+ *   see the poster and can press Play.
+ * - Pauses while scrolled out of view, to save battery and data.
+ * - Without JavaScript, the browser's own controls appear instead.
+ *
+ * Files live in `public/videos/`. Use MP4 (H.264), no audio track.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  /** For example `/videos/pvcase-platform-demo.mp4`. */
+  src: string;
+  /** For example `/videos/pvcase-platform-demo-poster.jpg`. */
+  poster: string;
+  width: number;
+  height: number;
+  /** What the video shows, for screen readers. */
+  label: string;
+  caption?: string;
+}
+
+const { src, poster, width, height, label, caption } = Astro.props;
+---
+
+<figure class="loop-video" data-loop-video>
+  <div class="frame">
+    <video
+      src={src}
+      poster={poster}
+      width={width}
+      height={height}
+      muted
+      loop
+      playsinline
+      preload="none"
+      controls
+      aria-label={label}></video>
+    <button type="button" class="toggle" hidden aria-label="Play video">
+      <span class="when-paused"><Icon name="play" size={18} /></span>
+      <span class="when-playing"><Icon name="pause" size={18} /></span>
+    </button>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('[data-loop-video]').forEach((figure) => {
+    const video = figure.querySelector('video');
+    const button = figure.querySelector<HTMLButtonElement>('.toggle');
+    if (!video || !button) return;
+
+    // JavaScript is running, so swap the native controls for the custom button.
+    video.controls = false;
+    video.muted = true; // Browsers only allow autoplay for muted video.
+    button.hidden = false;
+
+    /** True once the visitor has pressed pause; we then never resume on our own. */
+    let userPaused = false;
+    let inView = false;
+
+    const sync = () => {
+      const playing = !video.paused;
+      figure.dataset.playing = String(playing);
+      button.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+    };
+
+    const tryPlay = () => {
+      video.play().catch(() => sync());
+    };
+
+    button.addEventListener('click', () => {
+      if (video.paused) {
+        userPaused = false;
+        tryPlay();
+      } else {
+        userPaused = true;
+        video.pause();
+      }
+    });
+
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+
+    new IntersectionObserver(
+      ([entry]) => {
+        inView = entry?.isIntersecting ?? false;
+        if (!inView) {
+          video.pause();
+        } else if (!userPaused && !reduceMotion.matches) {
+          tryPlay();
+        }
+      },
+      { threshold: 0.25 },
+    ).observe(video);
+
+    sync();
+  });
+</script>
+
+<style>
+  .loop-video {
+    margin: var(--space-4) 0;
+  }
+
+  .frame {
+    position: relative;
+  }
+
+  video {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .toggle {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .when-playing,
+  [data-playing='true'] .when-paused {
+    display: none;
+  }
+
+  [data-playing='true'] .when-playing {
+    display: inline;
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+</style>

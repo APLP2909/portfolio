@@ -1,0 +1,150 @@
+/*
+ * Global styles and design tokens.
+ *
+ * PRE-DESIGN PLACEHOLDER (Phase 2). The palette and type below are neutral
+ * stand-ins. Phase 3 replaces the token values after Aadeel picks a visual
+ * direction. Every colour in the site MUST reference a token from this file.
+ */
+
+:root {
+  color-scheme: light;
+
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f2;
+  --color-text: #1a1a1a;
+  --color-text-muted: #4d4d4d;
+  --color-border: #d6d6d2;
+  --color-accent: #1f4fbf;
+  --color-accent-contrast: #ffffff;
+  --color-focus: #1f4fbf;
+
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: var(--font-body);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+
+  --radius: 6px;
+  --measure: 68ch;
+  --page-max: 72rem;
+  --gutter: 1rem;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #121212;
+  --color-surface: #1e1e1e;
+  --color-text: #ececec;
+  --color-text-muted: #b5b5b5;
+  --color-border: #3a3a3a;
+  --color-accent: #8fb0ff;
+  --color-accent-contrast: #121212;
+  --color-focus: #8fb0ff;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -3rem;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,44 @@
+---
+/**
+ * All case studies as cards, newest first. Shows an empty state when
+ * there are none, so the live site never shows a blank block.
+ */
+import Grid from './Grid.astro';
+import PortfolioPreview from './PortfolioPreview.astro';
+import { getWork } from '../lib/work';
+
+interface Props {
+  headingLevel?: 2 | 3;
+}
+
+const { headingLevel = 3 } = Astro.props;
+const entries = await getWork();
+---
+
+{
+  entries.length > 0 ? (
+    <Grid as="ul">
+      {entries.map((entry) => (
+        <li>
+          <PortfolioPreview entry={entry} headingLevel={headingLevel} />
+        </li>
+      ))}
+    </Grid>
+  ) : (
+    <p class="empty">
+      {/* DRAFT COPY: awaiting Aadeel's approval. */}
+      Case studies are being written and will appear here soon. In the meantime, my <a href="/resume/">resume</a>{' '}
+      covers my experience in full.
+    </p>
+  )
+}
+
+<style>
+  .empty {
+    padding: var(--space-4);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text-muted);
+    max-width: var(--measure);
+  }
+</style>

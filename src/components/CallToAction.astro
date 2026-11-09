@@ -1,0 +1,49 @@
+---
+/** Link styled as a button. `primary` is the filled style, `secondary` the outlined one. */
+import Icon from './Icon.astro';
+import type { IconName } from './IconPaths';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  icon?: IconName;
+  /** Adds the `download` attribute, so browsers save the file instead of opening it. */
+  download?: boolean;
+  rel?: string;
+}
+
+const { href, variant = 'primary', icon, download = false, rel } = Astro.props;
+---
+
+<a class:list={['cta', variant]} href={href} download={download || undefined} rel={rel}>
+  {icon && <Icon name={icon} size={18} />}
+  <span><slot /></span>
+</a>
+
+<style>
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-4);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .primary {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .secondary {
+    background: transparent;
+    color: var(--color-accent);
+  }
+
+  .cta:hover {
+    text-decoration: underline;
+  }
+</style>

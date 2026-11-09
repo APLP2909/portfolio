@@ -1,0 +1,54 @@
+---
+/** Site footer: contact links and the privacy page link. */
+import { site } from '../site.config';
+import EmailLink from './EmailLink.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container row">
+    <p>© {year} {site.name}</p>
+    <ul>
+      <li><EmailLink>Email</EmailLink></li>
+      <li><a href={site.linkedin} rel="me">LinkedIn</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a,
+  :global(.site-footer .email-link) {
+    color: var(--color-text-muted);
+  }
+</style>

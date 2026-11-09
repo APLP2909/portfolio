@@ -1,0 +1,47 @@
+---
+/** Skills block on the home page. Copy from copy-home.md (approved 9 November 2026). */
+const groups = [
+  {
+    name: 'Product leadership',
+    items:
+      'product strategy, platform strategy, product vision, product organisation design, team building and coaching, discovery, roadmapping, operating cadence',
+  },
+  {
+    name: 'Technology',
+    items:
+      'AI and LLM products, agentic workflows, workflow automation, platform architecture, APIs, data products, integrations, analytics',
+  },
+  {
+    name: 'Commercial',
+    items: 'B2B SaaS, marketplace economics, payments, cost optimisation, growth',
+  },
+];
+---
+
+<dl class="skills">
+  {
+    groups.map((g) => (
+      <div>
+        <dt>{g.name}</dt>
+        <dd>{g.items}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .skills {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

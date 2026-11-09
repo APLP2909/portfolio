@@ -1,0 +1,28 @@
+---
+/** Shared page shell: <head>, skip link, header, main content and footer. */
+import '../styles/global.css';
+import MainHead from '../components/MainHead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof MainHead>;
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <MainHead {...props} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main" class="container">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,61 @@
+---
+/**
+ * Light/dark switch. Saves the choice in localStorage and sets
+ * `data-theme` on <html>. The first-paint logic lives in MainHead.astro.
+ */
+import Icon from './Icon.astro';
+---
+
+<button type="button" class="theme-toggle" aria-label="Switch to dark theme" data-theme-toggle>
+  <span class="icon-light"><Icon name="sun" /></span>
+  <span class="icon-dark"><Icon name="moon" /></span>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const root = document.documentElement;
+
+  const label = () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    button?.setAttribute('aria-label', `Switch to ${next} theme`);
+  };
+
+  label();
+  button?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      // Storage can be blocked; the toggle still works for this page view.
+    }
+    label();
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .icon-dark {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .icon-light {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .icon-dark {
+    display: inline;
+  }
+</style>
