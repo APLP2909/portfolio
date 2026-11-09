@@ -1,6 +1,6 @@
 /**
  * Builds 1200 × 630 social preview images at build time, in the site's
- * "Engineered" style: graphite background, IBM Plex, one solar-amber rule.
+ * "Engineered" style: night background (Charge State), Archivo titles, IBM Plex, one charge-teal bar.
  *
  * Fonts MUST be .woff, .ttf or .otf files (the image renderer cannot read .woff2).
  *
@@ -25,27 +25,31 @@ export interface OgContent {
 
 interface Fonts {
   sans400: Buffer;
-  sans700: Buffer;
+  display700: Buffer;
   mono500: Buffer;
 }
 
 let fonts: Promise<Fonts> | undefined;
 
+/**
+ * Loads fonts for the image renderer. Archivo here is the static, standard-width
+ * cut: the renderer cannot apply the semi-expanded width used on the site.
+ */
 function loadFonts(): Promise<Fonts> {
   const file = (pkg: string, weight: number) =>
     readFile(require.resolve(`@fontsource/${pkg}/files/${pkg}-latin-${weight}-normal.woff`));
-  fonts ??= Promise.all([file('ibm-plex-sans', 400), file('ibm-plex-sans', 700), file('ibm-plex-mono', 500)]).then(
-    ([sans400, sans700, mono500]) => ({ sans400, sans700, mono500 }),
+  fonts ??= Promise.all([file('ibm-plex-sans', 400), file('archivo', 700), file('ibm-plex-mono', 500)]).then(
+    ([sans400, display700, mono500]) => ({ sans400, display700, mono500 }),
   );
   return fonts;
 }
 
 const colours = {
-  background: '#16181d',
-  text: '#e9ebee',
-  muted: '#a8afba',
-  accent: '#f5b330',
-  rule: '#3a4049',
+  background: '#0b1117',
+  text: '#e6edf2',
+  muted: '#8c9aa6',
+  accent: '#38e1d0',
+  rule: '#26323d',
 };
 
 /** Minimal element helper, so this file needs no JSX or React. */
@@ -60,7 +64,7 @@ const h = (type: string, style: Record<string, unknown>, children?: unknown) => 
  * @returns PNG bytes.
  */
 export async function renderOgImage({ title, line, name }: OgContent): Promise<Uint8Array> {
-  const { sans400, sans700, mono500 } = await loadFonts();
+  const { sans400, display700, mono500 } = await loadFonts();
   const mono = { fontFamily: 'IBM Plex Mono', fontWeight: 500, letterSpacing: 2, textTransform: 'uppercase' };
 
   const tree = h(
@@ -89,9 +93,10 @@ export async function renderOgImage({ title, line, name }: OgContent): Promise<U
             width: 1040,
             fontSize: title.length > 60 ? 60 : 76,
             fontWeight: 700,
+            fontFamily: 'Archivo',
             color: colours.text,
             lineHeight: 1.08,
-            letterSpacing: -1.5,
+            letterSpacing: -0.5,
           },
           title,
         ),
@@ -108,7 +113,7 @@ export async function renderOgImage({ title, line, name }: OgContent): Promise<U
     height: 630,
     fonts: [
       { name: 'IBM Plex Sans', data: sans400, weight: 400, style: 'normal' },
-      { name: 'IBM Plex Sans', data: sans700, weight: 700, style: 'normal' },
+      { name: 'Archivo', data: display700, weight: 700, style: 'normal' },
       { name: 'IBM Plex Mono', data: mono500, weight: 500, style: 'normal' },
     ],
   });

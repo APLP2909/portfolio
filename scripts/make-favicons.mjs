@@ -1,7 +1,7 @@
 /**
  * Builds the favicon set: public/favicon.svg plus PNGs at 32, 180 and 192 px.
  *
- * The mark is "AP" in IBM Plex Mono on graphite with a solar-amber bar.
+ * The mark is "AP" in IBM Plex Mono on night (#0b1117) with a charge-teal bar (Charge State).
  * Letters are converted to shapes, so the icon never depends on installed fonts.
  * Edit the colours or letters below, then run `npm run favicons`.
  */
@@ -24,12 +24,12 @@ const tree = h(
     alignItems: 'center',
     justifyContent: 'center',
     gap: 5,
-    background: '#16181d',
+    background: '#0b1117',
     borderRadius: 4,
   },
   [
-    h({ display: 'flex', fontFamily: 'IBM Plex Mono', fontWeight: 500, fontSize: 27, letterSpacing: 0, color: '#e9ebee', lineHeight: 1 }, 'AP'),
-    h({ display: 'flex', width: 36, height: 5, background: '#f5b330' }),
+    h({ display: 'flex', fontFamily: 'IBM Plex Mono', fontWeight: 500, fontSize: 27, letterSpacing: 0, color: '#e6edf2', lineHeight: 1 }, 'AP'),
+    h({ display: 'flex', width: 36, height: 5, background: '#38e1d0' }),
   ],
 );
 
