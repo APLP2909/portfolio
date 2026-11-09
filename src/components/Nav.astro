@@ -1,5 +1,8 @@
 ---
-/** Site header: name, main navigation and the theme toggle. */
+/**
+ * Site header: AP monogram (links home), main navigation and the theme toggle.
+ * The full name appears once per page elsewhere (the H1 on Home), not here.
+ */
 import { navItems, site } from '../site.config';
 import { getWork } from '../lib/work';
 import ThemeToggle from './ThemeToggle.astro';
@@ -12,7 +15,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
 <header class="site-header">
   <div class="container bar">
-    <a class="name" href="/">{site.name}</a>
+    <a class="monogram" href="/" aria-label={`${site.name}, home`}>AP</a>
     <nav aria-label="Main">
       <ul>
         {
@@ -43,11 +46,21 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     padding-block: var(--space-3);
   }
 
-  .name {
-    font-weight: 700;
+  /* Plain monogram with a 1px border (design rules, 9 November 2026). */
+  .monogram {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding-inline: var(--space-2);
+    margin-right: auto;
+    border: 1px solid var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.04em;
     color: var(--color-text);
     text-decoration: none;
-    margin-right: auto;
   }
 
   ul {

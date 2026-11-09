@@ -1,19 +1,11 @@
 ---
-/** Site footer: contact links and the privacy page link. */
+/** Site footer: location and the privacy page link (copy-home.md: "Berlin · Privacy"). */
 import { site } from '../site.config';
-import EmailLink from './EmailLink.astro';
-
-const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container row">
-    <p>© {year} {site.name}</p>
-    <ul>
-      <li><EmailLink>Email</EmailLink></li>
-      <li><a href={site.linkedin} rel="me">LinkedIn</a></li>
-      <li><a href="/privacy/">Privacy</a></li>
-    </ul>
+    <p>{site.location} · <a href="/privacy/">Privacy</a></p>
   </div>
 </footer>
 
