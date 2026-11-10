@@ -51,7 +51,7 @@ export const site = {
    * following days. robots.txt deliberately stays open: crawlers must be able
    * to read a page to see its noindex tag.
    */
-  allowIndexing: false,
+  allowIndexing: true, // Switched on at launch, 10 November 2026.
 } as const;
 
 /** Main navigation. `requiresWork` items follow `hideWorkWhenEmpty`. */
