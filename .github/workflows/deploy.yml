@@ -1,6 +1,8 @@
-# Temporary workflow: publishes the placeholder page to GitHub Pages.
-# Stage 3 MUST replace this file with the Astro build workflow.
-name: Deploy placeholder to GitHub Pages
+# Builds the Astro site and publishes it to GitHub Pages on every push to main.
+# The custom domain (aadeelp.com) and HTTPS are set in the repo's Pages
+# settings, so no CNAME file is needed.
+# Action versions checked on 10 November 2026.
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -12,22 +14,27 @@ permissions:
   pages: write
   id-token: write
 
-# Run one deployment at a time.
+# Run one deployment at a time; let an in-progress deploy finish.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
+        with:
+          # Astro 7 needs Node 22.23.4 or later; 26 matches local development.
+          node-version: 26
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: placeholder
       - id: deployment
         uses: actions/deploy-pages@v5
