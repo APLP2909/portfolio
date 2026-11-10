@@ -73,7 +73,8 @@ main .ps-row:last-child {
  * system's bundle.css. Tokens only.
  * The row reacts to its own width (container query), not the screen width,
  * so it works inside the narrow article column: two columns when the row is
- * 560px or wider, otherwise one column with the image first.
+ * 700px or wider, otherwise one column with the image first (tablets get
+ * full-width screenshots this way).
  */
 .ps-feature {
   container-type: inline-size;
@@ -115,7 +116,7 @@ main .ps-row:last-child {
   object-position: 0 0;
 }
 
-@container (min-width: 560px) {
+@container (min-width: 700px) {
   .ps-feature__inner {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-5);
@@ -124,5 +125,17 @@ main .ps-row:last-child {
 
   .ps-feature--flip .ps-feature__media {
     order: 2;
+  }
+}
+
+/* Wide rows (800px or more): give the screenshot about 60% of the row. */
+@container (min-width: 800px) {
+  .ps-feature__inner {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-6);
+  }
+
+  .ps-feature--flip .ps-feature__inner {
+    grid-template-columns: 2fr 3fr;
   }
 }

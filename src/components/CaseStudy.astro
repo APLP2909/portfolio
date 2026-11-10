@@ -1,0 +1,190 @@
+---
+/**
+ * Case-study page body. Template from design-system.md, "Case study", with two
+ * changes Aadeel approved on 10 November 2026:
+ * - a split hero: title and summary beside the hero media;
+ * - the context facts as one horizontal strip under the hero instead of a
+ *   sidebar, so the article and its feature rows can use the full width.
+ * Story text stays at the reading measure (720px); FeatureRows run full width
+ * with the screenshot taking about 60% of the row. Below 768px the facts form a
+ * two-column grid, and each screenshot sits above its paragraph.
+ */
+import { render } from 'astro:content';
+import LoopVideo from './LoopVideo.astro';
+import Zoomable from './Zoomable.astro';
+import { assertSections, type WorkEntry } from '../lib/work';
+
+interface Props {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+assertSections(entry, headings);
+
+const d = entry.data;
+// Same labels, same order, on every case study. Team is optional.
+const facts: [string, string | undefined][] = [
+  ['Role', d.role],
+  ['Company', d.company],
+  ['Sector', d.sector],
+  ['Timeframe', d.timeframe],
+  ['Team', d.team],
+];
+const shownFacts = facts.filter(([, value]) => value) as [string, string][];
+---
+
+<section class="ps-halo" aria-labelledby="case-heading">
+  <div class="ps-container ps-hero__inner">
+    <header class="ps-hero__text">
+      <a class="ps-back" href="/work/">← My work</a>
+      <div class="ps-tags">{d.tags.map((tag) => <span class="ps-tag">{tag}</span>)}</div>
+      <h1 class="ps-display-lg case-title" id="case-heading">{d.title}</h1>
+      <p class="ps-lead">{d.description}</p>
+    </header>
+    {
+      (d.video || d.cover) && (
+        <div class="case-hero__media">
+          {d.video ? (
+            <LoopVideo {...d.video} class="ps-media--4x3" />
+          ) : (
+            d.cover && (
+              <div class="ps-media ps-media--4x3">
+                <Zoomable
+                  src={d.cover}
+                  alt={d.coverAlt ?? ''}
+                  widths={[480, 720, 1080, 1440]}
+                  sizes="(min-width: 64rem) 540px, (min-width: 45rem) 720px, 100vw"
+                  loading="eager"
+                  fetchpriority="high"
+                />
+              </div>
+            )
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<div class="ps-container">
+  <dl class="facts-strip" aria-label="Context">
+    {
+      shownFacts.map(([label, value]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))
+    }
+    <div class="facts-strip__outcome">
+      <dt>Outcome</dt>
+      <dd>{d.outcome}</dd>
+    </div>
+  </dl>
+  <div class="ps-stack article">
+    <Content />
+  </div>
+</div>
+
+<style>
+  /* In the split hero the title has half the width, so it uses display-lg
+     (the About headline size) instead of display-xl, and a bolder weight. */
+  .case-title {
+    font-weight: 700;
+  }
+
+  /*
+   * Split hero (Aadeel, 10 Nov 2026): the system Hero pattern with the case
+   * study's media in place of the portrait. Text and media wrap when there is
+   * not room for both; the media then sits under the text, capped at the
+   * reading measure. The 4:3 frame is close to a product screenshot's shape,
+   * and anchoring the crop top-left keeps the app's top bar and side rail.
+   */
+  .case-hero__media {
+    flex: 1 1 420px;
+    min-width: 0;
+    max-width: var(--measure);
+  }
+
+  .case-hero__media :global(img) {
+    object-position: 0 0;
+  }
+
+  /* Markdown sections render as SectionRow-style blocks: an h2 and paragraphs. */
+  .article :global(h2) {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 30px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    padding-top: var(--space-6);
+  }
+
+  .article :global(h2:first-child) {
+    padding-top: 0;
+  }
+
+  .article :global(p),
+  .article :global(li) {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .article :global(ul) {
+    padding-left: 1.2em;
+    list-style: disc;
+  }
+
+  /* Plain Markdown images (inside a paragraph) get a media frame. Images in
+     MediaSlots are styled by the system and must not be touched here. */
+  .article :global(p > img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  /* ---- Facts strip ---- */
+  .facts-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-5);
+    margin: 0 0 var(--space-7);
+    padding-block: var(--space-5);
+    border-block: 1px solid var(--line);
+  }
+
+  .facts-strip dt {
+    font: 500 11.5px/1.3 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .facts-strip dd {
+    margin: 6px 0 0;
+    font-size: 15px;
+    line-height: 1.45;
+    overflow-wrap: break-word;
+  }
+
+  .facts-strip__outcome dd {
+    font: 500 15px/1.45 var(--font-mono);
+    color: var(--accent);
+  }
+
+  @media (min-width: 48rem) {
+    .facts-strip {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+
+  /* Story text stays at the reading measure; feature rows use the full width. */
+  .article > :global(:not(.ps-feature)) {
+    max-width: var(--measure);
+  }
+</style>
