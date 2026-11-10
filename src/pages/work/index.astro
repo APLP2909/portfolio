@@ -6,6 +6,10 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import WorkList from '../../components/WorkList.astro';
+import { getWork } from '../../lib/work';
+
+// The coming-soon line only makes sense under real cards; the empty state has its own wording.
+const hasWork = (await getWork()).length > 0;
 ---
 
 <BaseLayout
@@ -21,7 +25,15 @@ import WorkList from '../../components/WorkList.astro';
       </div>
     </div>
   </section>
-  <div class="ps-container">
+  <div class="ps-container ps-stack">
     <WorkList headingLevel={2} />
+    {
+      hasWork && (
+        // Copy brief approved 10 November 2026: muted body text, space-5 below the stack, capped at measure.
+        <p class="ps-muted" style="max-width: var(--measure)">
+          More case studies are coming soon.
+        </p>
+      )
+    }
   </div>
 </BaseLayout>

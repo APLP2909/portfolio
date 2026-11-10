@@ -8,14 +8,14 @@ export const site = {
   /** Full name, shown in the header, footer and social previews. */
   name: 'Aadeel Peerally',
   /** Default page title (browser tab, search results, link previews). */
-  defaultTitle: 'Aadeel Peerally, Product Director: platforms and AI',
+  defaultTitle: 'Aadeel Peerally, Product Leader: platforms, payments and AI',
   /** Default meta description. */
   defaultDescription:
-    'Product Director. I lead platforms and AI products. 15 years building and leading product teams across four sectors. Based in Berlin.',
+    'Product Leader. I build platforms, payments and AI products. 15 years in product across four sectors. Hands-on: I launch products from zero to one and build with AI myself. Based in Berlin.',
   /** Tagline, used as the title of the home page social preview image. */
-  ogLine: 'Product Director. I lead platforms and AI products.',
+  ogLine: 'Product Leader. I build platforms, payments and AI products.',
   /** Supporting line under the tagline, used on the home page social preview image. */
-  ogSupportingLine: '15 years building and leading product teams across four sectors.',
+  ogSupportingLine: '15 years in product across four sectors. Hands-on: I launch products from zero to one and build with AI myself.',
   location: 'Berlin',
   /**
    * Public email address, stored backwards so bots that scan this public

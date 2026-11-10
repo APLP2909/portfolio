@@ -2,7 +2,9 @@
  * Resume content. Wording is copied from the approved content pack
  * (content-source.md, sections 2–8, approved 9 November 2026; achievements and
  * Arnie OS label updated the same day; titles for Delivery Hero and AMBOSS and
- * the removal of "Side project" from TryMyKitchen, Aadeel, 10 November 2026).
+ * the removal of "Side project" from TryMyKitchen, Aadeel, 10 November 2026;
+ * achievements and three Experience bullets from the copy brief approved
+ * 10 November 2026).
  *
  * The site is the master copy for wording. When you change this file,
  * re-export the PDF in `public/` so the two stay in step.
@@ -36,8 +38,8 @@ export const experience: Role[] = [
         dates: 'Nov 2024 – present',
         bullets: [
           'Lead product vision and strategy for a new B2B SaaS operating system, uniting fragmented solar engineering and commercial workflows into a centralised platform.',
-          'Exceeded pilot adoption goals, driving usage to 500+ monthly active users.',
-          'Launched an AI-native, LLM-powered review workflow that converts manual human expertise into automated, structured compliance checks with human-in-the-loop validation. Now released and gaining traction with customers.',
+          'Took PVcase Platform to 500+ monthly active users, over twice the pilot goal.',
+          'Launched AI-Assisted Design Review, an LLM workflow that turns manual expert review into structured compliance checks, with a person validating every finding. Released and gaining traction with customers.',
           'Architected Pipeline Intelligence, a cross-product data model unifying project records into a single platform-wide data foundation.',
           'Established a metrics-driven product operating cadence, automating weekly reporting on delivery and adoption to drive high-tempo, pragmatic decision-making.',
           'Hired and coached Product and Engineering talent, established structured discovery and PRD review practices, and drove alignment across all levels of the business.',
@@ -111,7 +113,7 @@ export const experience: Role[] = [
         dates: 'Dec 2014 – Dec 2015',
         bullets: [
           'Hired and led the fraud, compliance and customer support teams.',
-          "Drove cross-functional technical integrations with Stripe, LexisNexis and Salesforce, establishing improved transaction monitoring and reporting workflows that eliminated most of the platform's fraud.",
+          "Drove cross-functional technical integrations with Stripe, LexisNexis and Salesforce, establishing improved transaction monitoring and reporting workflows that cut platform fraud by over 90%.",
         ],
       },
     ],
@@ -148,23 +150,23 @@ export const experience: Role[] = [
   },
 ];
 
-/** Achievements block (content-source.md, section 3, rewritten 9 November 2026). Site wording only. */
+/** Achievements block (content-source.md, section 3; rewritten from the copy brief approved 10 November 2026). Site wording only. */
 export const achievements: { label: string; text: string }[] = [
   {
     label: 'Platform',
-    text: 'defined the shared project data model behind PVcase Platform (500+ monthly active users), opening new OEM and partner opportunities.',
+    text: 'created the system of record for solar projects at PVcase, from 0-1 and used by 500+ monthly active users, over twice the pilot goal. I defined the shared project data model and own investment decisions across four engineering teams.',
   },
   {
     label: 'AI',
-    text: "led the release of AI-Assisted Design Review, an LLM workflow with a human deciding every finding. It shortens customers' design review cycles and is released and gaining traction with customers.",
+    text: 'led AI-Assisted Design Review, an LLM workflow where a person decides every finding. Customer interviews showed users reading project documents outside the platform, so I stopped work on notifications and business-development packages and built this instead. Retention more than doubled.',
   },
   {
     label: 'Arnie OS',
-    text: "architected Arnie OS, a multi-agent system that automates my team's admin and reporting, and used it to deliver AI-Assisted Design Review from idea to shipped in under a month.",
+    text: 'built Arnie OS, 10+ agents with defined permissions and escalation rules, connected to Jira, Slack, Tableau and Google Workspace. My Senior PMs use it. It took AI-Assisted Design Review from idea to shipped in under a month.',
   },
   {
-    label: 'Commercial',
-    text: 'reduced annual processing costs by €5M+ at Delivery Hero; improved purchase-path conversion and average order value at AMBOSS.',
+    label: 'Payments',
+    text: 'cut annual payment processing costs by €5M+ at Delivery Hero. At AMBOSS, cut processing costs by nearly 50% and raised payment success rates by 4%.',
   },
 ];
 

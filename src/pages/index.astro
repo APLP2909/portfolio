@@ -1,6 +1,7 @@
 ---
 /**
- * Home page. Copy from copy-home.md (approved 9 November 2026).
+ * Home page. Copy from copy-home.md (approved 9 November 2026); hero, proof
+ * strip and cards updated from the copy brief approved 10 November 2026.
  * Template from design-system.md, "Home": Hero, StatStrip, CardGrid,
  * WorkCard, SkillGroups, then the ContactPanel and Footer from the layout.
  */
@@ -16,23 +17,31 @@ const hasWork = (await getWork()).length > 0;
 const showWorkButton = hasWork || !site.hideWorkWhenEmpty;
 
 const proof = [
-  { value: '500+', label: 'monthly active users on PVcase Platform, beyond pilot goals' },
-  { value: '20+', label: 'countries migrated onto one financial platform at Delivery Hero' },
+  {
+    value: '500+',
+    label:
+      'monthly active users on the system of record I created for PVcase, with month-1 retention doubled from its pilot low',
+  },
   { value: '€5M+', label: 'saved each year in payment processing costs at Delivery Hero' },
+  { value: '30%+', label: 'higher purchase-path conversion at AMBOSS' },
 ];
 
 const cards = [
   {
-    title: 'The same problem, in different sectors',
-    text: 'Fragmented systems brought onto one platform at Delivery Hero, AMBOSS and PVcase.',
+    title: 'Platforms in fintech, marketplaces and energy',
+    text: 'Moved 20+ countries onto one financial platform at Delivery Hero and brought AMBOSS payments into one system. At PVcase I lead the platform that connects four products around one project record.',
   },
   {
     title: 'Payments with commercial results',
-    text: 'Lower processing costs, better success rates and recovered orders at four companies.',
+    text: 'Cut payment processing costs by €5M+ a year at Delivery Hero and by nearly 50% at AMBOSS, with better success rates and recovered orders. Cut platform fraud by over 90% at WeSwap.',
   },
   {
     title: 'Hands-on AI',
-    text: 'Shipped an LLM-powered review workflow at PVcase. Built Arnie OS, a system of 10+ AI agents.',
+    text: 'Released an LLM review workflow at PVcase where a person approves every finding. Built Arnie OS, 10+ AI agents that my Senior PMs use for research, PRDs and reporting.',
+  },
+  {
+    title: 'Decisions from evidence',
+    text: 'When retention on PVcase Platform stayed low, I stopped work on notifications and business-development packages and interviewed customers. What they did with their project documents led to AI-Assisted Design Review.',
   },
   {
     title: 'Founder experience',
@@ -68,8 +77,11 @@ const skills = [
       <div class="ps-hero__text">
         <div class="ps-eyebrow ps-eyebrow--accent">Hello, I am</div>
         <h1 class="ps-display-xl ps-name" id="hero-heading">{site.name}</h1>
-        <p class="ps-tagline">Product Director. I lead platforms and AI products.</p>
-        <p class="ps-lead">15 years building and leading product teams across four sectors. Based in Berlin.</p>
+        <p class="ps-tagline">Product Leader. I build platforms, payments and AI products.</p>
+        <p class="ps-lead">
+          15 years in product across four sectors. Hands-on: I launch products from zero to one and build with AI
+          myself. Based in Berlin.
+        </p>
         <div class="ps-actions">
           {showWorkButton && <a class="ps-btn ps-btn--primary" href="/work/">See my work</a>}
           <a class="ps-btn ps-btn--secondary" href={site.resumePdf} download>Download resume</a>
