@@ -4,14 +4,16 @@
  * Content lives in src/data/resume.ts (from content-source.md).
  * Template from design-system.md, "Resume", with two changes Aadeel asked for
  * (10 Nov 2026): a SectionRibbon under the head, and this section order:
- * Achievements, Experience, Projects, Skills, Education, Languages.
+ * Achievements, Experience, Skills, Education, Languages. The Projects section
+ * was removed the same day: Arnie OS now appears as an achievement and will
+ * get its own case study.
  * Achievements use the CardGrid so they read first. Prints on white with no
  * controls (bundle.css).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillGroups from '../components/SkillGroups.astro';
 import { site } from '../site.config';
-import { achievements, education, experience, languages, projects, skills } from '../data/resume';
+import { achievements, education, experience, languages, skills } from '../data/resume';
 
 // One entry per title: WeSwap's two titles become two entries, newest first.
 const entries = experience.flatMap((role) =>
@@ -32,7 +34,6 @@ const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const ribbon = [
   { id: 'achievements', label: 'Achievements' },
   { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'languages', label: 'Languages' },
@@ -97,27 +98,6 @@ const ribbon = [
                   ))}
                 </ul>
               )}
-            </div>
-          </article>
-        ))
-      }
-    </section>
-
-    <section class="ps-section" aria-labelledby="projects">
-      <h2 class="ps-h2 group" id="projects">Projects</h2>
-      {
-        projects.map((p) => (
-          <article class="ps-entry">
-            <div class="ps-entry__when">{p.label}</div>
-            <div class="ps-entry__what">
-              <h3 class="ps-h3">{p.name}</h3>
-              <ul class="ps-entry__list">
-                {p.bullets.map((b) => (
-                  <li>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </article>
         ))

@@ -1,7 +1,8 @@
 /**
  * Resume content. Wording is copied from the approved content pack
  * (content-source.md, sections 2–8, approved 9 November 2026; achievements and
- * Arnie OS label updated the same day).
+ * Arnie OS label updated the same day; titles for Delivery Hero and AMBOSS and
+ * the removal of "Side project" from TryMyKitchen, Aadeel, 10 November 2026).
  *
  * The site is the master copy for wording. When you change this file,
  * re-export the PDF in `public/` so the two stay in step.
@@ -49,7 +50,7 @@ export const experience: Role[] = [
     location: 'Berlin',
     positions: [
       {
-        title: 'Product Director',
+        title: 'Product Director – Growth and Payments',
         dates: 'Jul 2022 – Sep 2024',
         bullets: [
           'Accountable for growth, adoption and retention across global markets, with particular focus on user acquisition in the US.',
@@ -66,7 +67,7 @@ export const experience: Role[] = [
     location: 'Berlin',
     positions: [
       {
-        title: 'Product Director',
+        title: 'Product Director – Payments Platform',
         dates: 'Aug 2020 – Jan 2022',
         bullets: [
           'Led global product strategy for a high-volume, multi-sided marketplace. Drove platform expansion by migrating 20+ countries onto a centralised financial platform across APAC, LATAM and Europe.',
@@ -118,7 +119,6 @@ export const experience: Role[] = [
   {
     company: 'TryMyKitchen',
     location: 'London',
-    note: 'Side project',
     positions: [
       {
         title: 'Co-founder',
