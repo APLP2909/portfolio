@@ -25,7 +25,12 @@ const entries = experience.flatMap((role) =>
     bullets: pos.bullets,
   })),
 );
-const currentRole = entries[0]?.title ?? '';
+/**
+ * Page title. The design system's template uses the current role; Aadeel chose
+ * "Product Leader" instead (10 Nov 2026), matching the PDF resume header and
+ * the approved title in content-source.md.
+ */
+const heading = 'Product Leader';
 
 /** Achievement text starts mid-sentence ("defined the…"); a card needs a capital. */
 const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -50,7 +55,7 @@ const ribbon = [
       <div class="ps-resume__head">
         <div>
           <div class="ps-eyebrow ps-eyebrow--accent">Resume</div>
-          <h1 class="ps-display-lg title" id="resume-heading">{currentRole}</h1>
+          <h1 class="ps-display-lg title" id="resume-heading">{heading}</h1>
         </div>
         <a class="ps-btn ps-btn--primary" href={site.resumePdf} download>Download PDF</a>
       </div>
