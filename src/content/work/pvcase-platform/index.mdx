@@ -1,0 +1,95 @@
+---
+title: "PVcase Platform: one connected platform for solar design"
+description: "PVcase's products each had their own login, customer database and user experience. I lead Platform, which connects them around one project record. It has over 500 monthly active users."
+publishDate: 2026-11-10
+role: "Product Director – Platform"
+company: "PVcase"
+sector: "Solar Project Development, B2B SaaS"
+timeframe: "April 2025 – present"
+team: "4 Senior PMs, 4 engineering teams, remote across the US, Spain and Lithuania"
+outcome: "Over 500 monthly active users"
+tags: [Platform, AI]
+cover: ./hero.png
+coverAlt: "3D design review view of a ground-mounted solar site in PVcase Platform, with comment and review tools."
+---
+
+import FeatureRow from '../../../components/FeatureRow.astro';
+import parcels from './parcels.png';
+import designVariants from './design-variants.png';
+import collaboration from './collaboration.png';
+
+## Summary
+
+PVcase’s products each had their own customer database, login and user experience, and none of them worked alike. Customers with licences for several products lacked visibility of their projects and data transfer was manual. I lead Platform, which connects the products with one login, shared entitlements and visibility of project data across all of them. It began as one foundational epic in April 2025 and now has 500+ monthly active users.
+
+## Context
+
+Before Platform, PVcase built software for two groups: design engineers and early-stage solar developers. The company was reaching saturation with both, so growth could not come from selling more of the same products to the same people.
+
+The products also gave PVcase no way to serve the other people involved in a solar project, such as project managers and compliance teams. They gave it no way to develop partnerships with component manufacturers or energy trading partners either.
+
+## The problem
+
+The way the products were built caused problems on three levels.
+
+**For customers**, stale component data and manual data transfers cost up to €500k on a typical 50 MW project. Fragmented tooling meant reviewing and validating technical design assets took 21 days on average, roughly €150k per project.
+
+**For PVcase**, the same real-world project existed as a separate record in each product. The company could not measure how much solar pipeline ran through its software. That blocked partnership opportunities worth at least €2M a year. Selling a second product to an existing customer also needed manual workarounds.
+
+**For the product teams**, features such as the components database, the 3D viewer and the login were rebuilt for each product as it grew. That repeated work had already cost close to €1M. There was also no agreed definition of what a "project" was, so each team answered that differently.
+
+## My role
+
+I lead Platform and own its roadmap across the product line. Four Senior PMs report to me, and four engineering teams build it, working remotely across the US, Spain and Lithuania.
+
+Platform started with little agreement inside the company on what a platform was, or what counted as a project. I ran a leadership workshop to agree what Platform is for, and I wrote the Decision Stack. It is the operating reference for what Platform optimises for, what it will not do and how we choose between competing requests.
+
+From there I owned the work that turned separate products into one platform. I own the project definition and schema that every product team builds to, so a project is one record across all products. I introduced entitlements, a single service that controls which products each customer can use and lets them buy other PVcase products without friction. I created one login and one user experience across the products, in place of separate logins and interfaces. I defined the collaboration features that let new personas adopt Platform: project managers, business development, compliance, performance analysis and C-level decision makers. These features also bring new users into a project without a sales conversation.
+
+I own the PRDs for the shared project record and for the AI-assisted design review, and I secured executive sign-off for both. Each week I publish a company-wide report that combines delivery status with customer usage data. It has run every week for over a year and is now automated.
+
+## Decisions and trade-offs
+
+Four decisions shaped how Platform was built and rolled out. Each one follows from the one before it.
+
+**Which users to target.** Design engineers use PVcase products to create technical design assets, and that gave PVcase valuable project data at the source. Other roles in a solar project need that data, and so do component manufacturers and energy trading partners. I decided to build on this and target those roles: project managers, business development, compliance, performance analysis and C-level decision makers. The alternative was to stay with design engineers and solar developers, who are about 10% of the utility-scale solar workforce. A cheaper competing product was also winning design customers, so competing for the same group on price had limited upside.
+
+**Why the data had to be in one place.** The new roles could only use the design data if it sat in one place and was easy to reach. While each product kept its own records, a project manager or a partner had no way to see a project across products. So I made the shared project record the base for everything else: one project definition and schema for every product team, one login, and one view of each project. Without that, the new users and partners had nothing to work from.
+
+**How I phased the roll-out.** I set three phases: connect the products, extend to the new users and partners, then scale. I put the connection work first because an extension built on an unstable base fails under enterprise load. For each phase I set milestones and decided in advance what we would do if we missed them. If customers were not adding projects, for example, activation was the problem, so we would pause investment and find out why before building more.
+
+**How I approached pricing.** We interviewed executives to understand the pricing options and how PVcase could move from pricing each product to pricing the platform. We began with simple bundles and kept pricing transparent. I introduced entitlements so we could package products and sell add-ons without rework as pricing evolved.
+
+## What we shipped
+
+We shipped Platform in stages. It started with the shared project record and the first connection between a design tool and the web. The platform became the System of Record for every project.
+
+<FeatureRow src={parcels} alt="Multiple site parcels associated with a project" caption="Multiple site parcels associated with a project">
+
+**One project for every site and design.** Designs created in Prospect or Ground Mount, PVcase’s tools for site selection and ground-mounted solar, saved as a Platform project with their geo-location data, 3D view, bill of materials and CAD files. Project stakeholders can access the project, view the design in a browser 3D viewer and comment on it. The viewer shows every element of a design, including inverters, power stations, cables and roads. It has labels, textures, satellite imagery and a 2D mode. Module and inverter data from the shared component database appears in the design view.
+
+</FeatureRow>
+
+<FeatureRow src={collaboration} alt="Collaboration across a design" caption="Collaboration across a design" flip>
+
+**Review and collaboration in one place.** Reviewers comment on a whole design or pin a comment to a single object, reply, react and resolve threads. The same comments are reachable from the design tool. PDF drawings and documents open in the browser with comments, markup, versions and locking, so two people do not overwrite each other’s work. Teams can compare up to three designs side by side.
+
+</FeatureRow>
+
+<FeatureRow src={designVariants} alt="Multiple design variants per project" caption="Multiple design variants per project">
+
+**Project management and costs.** Each project holds its files, stages and priorities, and a sortable project list shows where every project stands. The design-level financial model takes component quantities from the design file and calculates levelised cost of energy (LCOE), net present value (NPV) and CAPEX. Teams compare the cost of design iterations without retyping bill-of-materials data.
+
+</FeatureRow>
+
+**Access across products.** Entitlements control which products each customer can use, and one login covers all of them. A permissions layer controls who can see and change each project.
+
+**AI-assisted design review.** Solar teams check every design by hand against rules from permits, grid codes and contracts. In the AI-assisted design review, a team uploads the project documents and the AI proposes a list of checks, each linked to its source passage. A person approves or edits the list before it applies to the project. Each published design is then checked against the approved list, and failed checks appear on the design in the 3D viewer.
+
+## Outcome
+
+Platform became the system of record for projects at PVcase with over 500 monthly active users.
+
+Customers now use the products together. 89% of users have interacted with a new shared platform feature, and more than 100 projects are now active on the platform.
+
+The shared platform also changed how PVcase builds. The component database, the 3D viewer and the login used to be rebuilt for each product. They are now shared, and one project record links every product. That ended duplicate builds, and it let us create the latest PVcase product in weeks rather than months.
