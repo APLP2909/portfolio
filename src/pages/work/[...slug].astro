@@ -38,14 +38,18 @@ const facts: [string, string | undefined][] = [
 ---
 
 <BaseLayout title={d.title} description={d.description} ogImage={`/og/work/${slug}.png`} ogType="article">
-  <div class="ps-container">
-    <header class="ps-stack head">
-      <a class="ps-back" href="/work/">← My work</a>
-      <div class="ps-tags">{d.tags.map((tag) => <span class="ps-tag">{tag}</span>)}</div>
-      <h1 class="ps-display-xl">{d.title}</h1>
-      <p class="ps-lead">{d.description}</p>
-    </header>
+  <section class="ps-halo" aria-labelledby="case-heading">
+    <div class="ps-container">
+      <header class="ps-stack head">
+        <a class="ps-back" href="/work/">← My work</a>
+        <div class="ps-tags">{d.tags.map((tag) => <span class="ps-tag">{tag}</span>)}</div>
+        <h1 class="ps-display-xl" id="case-heading">{d.title}</h1>
+        <p class="ps-lead">{d.description}</p>
+      </header>
+    </div>
+  </section>
 
+  <div class="ps-container">
     {
       (d.video || d.cover) && (
         <div class="hero-media">
@@ -54,7 +58,7 @@ const facts: [string, string | undefined][] = [
           ) : (
             d.cover && (
               <div class="ps-media">
-                <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[640, 1280, 1920]} sizes="(min-width: 75rem) 1072px, 100vw" />
+                <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[640, 1280, 1920]} sizes="(min-width: 75rem) 1072px, 100vw" loading="eager" fetchpriority="high" />
               </div>
             )
           )}
@@ -89,8 +93,9 @@ const facts: [string, string | undefined][] = [
 </BaseLayout>
 
 <style>
+  /* Same top and bottom padding as the system hero (.ps-hero__inner: 16px 40px). */
   .head {
-    padding-block: var(--space-4) var(--space-7);
+    padding-block: var(--space-4) 40px;
   }
 
   .hero-media {
