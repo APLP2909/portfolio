@@ -1,0 +1,53 @@
+---
+/**
+ * FeatureRow: one paragraph beside the screenshot that shows it.
+ * A design-system extension approved by Aadeel on 10 November 2026, for the
+ * "What we shipped" section of case studies. Styles: `.ps-feature` in
+ * global.css (tokens only).
+ *
+ * Use it from an .mdx case study (leave a blank line inside the tags so the
+ * text is read as Markdown):
+ *
+ * ```mdx
+ * import FeatureRow from '../../../components/FeatureRow.astro';
+ * import shot from './shot.png';
+ *
+ * <FeatureRow src={shot} alt="What it shows" caption="What it shows">
+ *
+ * **Feature name.** The paragraph about it.
+ *
+ * </FeatureRow>
+ * ```
+ *
+ * Add `flip` to put the image on the right. On narrow columns the image
+ * always sits above its text.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  /** Describes what the image shows, for screen readers. */
+  alt: string;
+  /** Visible caption under the image. */
+  caption?: string;
+  /** Put the image on the right instead of the left. */
+  flip?: boolean;
+}
+
+const { src, alt, caption, flip = false } = Astro.props;
+---
+
+<div class:list={['ps-feature', { 'ps-feature--flip': flip }]}>
+  <div class="ps-feature__inner">
+    <figure class="ps-feature__media">
+      <div class="ps-media ps-media--4x3">
+        <Image src={src} alt={alt} widths={[360, 720, 1080]} sizes="(min-width: 60rem) 340px, 100vw" />
+      </div>
+      {caption && <figcaption class="ps-feature__caption">{caption}</figcaption>}
+    </figure>
+    <div class="ps-feature__text">
+      <slot />
+    </div>
+  </div>
+</div>

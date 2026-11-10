@@ -66,3 +66,63 @@ main {
 main .ps-row:last-child {
   padding-bottom: 0;
 }
+
+/*
+ * System extension: FeatureRow (src/components/FeatureRow.astro).
+ * Approved by Aadeel on 10 November 2026. A candidate to add to the design
+ * system's bundle.css. Tokens only.
+ * The row reacts to its own width (container query), not the screen width,
+ * so it works inside the narrow article column: two columns when the row is
+ * 560px or wider, otherwise one column with the image first.
+ */
+.ps-feature {
+  container-type: inline-size;
+}
+
+/* Give each row more air than a paragraph gap, so captions don't run into the next row. */
+.ps-stack > .ps-feature,
+.ps-stack > .ps-feature + * {
+  margin-top: var(--space-6);
+}
+
+.ps-feature__inner {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ps-feature__inner > * {
+  min-width: 0;
+}
+
+.ps-feature__media {
+  margin: 0;
+}
+
+.ps-feature__text > * + * {
+  margin-top: var(--space-4);
+}
+
+.ps-feature__caption {
+  margin-top: var(--space-2);
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--muted);
+  overflow-wrap: break-word;
+}
+
+/* Screenshots show the top of the app, so anchor the crop there. */
+.ps-feature .ps-media :where(img) {
+  object-position: 0 0;
+}
+
+@container (min-width: 560px) {
+  .ps-feature__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .ps-feature--flip .ps-feature__media {
+    order: 2;
+  }
+}
