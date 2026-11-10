@@ -43,6 +43,15 @@ export const site = {
    * while no case study exists. Pending decision (Aadeel, Phase 3).
    */
   hideWorkWhenEmpty: false,
+  /**
+   * LAUNCH SWITCH. While `false`, every page carries `<meta name="robots"
+   * content="noindex, nofollow">`, so search engines can reach the site but
+   * will not list it. Set to `true` on launch day (after the final content
+   * changes), commit and push. Search engines then pick the site up over the
+   * following days. robots.txt deliberately stays open: crawlers must be able
+   * to read a page to see its noindex tag.
+   */
+  allowIndexing: false,
 } as const;
 
 /** Main navigation. `requiresWork` items follow `hideWorkWhenEmpty`. */
