@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Page not found" description="This page does not exist." noindex>
   <section class="ps-halo" aria-labelledby="nf-heading">
-    <div class="ps-container ps-hero__inner">
+    <div class="ps-container ps-hero__inner flush-end">
       <div class="ps-hero__text">
         <div class="ps-eyebrow ps-eyebrow--accent">404</div>
         <h1 class="ps-display-lg" id="nf-heading">Page not found</h1>
@@ -17,3 +17,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* The hero is the last block here, so drop its bottom padding; the page's
+     standard gap before the ContactPanel (global.css) then applies alone. */
+  .flush-end {
+    padding-bottom: 0;
+  }
+</style>

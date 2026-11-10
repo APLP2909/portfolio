@@ -52,7 +52,17 @@ body {
   text-underline-offset: 0.18em;
 }
 
-/* Gap between page bands, using the system's section spacing. */
-.ps-band + .ps-band {
-  margin-top: clamp(40px, 6vw, var(--space-8));
+/*
+ * One vertical rhythm for every page, using the system's section spacing
+ * (.ps-section: clamp(40px, 6vw, space-8)):
+ * - the end of the page content always sits one section gap above the
+ *   ContactPanel;
+ * - a last SectionRow drops its own bottom padding, so the gap is not doubled.
+ */
+main {
+  padding-bottom: clamp(40px, 6vw, var(--space-8));
+}
+
+main .ps-row:last-child {
+  padding-bottom: 0;
 }
