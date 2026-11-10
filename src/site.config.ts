@@ -47,7 +47,7 @@ export const site = {
 
 /** Main navigation. `requiresWork` items follow `hideWorkWhenEmpty`. */
 export const navItems = [
-  { label: 'Work', href: '/work/', requiresWork: true },
   { label: 'About', href: '/about/', requiresWork: false },
   { label: 'Resume', href: '/resume/', requiresWork: false },
+  { label: 'Work', href: '/work/', requiresWork: true },
 ] as const;

@@ -1,12 +1,15 @@
 ---
 /**
  * Header (design-system.md): the AP monogram on the left, the main navigation
- * on the right, ending with a small primary "Email me" button that jumps to
- * the contact panel. The header never repeats the full name.
+ * on the right, ending with a small primary "Email me" button. The button opens
+ * the visitor's email app (scraper-protected link) rather than jumping to the
+ * contact panel, because the label promises an email (Aadeel, 10 Nov 2026).
+ * The header never repeats the full name.
  */
 import { navItems, site } from '../site.config';
 import { getWork } from '../lib/work';
 import ThemeToggle from './ThemeToggle.astro';
+import EmailLink from './EmailLink.astro';
 
 const hasWork = (await getWork()).length > 0;
 const items = navItems.filter((item) => !(item.requiresWork && site.hideWorkWhenEmpty && !hasWork));
@@ -25,6 +28,6 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
       ))
     }
     <ThemeToggle />
-    <a class="ps-btn ps-btn--primary ps-btn--sm" href="#contact">Email me</a>
+    <EmailLink class="ps-btn ps-btn--primary ps-btn--sm">Email me</EmailLink>
   </nav>
 </header>
