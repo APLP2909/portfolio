@@ -2,10 +2,11 @@
 /**
  * Resume page, rendered as real HTML text so it is searchable and accessible.
  * Content lives in src/data/resume.ts (from content-source.md).
- * Template from design-system.md, "Resume": head with the current role and a
- * Download PDF button, then ResumeEntry lists. Section order follows the
- * approved content pack: Experience, Achievements, Education, Skills,
- * Languages, Projects. Prints on white with no controls (bundle.css).
+ * Template from design-system.md, "Resume", with two changes Aadeel asked for
+ * (10 Nov 2026): a SectionRibbon under the head, and this section order:
+ * Achievements, Experience, Projects, Skills, Education, Languages.
+ * Achievements use the CardGrid so they read first. Prints on white with no
+ * controls (bundle.css).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillGroups from '../components/SkillGroups.astro';
@@ -23,6 +24,19 @@ const entries = experience.flatMap((role) =>
   })),
 );
 const currentRole = entries[0]?.title ?? '';
+
+/** Achievement text starts mid-sentence ("defined the…"); a card needs a capital. */
+const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Ribbon order MUST match the section order below. */
+const ribbon = [
+  { id: 'achievements', label: 'Achievements' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'education', label: 'Education' },
+  { id: 'languages', label: 'Languages' },
+];
 ---
 
 <BaseLayout
@@ -30,14 +44,36 @@ const currentRole = entries[0]?.title ?? '';
   description="Resume of Aadeel Peerally, Product Director: experience at PVcase, AMBOSS, Delivery Hero, Equals and WeSwap."
   ogImage="/og/resume.png"
 >
-  <div class="ps-container">
-    <div class="ps-resume__head">
-      <div>
-        <div class="ps-eyebrow ps-eyebrow--accent">Resume</div>
-        <h1 class="ps-display-lg title">{currentRole}</h1>
+  <section class="ps-halo" aria-labelledby="resume-heading">
+    <div class="ps-container ps-hero__inner">
+      <div class="ps-resume__head">
+        <div>
+          <div class="ps-eyebrow ps-eyebrow--accent">Resume</div>
+          <h1 class="ps-display-lg title" id="resume-heading">{currentRole}</h1>
+        </div>
+        <a class="ps-btn ps-btn--primary" href={site.resumePdf} download>Download PDF</a>
       </div>
-      <a class="ps-btn ps-btn--primary" href={site.resumePdf} download>Download PDF</a>
     </div>
+  </section>
+
+  <div class="ps-container">
+    <nav class="ps-ribbon" aria-label="On this page">
+      {ribbon.map((r) => <a href={`#${r.id}`}>{r.label}</a>)}
+    </nav>
+
+    <section class="ps-section" aria-labelledby="achievements">
+      <h2 class="ps-h2 group" id="achievements">Achievements</h2>
+      <div class="ps-grid">
+        {
+          achievements.map((a) => (
+            <article class="ps-card">
+              <div class="ps-card__index">{a.label}</div>
+              <p class="ps-card__text">{sentence(a.text)}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
 
     <section class="ps-section" aria-labelledby="experience">
       <h2 class="ps-h2 group" id="experience">Experience</h2>
@@ -67,52 +103,6 @@ const currentRole = entries[0]?.title ?? '';
       }
     </section>
 
-    <section class="ps-section" aria-labelledby="achievements">
-      <h2 class="ps-h2 group" id="achievements">Achievements</h2>
-      <article class="ps-entry">
-        <div class="ps-entry__what">
-          <ul class="ps-entry__list">
-            {
-              achievements.map((a) => (
-                <li>
-                  <span>
-                    <strong>{a.label}:</strong> {a.text}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <section class="ps-section" aria-labelledby="education">
-      <h2 class="ps-h2 group" id="education">Education</h2>
-      {
-        education.map((e) => (
-          <article class="ps-entry">
-            <div class="ps-entry__when">{e.year}</div>
-            <div class="ps-entry__what">
-              <h3 class="ps-h3">{e.degree}</h3>
-              <p class="ps-entry__org">{e.school}</p>
-            </div>
-          </article>
-        ))
-      }
-    </section>
-
-    <section class="ps-section" aria-labelledby="skills">
-      <h2 class="ps-h2 group" id="skills">Skills</h2>
-      <SkillGroups groups={skills} />
-    </section>
-
-    <section class="ps-row" id="languages">
-      <h2 class="ps-h2 ps-row__title">Languages</h2>
-      <div class="ps-row__body">
-        <p>{languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
-      </div>
-    </section>
-
     <section class="ps-section" aria-labelledby="projects">
       <h2 class="ps-h2 group" id="projects">Projects</h2>
       {
@@ -133,16 +123,52 @@ const currentRole = entries[0]?.title ?? '';
         ))
       }
     </section>
+
+    <section class="ps-section" aria-labelledby="skills">
+      <h2 class="ps-h2 group" id="skills">Skills</h2>
+      <SkillGroups groups={skills} />
+    </section>
+
+    <section class="ps-section" aria-labelledby="education">
+      <h2 class="ps-h2 group" id="education">Education</h2>
+      {
+        education.map((e) => (
+          <article class="ps-entry">
+            <div class="ps-entry__when">{e.year}</div>
+            <div class="ps-entry__what">
+              <h3 class="ps-h3">{e.degree}</h3>
+              <p class="ps-entry__org">{e.school}</p>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="ps-section" aria-labelledby="languages">
+      <h2 class="ps-h2 group" id="languages">Languages</h2>
+      <p>{languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
+  /* The head sits inside the hero band so it carries the halo like other pages. */
+  .ps-resume__head {
+    flex: 1 1 100%;
+    padding-block: 0;
+  }
+
   .title {
     margin-top: var(--space-3);
   }
 
-  /* Space between a group title and its first entry. */
+  /* Space between a section title and its content (space-5). */
   .group {
     margin-bottom: var(--space-5);
+  }
+
+  /* Ribbon links land with breathing room below the page top. */
+  section[aria-labelledby] {
+    scroll-margin-top: var(--space-4);
   }
 </style>
