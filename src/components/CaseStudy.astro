@@ -177,9 +177,23 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
     color: var(--accent);
   }
 
+  /*
+   * From tablet width, each fact keeps its value on one line and is separated
+   * from the next by one fixed 40px gap, so the visible space between facts is
+   * exactly equal (Aadeel, 10 Nov 2026). Equal-width columns had left gaps of
+   * 34-128px. Facts flow onto a second row when they don't fit; very long values
+   * still wrap rather than overflow on narrow screens.
+   */
   @media (min-width: 48rem) {
     .facts-strip {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5) 40px;
+    }
+
+    .facts-strip > div {
+      flex: 0 0 auto;
+      max-width: 100%;
     }
   }
 
