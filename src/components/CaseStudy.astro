@@ -178,22 +178,23 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
   }
 
   /*
-   * From tablet width, each fact keeps its value on one line and is separated
-   * from the next by one fixed 40px gap, so the visible space between facts is
-   * exactly equal (Aadeel, 10 Nov 2026). Equal-width columns had left gaps of
-   * 34-128px. Facts flow onto a second row when they don't fit; very long values
-   * still wrap rather than overflow on narrow screens.
+   * From 1024px all facts share ONE row with EQUAL visible gaps (Aadeel,
+   * 10 Nov 2026). Long values wrap inside their fact, which normally leaves
+   * empty space at the end of their lines; the script below trims each fact
+   * to its longest line, and `space-between` then shares the leftover width
+   * equally between the facts. Below 1024px the facts use the two-column grid.
    */
-  @media (min-width: 48rem) {
+  @media (min-width: 64rem) {
     .facts-strip {
       display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-5) 40px;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 32px;
     }
 
     .facts-strip > div {
-      flex: 0 0 auto;
-      max-width: 100%;
+      flex: 0 1 auto;
+      min-width: 0;
     }
   }
 
@@ -202,3 +203,86 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
     max-width: var(--measure);
   }
 </style>
+
+<script>
+  /**
+   * Trims each fact in the facts strip to the width of its longest text line,
+   * so the strip's `justify-content: space-between` gives equal visible gaps.
+   * Runs on load and whenever the strip changes width. Only acts from 1024px,
+   * where the strip is a single row.
+   */
+  const strip = document.querySelector<HTMLElement>('.facts-strip');
+  const wide = window.matchMedia('(min-width: 64rem)');
+
+  const longestLine = (el: HTMLElement) => {
+    let max = 0;
+    const left = el.getBoundingClientRect().left;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent?.trim()) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const rect of range.getClientRects()) max = Math.max(max, rect.right - left);
+    }
+    return Math.ceil(max) + 1;
+  };
+
+  /** Width a fact needs to sit on one line. */
+  const naturalWidth = (el: HTMLElement) => {
+    // Measure with the row's squeezing switched off, or the width comes out short.
+    el.style.flex = 'none';
+    el.style.whiteSpace = 'nowrap';
+    el.style.width = 'max-content';
+    const w = Math.ceil(el.getBoundingClientRect().width);
+    el.style.flex = '';
+    el.style.whiteSpace = '';
+    el.style.width = '';
+    return w;
+  };
+
+  const fit = () => {
+    if (!strip) return;
+    const facts = [...strip.children] as HTMLElement[];
+    facts.forEach((f) => {
+      f.style.flex = '';
+      f.style.width = '';
+    });
+    if (!wide.matches) return;
+
+    // 1. Share the row fairly: short facts keep their one-line width; the long
+    //    ones are capped at one common width (c) so that everything fits.
+    const gap = parseFloat(getComputedStyle(strip).columnGap) || 0;
+    const available = strip.clientWidth - gap * (facts.length - 1);
+    const natural = facts.map(naturalWidth);
+    let cap = available / facts.length;
+    for (let i = 0; i < facts.length; i++) {
+      const short = natural.filter((w) => w <= cap);
+      const longCount = facts.length - short.length;
+      if (!longCount) break;
+      cap = (available - short.reduce((sum, w) => sum + w, 0)) / longCount;
+    }
+    facts.forEach((f, i) => {
+      f.style.flex = '0 0 auto';
+      f.style.width = `${Math.floor(Math.min(natural[i] ?? 0, cap))}px`;
+    });
+
+    // 2. Trim each fact to its longest wrapped line, so space-between shares
+    //    the leftover width as equal gaps.
+    const widths = facts.map(longestLine);
+    facts.forEach((f, i) => {
+      f.style.width = `${widths[i]}px`;
+    });
+  };
+
+  if (strip) {
+    let lastWidth = 0;
+    new ResizeObserver(([entry]) => {
+      const width = Math.round(entry?.contentRect.width ?? 0);
+      if (width !== lastWidth) {
+        lastWidth = width;
+        fit();
+      }
+    }).observe(strip);
+    document.fonts?.ready.then(fit);
+  }
+</script>
