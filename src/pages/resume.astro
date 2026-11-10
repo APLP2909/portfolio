@@ -63,7 +63,7 @@ const ribbon = [
 
     <section class="ps-section" aria-labelledby="achievements">
       <h2 class="ps-h2 group" id="achievements">Achievements</h2>
-      <div class="ps-grid">
+      <div class="ps-grid section-body">
         {
           achievements.map((a) => (
             <article class="ps-card">
@@ -126,7 +126,9 @@ const ribbon = [
 
     <section class="ps-section" aria-labelledby="skills">
       <h2 class="ps-h2 group" id="skills">Skills</h2>
-      <SkillGroups groups={skills} />
+      <div class="section-body">
+        <SkillGroups groups={skills} />
+      </div>
     </section>
 
     <section class="ps-section" aria-labelledby="education">
@@ -146,7 +148,9 @@ const ribbon = [
 
     <section class="ps-section" aria-labelledby="languages">
       <h2 class="ps-h2 group" id="languages">Languages</h2>
-      <p>{languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
+      <div class="section-body">
+        <p>{languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
+      </div>
     </section>
   </div>
 </BaseLayout>
@@ -165,6 +169,16 @@ const ribbon = [
   /* Space between a section title and its content (space-5). */
   .group {
     margin-bottom: var(--space-5);
+  }
+
+  /*
+   * Sections without ResumeEntry rows (Achievements, Skills, Languages) get the
+   * same 1px line and top spacing that each entry has (.ps-entry: border-top,
+   * 28px padding), so every section reads the same.
+   */
+  .section-body {
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
   }
 
   /* Ribbon links land with breathing room below the page top. */
