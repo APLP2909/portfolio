@@ -39,33 +39,39 @@ const facts: [string, string | undefined][] = [
 
 <BaseLayout title={d.title} description={d.description} ogImage={`/og/work/${slug}.png`} ogType="article">
   <section class="ps-halo" aria-labelledby="case-heading">
-    <div class="ps-container">
-      <header class="ps-stack head">
+    <div class="ps-container ps-hero__inner">
+      <header class="ps-hero__text">
         <a class="ps-back" href="/work/">← My work</a>
         <div class="ps-tags">{d.tags.map((tag) => <span class="ps-tag">{tag}</span>)}</div>
-        <h1 class="ps-display-xl" id="case-heading">{d.title}</h1>
+        <h1 class="ps-display-lg case-title" id="case-heading">{d.title}</h1>
         <p class="ps-lead">{d.description}</p>
       </header>
+      {
+        (d.video || d.cover) && (
+          <div class="case-hero__media">
+            {d.video ? (
+              <LoopVideo {...d.video} class="ps-media--4x3" />
+            ) : (
+              d.cover && (
+                <div class="ps-media ps-media--4x3">
+                  <Image
+                    src={d.cover}
+                    alt={d.coverAlt ?? ''}
+                    widths={[480, 720, 1080, 1440]}
+                    sizes="(min-width: 60rem) 540px, (min-width: 45rem) 720px, 100vw"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+              )
+            )}
+          </div>
+        )
+      }
     </div>
   </section>
 
   <div class="ps-container">
-    {
-      (d.video || d.cover) && (
-        <div class="hero-media">
-          {d.video ? (
-            <LoopVideo {...d.video} />
-          ) : (
-            d.cover && (
-              <div class="ps-media">
-                <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[640, 1280, 1920]} sizes="(min-width: 75rem) 1072px, 100vw" loading="eager" fetchpriority="high" />
-              </div>
-            )
-          )}
-        </div>
-      )
-    }
-
     <div class="ps-case">
       <aside class="ps-panel" aria-label="Context">
         <dl>
@@ -93,13 +99,28 @@ const facts: [string, string | undefined][] = [
 </BaseLayout>
 
 <style>
-  /* Same top and bottom padding as the system hero (.ps-hero__inner: 16px 40px). */
-  .head {
-    padding-block: var(--space-4) 40px;
+  /*
+   * Split hero (Aadeel, 10 Nov 2026): the system Hero pattern with the case
+   * study's media in place of the portrait. Text and media share the row and
+   * wrap when there is not room for both; the media then sits under the text,
+   * capped at the reading measure so it never grows taller than the screen.
+   * The 4:3 frame is close to a product screenshot's shape, so little is
+   * cropped; anchoring the crop at the top keeps the app's top bar and side rail.
+   */
+  /* In the split hero the title has half the width, so it uses display-lg
+     (the About headline size) instead of display-xl, and a bolder weight. */
+  .case-title {
+    font-weight: 700;
   }
 
-  .hero-media {
-    margin-bottom: var(--space-7);
+  .case-hero__media {
+    flex: 1 1 420px;
+    min-width: 0;
+    max-width: var(--measure);
+  }
+
+  .case-hero__media :global(img) {
+    object-position: 0 0;
   }
 
   /* Markdown sections render as SectionRow-style blocks: an h2 and paragraphs. */
