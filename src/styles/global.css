@@ -139,3 +139,55 @@ main .ps-row:last-child {
     grid-template-columns: 2fr 3fr;
   }
 }
+
+/*
+ * Reading width (design-system.md: --measure, 720px). Caps a text block that
+ * sits outside a row body or article, such as the line under the Work cards.
+ */
+.ps-measure {
+  max-width: var(--measure);
+}
+
+/*
+ * Balanced CardGrid (Aadeel, 10 November 2026). Add `ps-grid--balanced` to a
+ * `ps-grid` so the last row never holds one lone card. Works for any count.
+ * - 900px and wider: three per row. A last row of two shares the full width;
+ *   a last row of one spans it.
+ * - 600px to 899px: two per row. A lone last card spans the full width.
+ * - Narrower: one column. (The base `ps-grid` would still fit two columns
+ *   between about 540px and 599px and leave a lone card.)
+ */
+@media (min-width: 900px) {
+  .ps-grid--balanced {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .ps-grid--balanced > * {
+    grid-column: span 2;
+  }
+
+  .ps-grid--balanced > :nth-child(3n + 1):nth-last-child(2),
+  .ps-grid--balanced > :nth-child(3n + 1):nth-last-child(2) ~ * {
+    grid-column: span 3;
+  }
+
+  .ps-grid--balanced > :nth-child(3n + 1):last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .ps-grid--balanced {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ps-grid--balanced > :nth-child(odd):last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 599px) {
+  .ps-grid--balanced {
+    grid-template-columns: 1fr;
+  }
+}
