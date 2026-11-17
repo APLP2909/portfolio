@@ -1,0 +1,68 @@
+---
+/**
+ * AreaCard: a card for one area of a system, such as a group of AI agents.
+ * It shows small chips (who works in the area), a title, an outcome sentence,
+ * then one line per item: a lead in the accent colour, the text, and a small
+ * muted note underneath (for example, when it runs). Use it inside `CardGrid`.
+ *
+ * Add `hub` for the card that oversees the others: it spans the full row and
+ * has an accent border. From 1000px wide the hub card has two columns (chips,
+ * title and outcome on the left; the lines in columns on the right, with a
+ * divider between). Below 1000px it stacks.
+ *
+ * ```mdx
+ * <AreaCard
+ *   chips={['Paddington', 'Angela']}
+ *   title="Research"
+ *   outcome="One sentence on what changed."
+ *   lines={[{ lead: 'Paddington', text: 'What it gives me.', note: 'Weekly.' }]}
+ * />
+ * ```
+ */
+interface Line {
+  /** Shown first, in the accent colour. */
+  lead: string;
+  /** The rest of the line. */
+  text: string;
+  /** Small muted note under the line. */
+  note: string;
+}
+
+interface Props {
+  /** Chip labels, shown in the accent colour. */
+  chips: string[];
+  /** Optional extra chip in the muted colour. */
+  mutedChip?: string;
+  /** Card title, shown as an `h3`. */
+  title: string;
+  /** One outcome sentence under the title. */
+  outcome: string;
+  /** One or more lines. */
+  lines: Line[];
+  /** The card that oversees the others. */
+  hub?: boolean;
+}
+
+const { chips, mutedChip, title, outcome, lines, hub = false } = Astro.props;
+---
+
+<article class:list={['ps-card', 'ps-area', { 'ps-area--hub': hub }]}>
+  <div class="ps-area__head">
+    <ul class="ps-area__chips">
+      {chips.map((chip) => <li class="ps-area__chip">{chip}</li>)}
+      {mutedChip && <li class="ps-area__chip ps-area__chip--muted">{mutedChip}</li>}
+    </ul>
+    <h3 class="ps-h3 ps-area__title">{title}</h3>
+    <p class="ps-area__outcome">{outcome}</p>
+  </div>
+  <ul class="ps-area__lines">
+    {
+      lines.map(({ lead, text, note }) => (
+        <li>
+          <span class="ps-area__lead">{lead}</span> {text}
+          <span class="ps-area__note">{note}</span>
+        </li>
+      ))
+    }
+  </ul>
+</article>

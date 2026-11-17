@@ -33,8 +33,13 @@ const work = defineCollection({
         outcome: nonEmpty,
         tags: z.array(z.enum(WORK_TAGS)).min(1),
 
-        /** Optional cover image, stored next to the content file. */
+        /**
+         * Optional cover image, stored next to the content file. When
+         * `coverLight` is also set, `cover` is the dark-theme version.
+         */
         cover: image().optional(),
+        /** Optional light-theme version of the cover. Requires `cover`. */
+        coverLight: image().optional(),
         coverAlt: nonEmpty.optional(),
 
         /** Optional silent looping video, stored in public/videos/. */
@@ -58,6 +63,10 @@ const work = defineCollection({
       .refine((d) => !d.cover || d.coverAlt, {
         message: 'coverAlt is required when cover is set',
         path: ['coverAlt'],
+      })
+      .refine((d) => !d.coverLight || d.cover, {
+        message: 'coverLight needs cover (the dark-theme version) as well',
+        path: ['cover'],
       }),
 });
 

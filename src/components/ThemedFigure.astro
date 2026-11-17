@@ -1,0 +1,76 @@
+---
+/**
+ * ThemedFigure: one image in a dark and a light version, with a visible
+ * caption. The site shows the version that matches the current theme and
+ * swaps them when the visitor switches theme (CSS on `data-theme`, see
+ * `.ps-theme--dark` and `.ps-theme--light` in global.css).
+ *
+ * - Pass a URL string (a file in `public/`) for files that MUST be served
+ *   unchanged, such as animated SVG diagrams. Give `width` and `height` (the
+ *   SVG's viewBox size) so the page does not jump while the image loads.
+ *   The image keeps its own aspect ratio: it is never cropped.
+ * - Pass an imported image (`ImageMetadata`) for screenshots. Astro resizes
+ *   and compresses it at build time.
+ *
+ * Both versions load lazily. The hidden one is `display: none`, so the
+ * browser does not download it until the visitor switches theme.
+ *
+ * ```mdx
+ * <ThemedFigure
+ *   dark="/work/my-study/diagram-dark.svg"
+ *   light="/work/my-study/diagram-light.svg"
+ *   width={1200}
+ *   height={700}
+ *   alt="What the diagram shows"
+ *   caption="Visible caption."
+ * />
+ * ```
+ *
+ * Add `wide` to let the figure use the full article width instead of the
+ * reading measure.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  /** Dark-theme version: a URL in `public/` or an imported image. */
+  dark: string | ImageMetadata;
+  /** Light-theme version: a URL in `public/` or an imported image. */
+  light: string | ImageMetadata;
+  /** Intrinsic width. Required for URL sources; ignored for imported images. */
+  width?: number;
+  /** Intrinsic height. Required for URL sources; ignored for imported images. */
+  height?: number;
+  /** Describes what the image shows, for screen readers. */
+  alt: string;
+  /** Visible caption under the image. */
+  caption: string;
+  /** Use the full article width instead of the reading measure. */
+  wide?: boolean;
+  /** `sizes` for imported images. */
+  sizes?: string;
+}
+
+const { dark, light, width, height, alt, caption, wide = false, sizes = '(min-width: 75rem) 1072px, 100vw' } =
+  Astro.props;
+
+const versions = [
+  { src: dark, theme: 'ps-theme--dark' },
+  { src: light, theme: 'ps-theme--light' },
+] as const;
+---
+
+<figure class:list={['ps-figure', { 'ps-wide': wide }]}>
+  <div class="ps-figure__frame">
+    {
+      versions.map(({ src, theme }) =>
+        typeof src === 'string' ? (
+          <img class={theme} src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+        ) : (
+          <Image class={theme} src={src} alt={alt} widths={[720, 1080, 1600, 2400]} sizes={sizes} loading="lazy" />
+        ),
+      )
+    }
+  </div>
+  <figcaption class="ps-figure__caption">{caption}</figcaption>
+</figure>

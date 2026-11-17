@@ -62,6 +62,7 @@ Adding a case study takes **one content file plus its images**. No code changes:
    outcome: "Exceeded pilot goals, 500+ monthly active users"
    tags: [Platform, AI]
    cover: ./cover.png
+   coverLight: ./cover-light.png   # optional: light-theme version of the cover
    coverAlt: "What the cover image shows"
    ---
 
@@ -85,12 +86,39 @@ Rules the build enforces:
 - `title`, `description`, `publishDate`, `role`, `company`, `sector`, `timeframe`, `outcome` and `tags` are required. `team` is optional.
 - `tags` MUST be one or more of `Platform`, `Payments`, `AI` and `Founder`.
 - `coverAlt` is required when `cover` is set.
+- `coverLight` is optional. When it is set, `cover` is the dark-theme version, and the case-study
+  page and its work cards show the version that matches the visitor's theme. `coverLight` needs `cover`.
 - The `##` headings MUST be the seven required sections in the order above. `What I'd do differently` MAY follow at the end.
 
 Rules the build cannot enforce (check them yourself):
 
 - Copy follows `positioning.md`: voice, the numbers rule and the red-line words.
 - Do not commit an unfinished case study. Files whose names start with `_sample` are ignored by git, so you can use that prefix for drafts and tests.
+
+### Add figures, cards and use cases to a case study
+
+Name the content file `index.mdx` (not `index.md`) to use these components. Import each one at the
+top of the file, below the frontmatter, for example
+`import ThemedFigure from '../../../components/ThemedFigure.astro';`. Each component's file has a
+full example in its header comment.
+
+| Component | Use it for |
+|---|---|
+| `ThemedFigure` | An image in a dark and a light version, with alt text and a visible caption. The page shows the version that matches the theme. Add `wide` to use the full article width. |
+| `CardGrid` | A grid of cards at the full article width: three columns on desktop, fewer on smaller screens. |
+| `Card` | A plain card inside `CardGrid`: an `h3` title and a short text in the muted colour. |
+| `AreaCard` | A card inside `CardGrid` with chips, a title, an outcome sentence and one line per item (lead, text, small note). Add `hub` for the card that oversees the others: it spans the row and has an accent border. |
+| `UseCaseRow` | A worked example: a `ThemedFigure` beside an `h3` title, optional intro text and labelled steps. Add `flip` to put the figure on the right. On narrow screens the figure sits above the text. |
+| `FeatureRow` | One paragraph beside the screenshot that shows it (single image, no theme pair). |
+
+Rules for images in these components:
+
+- Files that MUST be served unchanged, such as animated SVG diagrams, go in `public/work/<slug>/`.
+  Pass their URL (`/work/<slug>/name.svg`) with `width` and `height` set to the SVG's `viewBox` size.
+  Do not edit, optimise or minify them. Do not inline them: ids inside the files would clash.
+- Screenshots go next to the content file. Import them and pass the import, so Astro compresses them.
+- Every figure MUST have alt text and a caption.
+- Images are never cropped: they keep their own aspect ratio.
 
 ### Add a video to a case study
 
@@ -158,7 +186,7 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `src/content/work/` | Case studies, one folder each. |
 | `src/content.config.ts` | The case-study schema: required fields and allowed tags. |
 | `src/data/resume.ts` | Resume content. |
-| `src/components/` | Reusable pieces: navigation, cards, buttons, video, contact block. |
+| `src/components/` | Reusable pieces: navigation, cards, buttons, video, contact block, and the case-study figures, cards and use-case rows. |
 | `src/layouts/BaseLayout.astro` | The shell every page shares. |
 | `src/lib/` | Helpers: case-study sorting and section checks, social preview images. |
 | `src/styles/tokens.css` | Design tokens from the design system: colours, spacing, radii, fonts. Contrast is checked against WCAG AA; re-check if you change a colour. |
@@ -168,6 +196,7 @@ Check progress in the repository's **Actions** tab. The live site updates a minu
 | `scripts/` | One-off helper scripts, such as the favicon generator. |
 | `src/site.config.ts` | Site-wide settings. |
 | `public/` | Files served as-is: resume PDF, videos, favicon, `robots.txt`. |
+| `public/work/<slug>/` | Case-study files that MUST be served unchanged, such as animated SVG diagrams. |
 
 ### Commands
 

@@ -1,0 +1,23 @@
+---
+/**
+ * Card: the system's CardGrid card (`ps-card`): an `h3` title, then the
+ * text in the muted colour. Use it inside `CardGrid`.
+ *
+ * ```mdx
+ * <Card title="Title" text="One or two sentences." />
+ * ```
+ */
+interface Props {
+  /** Card title, shown as an `h3`. */
+  title: string;
+  /** Card text, shown in the muted colour. */
+  text: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<article class="ps-card">
+  <h3 class="ps-h3 ps-card__title">{title}</h3>
+  <p class="ps-card__text">{text}</p>
+</article>

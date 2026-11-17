@@ -1,0 +1,69 @@
+---
+/**
+ * UseCaseRow: a worked example beside the figure that shows it. Sized like
+ * FeatureRow: from 800px the figure takes 60% of the row. The text has an `h3`
+ * title, optional intro paragraphs (the slot), then labelled steps: a small
+ * mono label in the accent colour above each step's text.
+ *
+ * The row reacts to its own width (container query): from 700px it shows
+ * figure and text side by side; narrower, the figure sits above the text.
+ * Add `flip` to put the figure on the right. The figure is a `ThemedFigure`
+ * pair, so it follows the site theme.
+ *
+ * ```mdx
+ * <UseCaseRow
+ *   title="Use case 1: Name"
+ *   figure={{ dark: '/a-dark.svg', light: '/a-light.svg', width: 960, height: 600, alt: '…', caption: '…' }}
+ *   steps={[{ label: 'Step', text: 'What happens.' }]}
+ * >
+ *
+ * Optional intro paragraph.
+ *
+ * </UseCaseRow>
+ * ```
+ */
+import ThemedFigure from './ThemedFigure.astro';
+import type { ComponentProps } from 'astro/types';
+
+interface Step {
+  /** Short label, shown in small mono capitals. */
+  label: string;
+  /** What happens in this step. */
+  text: string;
+}
+
+interface Props {
+  /** Row title, shown as an `h3`. */
+  title: string;
+  /** The figure (dark and light versions, alt text and caption). */
+  figure: ComponentProps<typeof ThemedFigure>;
+  /** One or more labelled steps. */
+  steps: Step[];
+  /** Put the figure on the right instead of the left. */
+  flip?: boolean;
+}
+
+const { title, figure, steps, flip = false } = Astro.props;
+---
+
+<div class:list={['ps-usecase', 'ps-wide', { 'ps-usecase--flip': flip }]}>
+  <div class="ps-usecase__inner">
+    <div class="ps-usecase__media">
+      <ThemedFigure {...figure} />
+    </div>
+    <div class="ps-usecase__text">
+      <h3 class="ps-h3">{title}</h3>
+      <slot />
+      <dl class="ps-steps">
+        {
+          steps.map(({ label, text }) => (
+            <div>
+              <dt>{label}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</div>

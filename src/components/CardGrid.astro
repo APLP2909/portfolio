@@ -1,0 +1,17 @@
+---
+/**
+ * CardGrid for case studies: the system's CardGrid (`ps-grid ps-grid--wide`,
+ * 340px minimum per card, so three columns at full article width) that may
+ * use the full article width. Put `Card` or `AreaCard` components inside.
+ *
+ * ```mdx
+ * <CardGrid>
+ *   <Card title="Title" text="Text in the muted colour." />
+ * </CardGrid>
+ * ```
+ */
+---
+
+<div class="ps-grid ps-grid--wide ps-wide ps-card-grid">
+  <slot />
+</div>

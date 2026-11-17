@@ -49,16 +49,28 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
             <LoopVideo {...d.video} class="ps-media--4x3" />
           ) : (
             d.cover && (
-              <div class="ps-media ps-media--4x3">
-                <Zoomable
-                  src={d.cover}
-                  alt={d.coverAlt ?? ''}
-                  widths={[480, 720, 1080, 1440]}
-                  sizes="(min-width: 64rem) 540px, (min-width: 45rem) 720px, 100vw"
-                  loading="eager"
-                  fetchpriority="high"
-                />
-              </div>
+              <>
+                <div class:list={['ps-media ps-media--4x3', { 'ps-theme--dark': d.coverLight }]}>
+                  <Zoomable
+                    src={d.cover}
+                    alt={d.coverAlt ?? ''}
+                    widths={[480, 720, 1080, 1440]}
+                    sizes="(min-width: 64rem) 540px, (min-width: 45rem) 720px, 100vw"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+                {d.coverLight && (
+                  <div class="ps-media ps-media--4x3 ps-theme--light">
+                    <Zoomable
+                      src={d.coverLight}
+                      alt={d.coverAlt ?? ''}
+                      widths={[480, 720, 1080, 1440]}
+                      sizes="(min-width: 64rem) 540px, (min-width: 45rem) 720px, 100vw"
+                    />
+                  </div>
+                )}
+              </>
             )
           )}
         </div>
@@ -126,13 +138,17 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
     padding-top: 0;
   }
 
-  .article :global(p),
-  .article :global(li) {
+  /* Running text only: paragraphs and Markdown lists in the article, and the
+     text beside a FeatureRow image. Cards, figures and use-case rows inside
+     the article keep their own component styles. */
+  .article > :global(p),
+  .article > :global(ul > li),
+  .article :global(.ps-feature__text p) {
     font-size: 18px;
     line-height: 1.65;
   }
 
-  .article :global(ul) {
+  .article > :global(ul) {
     padding-left: 1.2em;
     list-style: disc;
   }
@@ -178,13 +194,13 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
   }
 
   /*
-   * From 1024px all facts share ONE row with EQUAL visible gaps (Aadeel,
+   * From 1000px all facts share ONE row with EQUAL visible gaps (Aadeel,
    * 10 Nov 2026). Long values wrap inside their fact, which normally leaves
    * empty space at the end of their lines; the script below trims each fact
    * to its longest line, and `space-between` then shares the leftover width
-   * equally between the facts. Below 1024px the facts use the two-column grid.
+   * equally between the facts. Below 1000px the facts use the two-column grid.
    */
-  @media (min-width: 64rem) {
+  @media (min-width: 1000px) {
     .facts-strip {
       display: flex;
       flex-wrap: nowrap;
@@ -198,8 +214,9 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
     }
   }
 
-  /* Story text stays at the reading measure; feature rows use the full width. */
-  .article > :global(:not(.ps-feature)) {
+  /* Story text stays at the reading measure; feature rows and blocks marked
+     `ps-wide` (card grids, use-case rows, full-width figures) use the full width. */
+  .article > :global(:not(.ps-feature, .ps-wide)) {
     max-width: var(--measure);
   }
 </style>
@@ -208,11 +225,11 @@ const shownFacts = facts.filter(([, value]) => value) as [string, string][];
   /**
    * Trims each fact in the facts strip to the width of its longest text line,
    * so the strip's `justify-content: space-between` gives equal visible gaps.
-   * Runs on load and whenever the strip changes width. Only acts from 1024px,
+   * Runs on load and whenever the strip changes width. Only acts from 1000px,
    * where the strip is a single row.
    */
   const strip = document.querySelector<HTMLElement>('.facts-strip');
-  const wide = window.matchMedia('(min-width: 64rem)');
+  const wide = window.matchMedia('(min-width: 1000px)');
 
   const longestLine = (el: HTMLElement) => {
     let max = 0;
