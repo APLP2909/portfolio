@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="t d" id="arnie-flow-escalation">
+<title id="t">Escalation routing</title>
+<desc id="d">Animated workflow of escalation routing. Every agent escalates to Oprah first, for example Paddington when a threshold is breached. Oprah's escalation framework routes each escalation to a tier: L3 interrupts me, L2 is flagged for today and L1 is queued.</desc>
+<style>
+text{font-family:"IBM Plex Sans",system-ui,sans-serif;fill:#1d1d1f}
+.ttl{font:700 20px "Archivo","IBM Plex Sans",system-ui,sans-serif;letter-spacing:-.01em}
+.eyebrow{font:500 11px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;fill:#5c5c66}
+.tile{font:700 16px "Archivo","IBM Plex Sans",system-ui,sans-serif;fill:#7a3fc8}
+.row{font:400 17px "IBM Plex Sans",system-ui,sans-serif}
+.cap{font:500 18px "IBM Plex Sans",system-ui,sans-serif}
+.lg{font:400 13px "IBM Plex Mono",ui-monospace,monospace;fill:#5c5c66}
+.small{font:400 15px "IBM Plex Sans",system-ui,sans-serif}
+.lab{font:500 11px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;fill:#5c5c66}
+#cam{animation:cam 12.0s linear infinite}
+.cap-static{opacity:0}
+.paused *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){
+ *{animation:none!important}
+ #cam{transform:translate(30px,80px) scale(0.7)}
+ .cap{opacity:0!important}
+ .cap-static{opacity:1}
+}
+@keyframes w1{0.0%{opacity:0}1.25%{opacity:0}2.5%{opacity:1}14.167%{opacity:1}15.417%{opacity:0}100.0%{opacity:0}}
+@keyframes p2{0%,12.5%{stroke-dashoffset:8;opacity:0}12.51%{stroke-dashoffset:8;opacity:1}20.833%{stroke-dashoffset:-108;opacity:1}20.843%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes w3{0.0%{opacity:0}6.25%{opacity:0}7.5%{opacity:1}19.167%{opacity:1}20.417%{opacity:0}100.0%{opacity:0}}
+@keyframes p4{0%,17.5%{stroke-dashoffset:8;opacity:0}17.51%{stroke-dashoffset:8;opacity:1}25.833%{stroke-dashoffset:-108;opacity:1}25.843%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes w5{0.0%{opacity:0}28.75%{opacity:0}30.0%{opacity:1}43.333%{opacity:1}44.583%{opacity:0}100.0%{opacity:0}}
+@keyframes p6{0%,31.667%{stroke-dashoffset:8;opacity:0}31.677000000000003%{stroke-dashoffset:8;opacity:1}40.0%{stroke-dashoffset:-108;opacity:1}40.01%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes w7{0.0%{opacity:0}37.083%{opacity:0}38.333%{opacity:1}48.333%{opacity:1}49.583%{opacity:0}100.0%{opacity:0}}
+@keyframes w8{0.0%{opacity:0}45.417%{opacity:0}46.667%{opacity:1}60.0%{opacity:1}61.25%{opacity:0}100.0%{opacity:0}}
+@keyframes p9{0%,48.333%{stroke-dashoffset:8;opacity:0}48.342999999999996%{stroke-dashoffset:8;opacity:1}56.667%{stroke-dashoffset:-108;opacity:1}56.677%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes w10{0.0%{opacity:0}53.75%{opacity:0}55.0%{opacity:1}65.0%{opacity:1}66.25%{opacity:0}100.0%{opacity:0}}
+@keyframes w11{0.0%{opacity:0}62.083%{opacity:0}63.333%{opacity:1}76.667%{opacity:1}77.917%{opacity:0}100.0%{opacity:0}}
+@keyframes p12{0%,65.0%{stroke-dashoffset:8;opacity:0}65.01%{stroke-dashoffset:8;opacity:1}73.333%{stroke-dashoffset:-108;opacity:1}73.343%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes w13{0.0%{opacity:0}70.417%{opacity:0}71.667%{opacity:1}81.667%{opacity:1}82.917%{opacity:0}100.0%{opacity:0}}
+@keyframes cam{0.0%{transform:translate(0px,0px);animation-timing-function:ease-in-out}23.333%{transform:translate(0px,0px);animation-timing-function:ease-in-out}28.333%{transform:translate(-400px,0px);animation-timing-function:ease-in-out}85.0%{transform:translate(-400px,0px);animation-timing-function:ease-in-out}91.667%{transform:translate(0px,0px);animation-timing-function:ease-in-out}100.0%{transform:translate(0px,0px);animation-timing-function:ease-in-out}}
+@keyframes w14{0.0%{opacity:0}0.0%{opacity:1}24.167%{opacity:1}25.833%{opacity:0}100.0%{opacity:0}}
+@keyframes w15{0.0%{opacity:0}27.5%{opacity:0}29.167%{opacity:1}45.833%{opacity:1}47.5%{opacity:0}100.0%{opacity:0}}
+@keyframes w16{0.0%{opacity:0}45.0%{opacity:0}46.667%{opacity:1}62.5%{opacity:1}64.167%{opacity:0}100.0%{opacity:0}}
+@keyframes w17{0.0%{opacity:0}61.667%{opacity:0}63.333%{opacity:1}85.833%{opacity:1}87.5%{opacity:0}100.0%{opacity:0}}
+</style>
+<defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="rgba(0,0,0,0.09)"/></pattern>
+<clipPath id="win"><rect width="960" height="540"/></clipPath></defs>
+<rect width="960" height="600" fill="#f9f9fb"/>
+<defs><radialGradient id="h1" cx="85%" cy="0%" r="55%"><stop offset="0" stop-color="#7a3fc8" stop-opacity="0.08"/><stop offset="1" stop-color="#7a3fc8" stop-opacity="0"/></radialGradient><radialGradient id="h2" cx="10%" cy="0%" r="55%"><stop offset="0" stop-color="#2f6fd0" stop-opacity="0.08"/><stop offset="1" stop-color="#2f6fd0" stop-opacity="0"/></radialGradient></defs><rect width="960" height="600" fill="url(#h1)"/><rect width="960" height="600" fill="url(#h2)"/>
+<g clip-path="url(#win)"><g id="cam">
+<rect x="-300" y="-300" width="2600" height="1300" fill="url(#dots)"/>
+<rect x="420" y="130" width="320" height="202" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="420" y="142" width="5" height="178" rx="2.5" fill="#2f6fd0"/><rect x="438" y="140" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="455" y="163" text-anchor="middle" class="tile">O</text><text x="482" y="155" class="ttl">Oprah</text><text x="482" y="172" class="eyebrow">ESCALATION FRAMEWORK · MODE 10</text>
+<rect x="40" y="100" width="300" height="96" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="40" y="112" width="5" height="72" rx="2.5" fill="#2f6fd0"/><rect x="58" y="110" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="75" y="133" text-anchor="middle" class="tile">P</text><text x="102" y="125" class="ttl">Paddington</text><text x="102" y="142" class="eyebrow">CUSTOMER ADVOCATE · MODE 10</text>
+<rect x="56" y="150" width="268" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="72" y="172.5" class="row">Threshold breached</text><circle cx="310" cy="167.0" r="4" fill="#5c5c66"/>
+<rect x="56" y="150" width="268" height="34" rx="9" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w1 12.0s linear infinite;"/>
+<path d="M326,167 C386,167 360,156 420,156" fill="none" stroke="rgba(0,0,0,0.30)" stroke-width="2"/><path d="M326,167 C386,167 360,156 420,156" pathLength="100" fill="none" stroke="#7a3fc8" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p2 12.0s linear infinite;"/>
+<rect x="40" y="230" width="300" height="96" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="40" y="242" width="5" height="72" rx="2.5" fill="#2f6fd0"/><rect x="58" y="240" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="75" y="263" text-anchor="middle" class="tile" style="font-size:13px">A</text><text x="102" y="255" class="ttl">Any agent</text><text x="102" y="272" class="eyebrow">ESCALATION FLAG</text>
+<rect x="56" y="280" width="268" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="72" y="302.5" class="row">Flags an escalation</text><circle cx="310" cy="297.0" r="4" fill="#5c5c66"/>
+<rect x="56" y="280" width="268" height="34" rx="9" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w3 12.0s linear infinite;"/>
+<path d="M326,297 C386,297 360,156 420,156" fill="none" stroke="rgba(0,0,0,0.30)" stroke-width="2"/><path d="M326,297 C386,297 360,156 420,156" pathLength="100" fill="none" stroke="#7a3fc8" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p4 12.0s linear infinite;"/>
+<rect x="436" y="194" width="288" height="38" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="452" y="218.5" class="row">L3 · Interrupt Aadeel</text><circle cx="710" cy="213.0" r="4" fill="#5c5c66"/>
+<rect x="436" y="194" width="288" height="38" rx="9" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w5 12.0s linear infinite;"/>
+<rect x="840" y="70" width="300" height="96" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="840" y="82" width="5" height="72" rx="2.5" fill="#1d1d1f"/><rect x="858" y="80" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="875" y="103" text-anchor="middle" class="tile" style="font-size:13px">L3</text><text x="902" y="95" class="ttl">Interrupt</text><text x="902" y="112" class="eyebrow">L3 · AADEEL</text>
+<rect x="856" y="120" width="268" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="872" y="142.5" class="row">Interrupts Aadeel</text><circle cx="1110" cy="137.0" r="4" fill="#5c5c66"/>
+<path d="M726,213 C786,213 780,94 840,94" fill="none" stroke="rgba(0,0,0,0.30)" stroke-width="2"/><path d="M726,213 C786,213 780,94 840,94" pathLength="100" fill="none" stroke="#7a3fc8" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p6 12.0s linear infinite;"/>
+<rect x="840" y="70" width="300" height="96" rx="14" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w7 12.0s linear infinite;"/>
+<rect x="436" y="240" width="288" height="38" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="452" y="264.5" class="row">L2 · Flag today</text><circle cx="710" cy="259.0" r="4" fill="#5c5c66"/>
+<rect x="436" y="240" width="288" height="38" rx="9" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w8 12.0s linear infinite;"/>
+<rect x="840" y="180" width="300" height="96" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="840" y="192" width="5" height="72" rx="2.5" fill="rgba(0,0,0,0.30)"/><rect x="858" y="190" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="875" y="213" text-anchor="middle" class="tile" style="font-size:13px">L2</text><text x="902" y="205" class="ttl">Flag today</text><text x="902" y="222" class="eyebrow">L2</text>
+<rect x="856" y="230" width="268" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="872" y="252.5" class="row">Flagged today</text><circle cx="1110" cy="247.0" r="4" fill="#5c5c66"/>
+<path d="M726,259 C786,259 780,204 840,204" fill="none" stroke="rgba(0,0,0,0.30)" stroke-width="2"/><path d="M726,259 C786,259 780,204 840,204" pathLength="100" fill="none" stroke="#7a3fc8" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p9 12.0s linear infinite;"/>
+<rect x="840" y="180" width="300" height="96" rx="14" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w10 12.0s linear infinite;"/>
+<rect x="436" y="286" width="288" height="38" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="452" y="310.5" class="row">L1 · Queue</text><circle cx="710" cy="305.0" r="4" fill="#5c5c66"/>
+<rect x="436" y="286" width="288" height="38" rx="9" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w11 12.0s linear infinite;"/>
+<rect x="840" y="290" width="300" height="96" rx="14" fill="#ffffff" stroke="rgba(0,0,0,0.13)"/><rect x="840" y="302" width="5" height="72" rx="2.5" fill="rgba(0,0,0,0.30)"/><rect x="858" y="300" width="34" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="875" y="323" text-anchor="middle" class="tile" style="font-size:13px">L1</text><text x="902" y="315" class="ttl">Queue</text><text x="902" y="332" class="eyebrow">L1</text>
+<rect x="856" y="340" width="268" height="34" rx="9" fill="#f2f2f6" stroke="rgba(0,0,0,0.13)"/><text x="872" y="362.5" class="row">Waits in the queue</text><circle cx="1110" cy="357.0" r="4" fill="#5c5c66"/>
+<path d="M726,305 C786,305 780,314 840,314" fill="none" stroke="rgba(0,0,0,0.30)" stroke-width="2"/><path d="M726,305 C786,305 780,314 840,314" pathLength="100" fill="none" stroke="#7a3fc8" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p12 12.0s linear infinite;"/>
+<rect x="840" y="290" width="300" height="96" rx="14" fill="rgba(122,63,200,0.10)" stroke="#7a3fc8" stroke-width="2.5" style="opacity:0;animation:w13 12.0s linear infinite;"/>
+</g></g>
+<rect y="540" width="960" height="60" fill="#ffffff"/><line x1="0" x2="960" y1="540" y2="540" stroke="rgba(0,0,0,0.13)"/>
+<text x="32" y="578" class="cap" style="opacity:0;animation:w14 12.0s linear infinite;">Every agent escalates to Oprah first.</text>
+<text x="32" y="578" class="cap" style="opacity:0;animation:w15 12.0s linear infinite;">L3: Oprah interrupts Aadeel.</text>
+<text x="32" y="578" class="cap" style="opacity:0;animation:w16 12.0s linear infinite;">L2: Oprah flags it for today.</text>
+<text x="32" y="578" class="cap" style="opacity:0;animation:w17 12.0s linear infinite;">L1: Oprah queues it.</text>
+<text x="32" y="578" class="cap cap-static">Every agent escalates to Oprah first. Oprah routes it: interrupt, flag today or queue.</text>
+<rect x="760" y="568" width="4" height="16" rx="2" fill="#2f6fd0"/><text x="772" y="581" class="lg">Agent</text><rect x="840" y="568" width="4" height="16" rx="2" fill="#1d1d1f"/><text x="852" y="581" class="lg">Aadeel</text>
+</svg>

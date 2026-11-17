@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="t d" id="arnie-architecture">
+<title id="t">Arnie OS architecture</title>
+<desc id="d">Diagram of Arnie OS. I sit at the top and decide and approve. Oprah, the chief of staff, is the escalation router and decides whether to interrupt me or queue an item. Nine specialist agents sit below her: Wade for communication, Paddington for customer advocacy, Angela for market intelligence, Monica for planning, Jacinda for people, Lisa as analyst, Eminem for narrative, Tony for product creation and Shuri for research. Wade, Eminem and Tony wait for my approval. The agents read from connected tools including Gmail, Slack, Google Calendar, Jira, Slite, Tableau, Mixpanel, Dovetail, HubSpot, Intercom, Figma, Miro, Google Drive and web search. Mary, the knowledge organiser, files their outputs into the Slite collections.</desc>
+<style>
+text{font-family:"IBM Plex Sans",system-ui,sans-serif;fill:#e6edf2}
+.ttl{font:700 20px "Archivo","IBM Plex Sans",system-ui,sans-serif;letter-spacing:-.01em}
+.eyebrow{font:500 11px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;fill:#9aa7b2}
+.tile{font:700 16px "Archivo","IBM Plex Sans",system-ui,sans-serif;fill:#38e1d0}
+.row{font:400 17px "IBM Plex Sans",system-ui,sans-serif}
+.cap{font:500 18px "IBM Plex Sans",system-ui,sans-serif}
+.lg{font:400 13px "IBM Plex Mono",ui-monospace,monospace;fill:#9aa7b2}
+.small{font:400 15px "IBM Plex Sans",system-ui,sans-serif}
+.lab{font:500 11px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;fill:#9aa7b2}
+.eyebrow{font-size:10px;letter-spacing:.03em}
+.paused *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@keyframes p1{0%,4.0%{stroke-dashoffset:8;opacity:0}4.01%{stroke-dashoffset:8;opacity:1}16.0%{stroke-dashoffset:-108;opacity:1}16.01%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes p2{0%,18.0%{stroke-dashoffset:8;opacity:0}18.01%{stroke-dashoffset:8;opacity:1}28.0%{stroke-dashoffset:-108;opacity:1}28.01%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes p3{0%,4.0%{stroke-dashoffset:8;opacity:0}4.01%{stroke-dashoffset:8;opacity:1}14.0%{stroke-dashoffset:-108;opacity:1}14.01%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes p4{0%,45.0%{stroke-dashoffset:8;opacity:0}45.01%{stroke-dashoffset:8;opacity:1}58.0%{stroke-dashoffset:-108;opacity:1}58.01%,100%{stroke-dashoffset:-108;opacity:0}}
+@keyframes p5{0%,60.0%{stroke-dashoffset:8;opacity:0}60.01%{stroke-dashoffset:8;opacity:1}82.0%{stroke-dashoffset:-108;opacity:1}82.01%,100%{stroke-dashoffset:-108;opacity:0}}
+</style>
+<rect width="1200" height="700" fill="#0b1117"/>
+<defs><radialGradient id="h1" cx="85%" cy="0%" r="55%"><stop offset="0" stop-color="#a862e0" stop-opacity="0.18"/><stop offset="1" stop-color="#a862e0" stop-opacity="0"/></radialGradient><radialGradient id="h2" cx="10%" cy="0%" r="55%"><stop offset="0" stop-color="#38e1d0" stop-opacity="0.14"/><stop offset="1" stop-color="#38e1d0" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="700" fill="url(#h1)"/><rect width="1200" height="700" fill="url(#h2)"/>
+<text x="30" y="104" class="lab">CONNECTED TOOLS</text>
+<rect x="30" y="116" width="220" height="440" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/>
+<circle cx="52" cy="143" r="3.5" fill="#9aa7b2"/><text x="66" y="148" class="small">Gmail</text>
+<circle cx="52" cy="173" r="3.5" fill="#9aa7b2"/><text x="66" y="178" class="small">Slack</text>
+<circle cx="52" cy="203" r="3.5" fill="#9aa7b2"/><text x="66" y="208" class="small">Google Calendar</text>
+<circle cx="52" cy="233" r="3.5" fill="#9aa7b2"/><text x="66" y="238" class="small">Jira</text>
+<circle cx="52" cy="263" r="3.5" fill="#9aa7b2"/><text x="66" y="268" class="small">Slite</text>
+<circle cx="52" cy="293" r="3.5" fill="#9aa7b2"/><text x="66" y="298" class="small">Tableau</text>
+<circle cx="52" cy="323" r="3.5" fill="#9aa7b2"/><text x="66" y="328" class="small">Mixpanel</text>
+<circle cx="52" cy="353" r="3.5" fill="#9aa7b2"/><text x="66" y="358" class="small">Dovetail</text>
+<circle cx="52" cy="383" r="3.5" fill="#9aa7b2"/><text x="66" y="388" class="small">HubSpot</text>
+<circle cx="52" cy="413" r="3.5" fill="#9aa7b2"/><text x="66" y="418" class="small">Intercom</text>
+<circle cx="52" cy="443" r="3.5" fill="#9aa7b2"/><text x="66" y="448" class="small">Figma</text>
+<circle cx="52" cy="473" r="3.5" fill="#9aa7b2"/><text x="66" y="478" class="small">Miro</text>
+<circle cx="52" cy="503" r="3.5" fill="#9aa7b2"/><text x="66" y="508" class="small">Google Drive</text>
+<circle cx="52" cy="533" r="3.5" fill="#9aa7b2"/><text x="66" y="538" class="small">Web search</text>
+<text x="950" y="104" class="lab">SLITE COLLECTIONS</text>
+<rect x="950" y="116" width="220" height="236" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/>
+<circle cx="972" cy="147" r="3.5" fill="#9aa7b2"/><text x="986" y="152" class="small">OS Actions</text>
+<circle cx="972" cy="183" r="3.5" fill="#9aa7b2"/><text x="986" y="188" class="small">Customer Signals</text>
+<circle cx="972" cy="219" r="3.5" fill="#9aa7b2"/><text x="986" y="224" class="small">Intelligence Briefings</text>
+<circle cx="972" cy="255" r="3.5" fill="#9aa7b2"/><text x="986" y="260" class="small">Decisions &amp; Risks</text>
+<circle cx="972" cy="291" r="3.5" fill="#9aa7b2"/><text x="986" y="296" class="small">Tony Artifacts</text>
+<circle cx="972" cy="327" r="3.5" fill="#9aa7b2"/><text x="986" y="332" class="small">Team Signals</text>
+<rect x="470" y="24" width="260" height="62" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="470" y="36" width="5" height="38" rx="2.5" fill="#a862e0"/><text x="494" y="52" class="ttl">Aadeel</text><text x="494" y="70" class="eyebrow">DECIDE AND APPROVE</text>
+<rect x="450" y="128" width="300" height="84" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="450" y="140" width="5" height="60" rx="2.5" fill="#6fb6ff"/><rect x="468" y="138" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="485" y="161" text-anchor="middle" class="tile">O</text><text x="512" y="153" class="ttl">Oprah</text><text x="512" y="170" class="eyebrow">CHIEF OF STAFF · ESCALATION ROUTER</text>
+<rect x="266" y="246" width="668" height="288" rx="18" fill="none" stroke="rgba(230,237,242,0.28)" stroke-dasharray="4 6"/><text x="286" y="270" class="lab">SPECIALIST AGENTS</text>
+<rect x="286" y="284" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="286" y="296" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="304" y="294" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="321" y="317" text-anchor="middle" class="tile">W</text><text x="348" y="309" class="ttl">Wade</text><text x="348" y="326" class="eyebrow">COMMUNICATION</text>
+<circle cx="466" cy="300" r="6" fill="#a862e0"/>
+<rect x="498" y="284" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="498" y="296" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="516" y="294" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="533" y="317" text-anchor="middle" class="tile">P</text><text x="560" y="309" class="ttl">Paddington</text><text x="560" y="326" class="eyebrow">CUSTOMER ADVOCATE</text>
+<rect x="710" y="284" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="710" y="296" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="728" y="294" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="745" y="317" text-anchor="middle" class="tile">A</text><text x="772" y="309" class="ttl">Angela</text><text x="772" y="326" class="eyebrow">MARKET INTELLIGENCE</text>
+<rect x="286" y="364" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="286" y="376" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="304" y="374" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="321" y="397" text-anchor="middle" class="tile">M</text><text x="348" y="389" class="ttl">Monica</text><text x="348" y="406" class="eyebrow">PLANNING</text>
+<rect x="498" y="364" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="498" y="376" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="516" y="374" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="533" y="397" text-anchor="middle" class="tile">J</text><text x="560" y="389" class="ttl">Jacinda</text><text x="560" y="406" class="eyebrow">PEOPLE</text>
+<rect x="710" y="364" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="710" y="376" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="728" y="374" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="745" y="397" text-anchor="middle" class="tile">L</text><text x="772" y="389" class="ttl">Lisa</text><text x="772" y="406" class="eyebrow">ANALYST</text>
+<rect x="286" y="444" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="286" y="456" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="304" y="454" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="321" y="477" text-anchor="middle" class="tile">E</text><text x="348" y="469" class="ttl">Eminem</text><text x="348" y="486" class="eyebrow">NARRATIVE</text>
+<circle cx="466" cy="460" r="6" fill="#a862e0"/>
+<rect x="498" y="444" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="498" y="456" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="516" y="454" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="533" y="477" text-anchor="middle" class="tile">T</text><text x="560" y="469" class="ttl">Tony</text><text x="560" y="486" class="eyebrow">PRODUCT CREATION</text>
+<circle cx="678" cy="460" r="6" fill="#a862e0"/>
+<rect x="710" y="444" width="196" height="66" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="710" y="456" width="5" height="42" rx="2.5" fill="#6fb6ff"/><rect x="728" y="454" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="745" y="477" text-anchor="middle" class="tile">S</text><text x="772" y="469" class="ttl">Shuri</text><text x="772" y="486" class="eyebrow">RESEARCH EXPERT</text>
+<rect x="450" y="586" width="300" height="84" rx="14" fill="#121a22" stroke="rgba(230,237,242,0.13)"/><rect x="450" y="598" width="5" height="60" rx="2.5" fill="#6fb6ff"/><rect x="468" y="596" width="34" height="34" rx="9" fill="#18222c" stroke="rgba(230,237,242,0.13)"/><text x="485" y="619" text-anchor="middle" class="tile">M</text><text x="512" y="611" class="ttl">Mary</text><text x="512" y="628" class="eyebrow">KNOWLEDGE ORGANISER</text>
+<path d="M600,86 L600,128" fill="none" stroke="rgba(230,237,242,0.28)" stroke-width="2"/><path d="M600,86 L600,128" pathLength="100" fill="none" stroke="#38e1d0" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p1 10.0s linear infinite;"/>
+<text x="612" y="112" class="lab">INTERRUPT · FLAG · QUEUE</text>
+<path d="M600,212 L600,246" fill="none" stroke="rgba(230,237,242,0.28)" stroke-width="2"/><path d="M600,212 L600,246" pathLength="100" fill="none" stroke="#38e1d0" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p2 10.0s linear infinite;"/>
+<text x="612" y="234" class="lab">ROUTES · ESCALATIONS</text>
+<path d="M250,390 L266,390" fill="none" stroke="rgba(230,237,242,0.28)" stroke-width="2"/><path d="M250,390 L266,390" pathLength="100" fill="none" stroke="#38e1d0" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p3 10.0s linear infinite;"/>
+<path d="M600,534 L600,586" fill="none" stroke="rgba(230,237,242,0.28)" stroke-width="2" stroke-dasharray="6 6"/><path d="M600,534 L600,586" pathLength="100" fill="none" stroke="#38e1d0" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p4 10.0s linear infinite;"/>
+<text x="612" y="566" class="lab">FILING</text>
+<path d="M750,628 L1040,628 Q1060,628 1060,608 L1060,356" fill="none" stroke="rgba(230,237,242,0.28)" stroke-width="2" stroke-dasharray="6 6"/><path d="M750,628 L1040,628 Q1060,628 1060,608 L1060,356" pathLength="100" fill="none" stroke="#38e1d0" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 300" style="opacity:0;animation:p5 10.0s linear infinite;"/>
+<circle cx="42" cy="618" r="6" fill="#a862e0"/><text x="56" y="623" class="lg">Waits for Aadeel&#8217;s approval</text>
+<line x1="30" x2="50" y1="648" y2="648" stroke="rgba(230,237,242,0.28)" stroke-width="2" stroke-dasharray="6 6"/><text x="56" y="653" class="lg">Filed by Mary</text>
+<line x1="30" x2="50" y1="676" y2="676" stroke="rgba(230,237,242,0.28)" stroke-width="2"/><text x="56" y="681" class="lg">Routes and escalations</text>
+</svg>

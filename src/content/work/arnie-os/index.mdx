@@ -1,0 +1,315 @@
+---
+title: "Arnie OS: 11 AI agents for research, PRDs and reporting"
+description: "I built Arnie OS, a system of 11 AI agents that supports my product workflow. It researches, creates content, builds prototypes and produces my reports."
+publishDate: 2026-11-17
+role: "Product Director"
+company: "PVcase"
+sector: "Product management, Agentic workflow"
+timeframe: "April 2026 – present"
+team: "My product team, me"
+outcome: "I stay up to date on information and fully focused on my task, while agents work in the background."
+tags: [AI]
+cover: ./hero-demo-mode-4x3-dark.png
+coverLight: ./hero-demo-mode-4x3-light.png
+coverAlt: "Arnie OS command centre with a list of agents, Oprah's brief, Monica's to-do list, what's new and pending approvals."
+---
+
+import ThemedFigure from '../../../components/ThemedFigure.astro';
+import CardGrid from '../../../components/CardGrid.astro';
+import Card from '../../../components/Card.astro';
+import AreaCard from '../../../components/AreaCard.astro';
+import UseCaseRow from '../../../components/UseCaseRow.astro';
+import heroDark from './hero-demo-mode-dark.png';
+import heroLight from './hero-demo-mode-light.png';
+
+export const dir = '/work/arnie-os';
+
+## Summary
+
+My product work was spread across many tools, and gathering the information took more time than using it. I built Arnie OS: 11 AI agents that read from those tools, draft PRDs, reports and replies, and file the results. I approve what goes out, so my time goes on conversations and decisions.
+
+## Context
+
+As Product Director at PVcase, my week mixed research, PRDs, reporting, team 1:1s and a heavy meeting load. Each of those needed information from a different set of tools.
+
+I started building Arnie OS in April 2026 to take on the repetitive parts. It is a set of agents that each own one kind of work. One agent, Oprah, acts as chief of staff. I built it in stages: build one part, use it, then adjust.
+
+<ThemedFigure
+  dark={`${dir}/architecture-dark.svg`}
+  light={`${dir}/architecture-light.svg`}
+  width={1200}
+  height={700}
+  alt="Diagram of Arnie OS. I approve at the top. Oprah, the chief of staff, routes escalations. Nine specialist agents sit below her. Mary files their output to Slite."
+  caption="I approve and decide. Oprah routes. Specialist agents do the work. Mary files it."
+/>
+
+## The problem
+
+Before Arnie OS, the repetitive work took most of my time, and each one started with a search across tools.
+
+<CardGrid>
+  <Card
+    title="PRDs"
+    text="took hours. The time went on finding information, talking it through with colleagues and stakeholders who held strong views, and writing each one for its audience."
+  />
+  <Card
+    title="Reporting"
+    text="meant copying data from Mixpanel and Tableau into slides every week, and again whenever a meeting needed current numbers. I tailored each version to its audience."
+  />
+  <Card
+    title="Market and customer insight"
+    text="sat in Slack channels, long white papers and articles, Productboard, Dovetail and Miro boards. Even after a long search, I could miss key information."
+  />
+  <Card
+    title="Team 1:1s and goal reviews"
+    text="meant pulling information from Culture Amp, Miro boards, Google Docs and meeting notes. Meeting preparation was the same."
+  />
+  <Card title="Prototypes" text="could only be built by engineers and slowed down the discovery process." />
+  <Card
+    title="Ad-hoc research"
+    text="needed focused time that the meeting load rarely left, so it often came out thinner than it should have."
+  />
+</CardGrid>
+
+I could miss information that makes or breaks a product decision. Deadlines were hard to meet, and my work was less detailed than it should have been.
+
+Focus was the biggest cost. Moving between tools and tasks used up much of my energy, and the context switching left little room for deep work.
+
+<ThemedFigure
+  dark={`${dir}/diagram-before-arnie-os-dark.svg`}
+  light={`${dir}/diagram-before-arnie-os-light.svg`}
+  width={1200}
+  height={700}
+  alt="Diagram of my work before Arnie OS: information in many tools, gathered and tailored by hand, feeding PRDs, reporting, insights, 1:1s, meeting prep and research. Some insights were missed and prototypes and research were delayed."
+  caption="Before Arnie OS: information in many places, gathered and tailored by hand. Some of it never reached me."
+/>
+
+## My role
+
+As Product Director at PVcase, I designed, built and operate Arnie OS. I defined each agent's role, the tools it can read, what it can do independently and what requires my approval. I use it in my own work, and I have shared the agent documentation with my team so they can use it too.
+
+## Decisions and trade-offs
+
+Six decisions shaped how Arnie OS works. Each agent has a name and one job, and I introduce them as they appear.
+
+- **Drafts wait for my approval.** Wade (communication), Eminem (PRDs and reports) and Tony (prototypes) do not send or file their work until I approve it. I trained Wade, the agent that drafts my messages, on accuracy and on my tone of voice, and approval is how I corrected him. The trade-off is that I stay in the loop on every outgoing message.
+- **One chief of staff routes every escalation.** Oprah, the chief of staff, filters and prioritises. Every agent escalates to her first, and her three tiers decide what happens: queue it, flag it today or interrupt me. The trade-off is that everything passes through one agent. In return, I am interrupted only when something needs me.
+- **One agent files.** Mary, the knowledge organiser, is the only agent that files to Slite. With a single filer, filing mistakes are easy to catch.
+- **Confidence labels on analysis.** Lisa, the analyst, labels her metrics as validated, directional or insufficient, so I can see how far to trust a number and what it came from. The labels also help me train her.
+- **Confidential sources stay unconnected.** Productboard and Culture Amp hold confidential customer and team information. I did not connect them to the agents, so nothing from them can leak.
+- **Build in stages.** I built one part, used it, learned what it needed and adjusted. That kept me from over-engineering the system before I knew what I needed.
+
+## What we shipped
+
+Together, the agents take over the gathering, drafting and chasing that used to fill my week. They read from the tools I already use, so the information I used to hunt for arrives ready to use. Research agents keep customer, market and roadmap evidence current, so I stop missing the important signals. Writing agents turn that evidence into PRDs, reports and replies in my voice. A planning agent keeps my week and my team work on track. One chief of staff watches everything, decides what reaches me and protects my focus. Each agent has one job:
+
+<ThemedFigure
+  dark={`${dir}/workflow-inbox-triage-dark.svg`}
+  light={`${dir}/workflow-inbox-triage-light.svg`}
+  width={960}
+  height={600}
+  alt="Wade triages Gmail, Slack, document comments and Miro comments. Mary files items as pending approval. Replies are drafted in my voice and wait for my approval."
+  caption="Wade triages the inbox and drafts replies in my voice. Every outgoing message waits for my approval."
+/>
+
+<CardGrid>
+  <AreaCard
+    hub
+    chips={['Oprah']}
+    mutedChip="Oversees every area below"
+    title="Chief of staff"
+    outcome="Everything is watched, and only what needs me reaches me."
+    lines={[
+      {
+        lead: 'Briefs',
+        text: 'me each morning, kicks off my week and reviews it on Friday.',
+        note: 'Every morning, every Monday and every Friday.',
+      },
+      {
+        lead: 'Routes',
+        text: 'work to the right agent and decides whether an issue interrupts me.',
+        note: 'Every escalation.',
+      },
+      {
+        lead: 'Keeps the record',
+        text: 'of decisions and risks, and prepares decision briefs and meeting prep.',
+        note: 'On request.',
+      },
+    ]}
+  />
+  <AreaCard
+    chips={['Paddington', 'Angela', 'Shuri']}
+    title="Research"
+    outcome="Customer, market and research evidence arrives up to date, so I do not have to hunt for it."
+    lines={[
+      {
+        lead: 'Paddington',
+        text: 'Customer signals and an insights report.',
+        note: 'Weekly, monthly and on demand.',
+      },
+      {
+        lead: 'Angela',
+        text: 'Market, competitor, regulatory and AI brief.',
+        note: 'Every Monday and on request.',
+      },
+      {
+        lead: 'Shuri',
+        text: 'Research briefs on any topic I pick.',
+        note: 'Weekly roadmap scan and on request.',
+      },
+    ]}
+  />
+  <AreaCard
+    chips={['Eminem', 'Wade']}
+    title="Narrative and communication"
+    outcome="What I write and send is drafted for me and waits for my approval."
+    lines={[
+      {
+        lead: 'Eminem',
+        text: 'PRDs, briefs, updates, QBR narratives, release notes, a weekly report in three lengths.',
+        note: 'On request and every Friday.',
+      },
+      { lead: 'Wade', text: 'A triaged inbox and replies in my voice.', note: 'Continuously.' },
+    ]}
+  />
+  <AreaCard
+    chips={['Tony']}
+    title="Prototypes"
+    outcome="Ideas get tested without waiting for engineering time."
+    lines={[{ lead: 'Tony', text: 'Figma prototype, presentations, demo and video spec.', note: 'On request.' }]}
+  />
+  <AreaCard
+    chips={['Jacinda']}
+    title="People"
+    outcome="I walk into every conversation prepared."
+    lines={[
+      {
+        lead: 'Jacinda',
+        text: '1:1 prep, review briefs, coaching suggestions.',
+        note: 'Day before each 1:1, before reviews, every 30 days.',
+      },
+    ]}
+  />
+  <AreaCard
+    chips={['Lisa']}
+    title="Data"
+    outcome="I have the numbers to hand, and I know how far to trust them."
+    lines={[
+      {
+        lead: 'Lisa',
+        text: 'Goals against actuals, with validated, directional or insufficient labels.',
+        note: 'Every Monday and on request.',
+      },
+    ]}
+  />
+  <AreaCard
+    chips={['Monica', 'Mary']}
+    title="Planning and filing"
+    outcome="My week is planned, and everything is filed so I can find it with universal search."
+    lines={[
+      { lead: 'Monica', text: 'Weekly plan, to-do list, carry-forward.', note: 'Weekly, daily and mid-day replans.' },
+      { lead: 'Mary', text: 'Everything filed in Slite.', note: 'As each agent finishes.' },
+    ]}
+  />
+</CardGrid>
+
+<UseCaseRow
+  title="Use case 1: From idea to prototype"
+  figure={{
+    dark: `${dir}/workflow-idea-to-prototype-dark.svg`,
+    light: `${dir}/workflow-idea-to-prototype-light.svg`,
+    width: 960,
+    height: 600,
+    alt: 'Paddington, Shuri and Angela supply evidence. Eminem writes the PRD. Tony builds the prototype. Mary files the prototype after I approve it.',
+    caption: 'Evidence, a PRD and a prototype in under a month, with me approving each version.',
+  }}
+  steps={[
+    {
+      label: 'Evidence',
+      text: 'I started with my own customer interviews. The agents added the insights already held in Dovetail, market intelligence and deep research. Paddington brought the customer evidence together. Angela supplied the market view. Shuri ran the deep research and wrote a brief.',
+    },
+    { label: 'PRD', text: 'Eminem used all of it to write the first PRD, and Mary filed it.' },
+    {
+      label: 'Prototype',
+      text: 'Tony took the PRD as his brief, challenged the scope and built the first prototype in Figma. He checked each version against the design system, the copy, accessibility and a design critique.',
+    },
+    {
+      label: 'Iteration',
+      text: 'I reviewed every version, and Tony and Eminem revised until the prototype was final. The path from idea to final prototype took less than a month.',
+    },
+  ]}
+>
+
+I used the AI-assisted design review to run the whole chain.
+
+</UseCaseRow>
+
+<UseCaseRow
+  flip
+  title="Use case 2: The weekly rhythm"
+  figure={{
+    dark: `${dir}/workflow-weekly-rhythm-dark.svg`,
+    light: `${dir}/workflow-weekly-rhythm-light.svg`,
+    width: 960,
+    height: 600,
+    alt: 'Eminem’s Friday report, reviewed by me before filing, then Oprah’s end-of-week review and Monica’s carry-forward.',
+    caption: 'Lisa’s data feeds Eminem’s weekly report. Oprah and Monica plan the week and close it out.',
+  }}
+  steps={[
+    {
+      label: 'Monday',
+      text: 'Lisa pulls the latest data from Mixpanel and Tableau and briefs Oprah on goals against actuals. Oprah then runs the weekly kickoff. She combines Lisa’s numbers with my calendar load, sprint status, top three priorities and flagged risks, and she hands the plan to Monica. Monica builds the week day by day and finds my deep-work windows.',
+    },
+    { label: 'Each morning', text: 'Oprah briefs me on the day and Monica gives me a time-aware to-do list.' },
+    {
+      label: 'Friday',
+      text: 'Eminem takes Lisa’s data and writes the weekly report in three lengths. I review it, and it goes into company-wide reporting.',
+    },
+    {
+      label: 'End of week',
+      text: 'Oprah then reviews my week: what I completed, what I deferred and what is still open. She hands Monica the carry-forward package. Monica updates the backlog, reschedules what carried over and flags risks. I start the next week knowing where I stand.',
+    },
+  ]}
+/>
+
+<UseCaseRow
+  title="Use case 3: Escalation"
+  figure={{
+    dark: `${dir}/workflow-escalation-dark.svg`,
+    light: `${dir}/workflow-escalation-light.svg`,
+    width: 960,
+    height: 600,
+    alt: 'Every agent escalates to Oprah, who routes to L3 interrupt, L2 flag today or L1 queue.',
+    caption: 'Oprah is the only agent that can interrupt me. She interrupts, flags for today or queues.',
+  }}
+  steps={[
+    {
+      label: 'Oversight',
+      text: 'Oprah works as a real chief of staff would. She has oversight of every agent’s work, and every agent escalates to her first. She is the only agent that can interrupt me.',
+    },
+    {
+      label: 'Three tiers',
+      text: 'She sets the tier. L3 interrupts me, L2 flags the item for today and L1 waits in the queue until my next brief.',
+    },
+    {
+      label: 'Example',
+      text: 'When Paddington finds a customer signal that could change a decision, he escalates it to Oprah with the evidence. She decides whether it needs me now, today or in the next brief. The other agents never reach me directly. That protects my focus time, whatever else is happening in the background.',
+    },
+  ]}
+/>
+
+## Outcome
+
+Arnie OS changed how I work, not only how fast I work. My information stays up to date and deadlines no longer slip. I stay ahead on market and customer insight. The time I used to spend gathering and formatting now goes into conversations with colleagues, customers and stakeholders, and into decisions I can support with evidence.
+
+I can now give any task my full focus. I know my agents are working in the background on the other topics I am responsible for, and that Oprah will interrupt me only when something needs me.
+
+I used it to take the AI-assisted design review from idea to shipped in under a month.
+
+<ThemedFigure
+  wide
+  dark={heroDark}
+  light={heroLight}
+  alt="Arnie OS command centre with a list of agents, Oprah's brief, Monica's to-do list, what's new and pending approvals."
+  caption="The command centre: Oprah’s brief, Monica’s to-do list, what is new and what waits for my approval."
+/>
