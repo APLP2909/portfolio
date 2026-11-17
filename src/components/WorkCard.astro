@@ -3,7 +3,8 @@
  * WorkCard (design-system.md): a case-study teaser generated from the case
  * study's frontmatter. Media on one side (the demo video if the case study has
  * one, otherwise its cover image), summary on the other. The only element
- * that uses the `glow` shadow.
+ * that uses the `glow` shadow. A cover with a `coverLight` version shows the
+ * one that matches the theme. Cover images are shown whole, never cropped.
  */
 import { Image } from 'astro:assets';
 import LoopVideo from './LoopVideo.astro';
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const { entry, headingLevel = 3 } = Astro.props;
-const { title, description, outcome, tags, cover, coverAlt, video } = entry.data;
+const { title, description, outcome, tags, cover, coverLight, coverAlt, video } = entry.data;
 const Heading = `h${headingLevel}` as 'h2' | 'h3';
 const href = `/work/${workSlug(entry)}/`;
 const hasMedia = Boolean(video || cover);
@@ -30,12 +31,25 @@ const hasMedia = Boolean(video || cover);
           <LoopVideo {...video} caption={undefined} />
         ) : (
           cover && (
-            <Image
-              src={cover}
-              alt={coverAlt ?? ''}
-              widths={[420, 840]}
-              sizes="(min-width: 60rem) 560px, 100vw"
-            />
+            <>
+              <Image
+                src={cover}
+                alt={coverAlt ?? ''}
+                widths={[420, 840]}
+                sizes="(min-width: 60rem) 560px, 100vw"
+                class:list={{ 'ps-theme--dark': coverLight }}
+              />
+              {coverLight && (
+                <Image
+                  src={coverLight}
+                  alt={coverAlt ?? ''}
+                  widths={[420, 840]}
+                  sizes="(min-width: 60rem) 560px, 100vw"
+                  loading="lazy"
+                  class="ps-theme--light"
+                />
+              )}
+            </>
           )
         )}
       </div>
@@ -54,6 +68,21 @@ const hasMedia = Boolean(video || cover);
   /* The media fills its half; the video's own frame is not needed inside it. */
   .ps-work__media {
     padding: 0;
+  }
+
+  /*
+   * Cover images are never cropped (Aadeel, 17 November 2026). The media half
+   * takes its height from the text beside it, so its shape changes with the
+   * screen width. The image keeps its own ratio, centred, and any leftover
+   * space shows the page ground, which matches the screenshots' own ground.
+   */
+  .ps-work__media:has(> img) {
+    background: var(--bg);
+  }
+
+  .ps-work__media > :global(img) {
+    height: auto;
+    object-fit: contain;
   }
 
   .ps-work__media :global(.loop-video),
